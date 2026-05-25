@@ -1,0 +1,142 @@
+{
+  // RemediationTask.jsonc
+  // Per-chapter work orders generated from audit findings and revision directives
+  // Tracks progress through Sprint 1-4 with acceptance criteria and test procedures
+  "entity_name": "RemediationTask",
+  "table_name": "remediation_tasks",
+  "description": "Chapter-level revision work orders with acceptance criteria and post-revision tests",
+  "fields": [
+    {
+      "name": "task_id",
+      "type": "UUID",
+      "primary_key": true,
+      "description": "Unique identifier for this remediation task"
+    },
+    {
+      "name": "manuscript_id",
+      "type": "UUID",
+      "foreign_key": true,
+      "references": "manuscripts",
+      "description": "Parent manuscript"
+    },
+    {
+      "name": "chapter_id",
+      "type": "INTEGER",
+      "description": "Chapter number (1-45 canonical range)"
+    },
+    {
+      "name": "chapter_name",
+      "type": "VARCHAR(255)",
+      "description": "Chapter title"
+    },
+    {
+      "name": "sprint",
+      "type": "INTEGER",
+      "description": "Sprint number (1, 2, 3, or 4)"
+    },
+    {
+      "name": "priority",
+      "type": "ENUM",
+      "enum_values": ["critical", "high", "medium", "low"],
+      "description": "Task priority level"
+    },
+    {
+      "name": "owner",
+      "type": "VARCHAR(255)",
+      "description": "Assigned reviewer/owner"
+    },
+    {
+      "name": "title",
+      "type": "VARCHAR(255)",
+      "description": "Task title / objective"
+    },
+    {
+      "name": "description",
+      "type": "TEXT",
+      "description": "Detailed task description"
+    },
+    {
+      "name": "delta_omega_target",
+      "type": "DECIMAL(3,1)",
+      "description": "Target Ω (audit score) after revision (e.g., 8.5)"
+    },
+    {
+      "name": "acceptance_criteria",
+      "type": "JSONB",
+      "description": "List of criteria that must all be satisfied: { criteria: [...] }"
+    },
+    {
+      "name": "post_revision_test",
+      "type": "TEXT",
+      "description": "Procedure for validating successful revision"
+    },
+    {
+      "name": "status",
+      "type": "ENUM",
+      "enum_values": ["not_started", "in_progress", "completed", "blocked"],
+      "default": "not_started",
+      "description": "Task status"
+    },
+    {
+      "name": "started_at",
+      "type": "TIMESTAMP",
+      "nullable": true,
+      "description": "When author/reviewer started work"
+    },
+    {
+      "name": "completed_at",
+      "type": "TIMESTAMP",
+      "nullable": true,
+      "description": "When task was marked complete"
+    },
+    {
+      "name": "revision_attempt",
+      "type": "INTEGER",
+      "default": 0,
+      "description": "Number of revision attempts made"
+    },
+    {
+      "name": "audit_run_id",
+      "type": "UUID",
+      "foreign_key": true,
+      "references": "audit_runs",
+      "nullable": true,
+      "description": "Audit run that generated this task"
+    },
+    {
+      "name": "created_at",
+      "type": "TIMESTAMP",
+      "default": "CURRENT_TIMESTAMP",
+      "description": "Record creation timestamp"
+    },
+    {
+      "name": "updated_at",
+      "type": "TIMESTAMP",
+      "default": "CURRENT_TIMESTAMP",
+      "on_update": "CURRENT_TIMESTAMP",
+      "description": "Last update timestamp"
+    }
+  ],
+  "indexes": [
+    {
+      "name": "idx_remediation_tasks_manuscript_chapter",
+      "columns": ["manuscript_id", "chapter_id"],
+      "unique": false
+    },
+    {
+      "name": "idx_remediation_tasks_sprint",
+      "columns": ["sprint"],
+      "unique": false
+    },
+    {
+      "name": "idx_remediation_tasks_status",
+      "columns": ["status"],
+      "unique": false
+    },
+    {
+      "name": "idx_remediation_tasks_owner",
+      "columns": ["owner"],
+      "unique": false
+    }
+  ]
+}

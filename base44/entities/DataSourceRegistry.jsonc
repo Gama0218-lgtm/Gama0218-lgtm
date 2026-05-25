@@ -1,0 +1,161 @@
+{
+  // DataSourceRegistry.jsonc
+  // Tracks connectivity, rate limits, and sync status for all external data sources
+  // Operational status and governance for the six API connectors
+  "entity_name": "DataSourceRegistry",
+  "table_name": "data_source_registry",
+  "description": "Registry and status tracking for external data source connectors",
+  "fields": [
+    {
+      "name": "registry_id",
+      "type": "UUID",
+      "primary_key": true,
+      "description": "Unique registry entry identifier"
+    },
+    {
+      "name": "source_id",
+      "type": "VARCHAR(50)",
+      "unique": true,
+      "description": "Source identifier (crossref, open_library, google_books, loc, semantic_scholar, tmdb)"
+    },
+    {
+      "name": "source_name",
+      "type": "VARCHAR(255)",
+      "description": "Full name of the data source"
+    },
+    {
+      "name": "api_endpoint",
+      "type": "VARCHAR(500)",
+      "description": "Base API endpoint URL"
+    },
+    {
+      "name": "status",
+      "type": "ENUM",
+      "enum_values": ["active", "degraded", "offline", "maintenance"],
+      "default": "active",
+      "description": "Current operational status"
+    },
+    {
+      "name": "auth_type",
+      "type": "ENUM",
+      "enum_values": ["none", "api_key", "oauth2", "bearer_token"],
+      "default": "none",
+      "description": "Authentication method required"
+    },
+    {
+      "name": "rate_limit_requests",
+      "type": "INTEGER",
+      "description": "Rate limit: number of requests"
+    },
+    {
+      "name": "rate_limit_window_seconds",
+      "type": "INTEGER",
+      "description": "Rate limit: time window in seconds"
+    },
+    {
+      "name": "documents_indexed",
+      "type": "BIGINT",
+      "description": "Approximate number of documents/records indexed"
+    },
+    {
+      "name": "geographic_coverage",
+      "type": "VARCHAR(100)",
+      "description": "Geographic coverage (global, US, EU, etc.)"
+    },
+    {
+      "name": "update_frequency",
+      "type": "VARCHAR(100)",
+      "description": "How often source is updated (real-time, daily, weekly, etc.)"
+    },
+    {
+      "name": "last_sync_at",
+      "type": "TIMESTAMP",
+      "nullable": true,
+      "description": "Timestamp of last successful sync"
+    },
+    {
+      "name": "last_sync_status",
+      "type": "ENUM",
+      "enum_values": ["success", "partial", "failed", "error"],
+      "nullable": true,
+      "description": "Status of last sync attempt"
+    },
+    {
+      "name": "last_error_message",
+      "type": "TEXT",
+      "nullable": true,
+      "description": "Error message from last sync failure"
+    },
+    {
+      "name": "sync_attempts_total",
+      "type": "INTEGER",
+      "default": 0,
+      "description": "Total number of sync attempts"
+    },
+    {
+      "name": "sync_attempts_failed",
+      "type": "INTEGER",
+      "default": 0,
+      "description": "Number of failed sync attempts"
+    },
+    {
+      "name": "success_rate",
+      "type": "DECIMAL(3,2)",
+      "description": "Success rate of syncs (0.0-1.0)"
+    },
+    {
+      "name": "avg_response_time_ms",
+      "type": "INTEGER",
+      "nullable": true,
+      "description": "Average response time in milliseconds"
+    },
+    {
+      "name": "enabled",
+      "type": "BOOLEAN",
+      "default": true,
+      "description": "Is this source currently enabled?"
+    },
+    {
+      "name": "governance_notes",
+      "type": "TEXT",
+      "nullable": true,
+      "description": "Governance, licensing, or compliance notes"
+    },
+    {
+      "name": "metadata",
+      "type": "JSONB",
+      "nullable": true,
+      "description": "Additional operational metadata"
+    },
+    {
+      "name": "created_at",
+      "type": "TIMESTAMP",
+      "default": "CURRENT_TIMESTAMP",
+      "description": "Record creation timestamp"
+    },
+    {
+      "name": "updated_at",
+      "type": "TIMESTAMP",
+      "default": "CURRENT_TIMESTAMP",
+      "on_update": "CURRENT_TIMESTAMP",
+      "description": "Last update timestamp"
+    }
+  ],
+  "indexes": [
+    {
+      "name": "idx_data_source_registry_source_id",
+      "columns": ["source_id"],
+      "unique": true
+    },
+    {
+      "name": "idx_data_source_registry_status",
+      "columns": ["status"],
+      "unique": false
+    },
+    {
+      "name": "idx_data_source_registry_enabled",
+      "columns": ["enabled"],
+      "unique": false
+    }
+  ]
+}

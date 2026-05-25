@@ -1,0 +1,99 @@
+{
+  // ManuscriptVersion.jsonc
+  // Frozen snapshots of manuscript state at specific audit/revision gates
+  // Allows version tracking and rollback capability
+  "entity_name": "ManuscriptVersion",
+  "table_name": "manuscript_versions",
+  "description": "Frozen manuscript version snapshots for audit trail and rollback",
+  "fields": [
+    {
+      "name": "version_id",
+      "type": "UUID",
+      "primary_key": true,
+      "description": "Unique identifier for this manuscript version"
+    },
+    {
+      "name": "manuscript_id",
+      "type": "UUID",
+      "foreign_key": true,
+      "references": "manuscripts",
+      "description": "Reference to the parent manuscript"
+    },
+    {
+      "name": "version_number",
+      "type": "INTEGER",
+      "description": "Sequential version number (1, 2, 3, ...)"
+    },
+    {
+      "name": "version_hash",
+      "type": "VARCHAR(64)",
+      "description": "SHA-256 hash of manuscript content at freeze time"
+    },
+    {
+      "name": "gate_zero_passed",
+      "type": "BOOLEAN",
+      "default": true,
+      "description": "Gate Zero passed at freeze time (45-chapter normalization verified)"
+    },
+    {
+      "name": "canonical_chapter_count",
+      "type": "INTEGER",
+      "default": 45,
+      "description": "Canonical chapter count at freeze time"
+    },
+    {
+      "name": "frozen_at",
+      "type": "TIMESTAMP",
+      "default": "CURRENT_TIMESTAMP",
+      "description": "When this version was frozen"
+    },
+    {
+      "name": "created_by",
+      "type": "VARCHAR(255)",
+      "description": "User who froze this version"
+    },
+    {
+      "name": "audit_run_id",
+      "type": "UUID",
+      "foreign_key": true,
+      "references": "audit_runs",
+      "nullable": true,
+      "description": "Associated audit run if frozen during audit"
+    },
+    {
+      "name": "metadata",
+      "type": "JSONB",
+      "nullable": true,
+      "description": "Additional metadata (chapter counts, section hashes, etc.)"
+    },
+    {
+      "name": "created_at",
+      "type": "TIMESTAMP",
+      "default": "CURRENT_TIMESTAMP",
+      "description": "Record creation timestamp"
+    }
+  ],
+  "indexes": [
+    {
+      "name": "idx_manuscript_versions_manuscript_id",
+      "columns": ["manuscript_id"],
+      "unique": false
+    },
+    {
+      "name": "idx_manuscript_versions_version_hash",
+      "columns": ["version_hash"],
+      "unique": true
+    },
+    {
+      "name": "idx_manuscript_versions_audit_run_id",
+      "columns": ["audit_run_id"],
+      "unique": false
+    }
+  ],
+  "constraints": [
+    {
+      "type": "unique",
+      "columns": ["manuscript_id", "version_number"]
+    }
+  ]
+}

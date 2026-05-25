@@ -1,0 +1,130 @@
+{
+  // ExternalWork.jsonc
+  // Comparative corpus rows from external sources (Crossref, Open Library, Google Books, etc.)
+  // Links audit findings to published works for context and validation
+  "entity_name": "ExternalWork",
+  "table_name": "external_works",
+  "description": "Comparative corpus entries from academic and reference databases",
+  "fields": [
+    {
+      "name": "work_id",
+      "type": "UUID",
+      "primary_key": true,
+      "description": "Unique identifier for this external work record"
+    },
+    {
+      "name": "manuscript_id",
+      "type": "UUID",
+      "foreign_key": true,
+      "references": "manuscripts",
+      "description": "Parent manuscript being analyzed"
+    },
+    {
+      "name": "source_id",
+      "type": "VARCHAR(50)",
+      "description": "Source database ID (crossref, open_library, google_books, loc, semantic_scholar, tmdb)"
+    },
+    {
+      "name": "external_id",
+      "type": "VARCHAR(255)",
+      "description": "ID in external source (DOI, ISBN, OCLC, etc.)"
+    },
+    {
+      "name": "title",
+      "type": "VARCHAR(500)",
+      "description": "Work title"
+    },
+    {
+      "name": "authors",
+      "type": "JSONB",
+      "description": "Author list: { authors: [{ name, role, id }, ...] }"
+    },
+    {
+      "name": "published_year",
+      "type": "INTEGER",
+      "nullable": true,
+      "description": "Publication year"
+    },
+    {
+      "name": "publication_venue",
+      "type": "VARCHAR(255)",
+      "nullable": true,
+      "description": "Journal, publisher, or platform"
+    },
+    {
+      "name": "work_type",
+      "type": "ENUM",
+      "enum_values": ["journal_article", "book", "book_chapter", "conference_paper", "dataset", "thesis", "film", "other"],
+      "description": "Type of work"
+    },
+    {
+      "name": "cited_in_manuscript",
+      "type": "BOOLEAN",
+      "default": false,
+      "description": "Is this work cited in the manuscript?"
+    },
+    {
+      "name": "citation_context",
+      "type": "TEXT",
+      "nullable": true,
+      "description": "How it's cited or related to manuscript"
+    },
+    {
+      "name": "relevance_score",
+      "type": "DECIMAL(3,2)",
+      "default": 0.0,
+      "description": "Relevance to manuscript (0.0-1.0)"
+    },
+    {
+      "name": "abstract",
+      "type": "TEXT",
+      "nullable": true,
+      "description": "Abstract or summary of the work"
+    },
+    {
+      "name": "url",
+      "type": "VARCHAR(500)",
+      "nullable": true,
+      "description": "Direct link to work"
+    },
+    {
+      "name": "metadata",
+      "type": "JSONB",
+      "nullable": true,
+      "description": "Additional metadata from source (keywords, citations, impact, etc.)"
+    },
+    {
+      "name": "synced_at",
+      "type": "TIMESTAMP",
+      "description": "When record was last synced from external source"
+    },
+    {
+      "name": "created_at",
+      "type": "TIMESTAMP",
+      "default": "CURRENT_TIMESTAMP",
+      "description": "Record creation timestamp"
+    }
+  ],
+  "indexes": [
+    {
+      "name": "idx_external_works_manuscript",
+      "columns": ["manuscript_id"],
+      "unique": false
+    },
+    {
+      "name": "idx_external_works_source_external_id",
+      "columns": ["source_id", "external_id"],
+      "unique": true
+    },
+    {
+      "name": "idx_external_works_citation_status",
+      "columns": ["cited_in_manuscript"],
+      "unique": false
+    },
+    {
+      "name": "idx_external_works_relevance",
+      "columns": ["relevance_score"],
+      "unique": false
+    }
+  ]
+}

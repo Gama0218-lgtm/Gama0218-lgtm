@@ -1,0 +1,158 @@
+{
+  // AuditRun.jsonc (Updated for v13)
+  // Enhanced to include Gate Zero enforcement, version freezing, and canonical chapter tracking
+  "entity_name": "AuditRun",
+  "table_name": "audit_runs",
+  "description": "Manuscript audit execution records with Gate Zero normalization and version tracking",
+  "fields": [
+    {
+      "name": "audit_run_id",
+      "type": "UUID",
+      "primary_key": true,
+      "description": "Unique identifier for this audit run"
+    },
+    {
+      "name": "manuscript_id",
+      "type": "UUID",
+      "foreign_key": true,
+      "references": "manuscripts",
+      "description": "Manuscript being audited"
+    },
+    {
+      "name": "version_id",
+      "type": "UUID",
+      "foreign_key": true,
+      "references": "manuscript_versions",
+      "nullable": true,
+      "description": "Associated frozen ManuscriptVersion"
+    },
+    {
+      "name": "audit_run_number",
+      "type": "INTEGER",
+      "description": "Sequential audit run number for this manuscript"
+    },
+    {
+      "name": "status",
+      "type": "ENUM",
+      "enum_values": ["pending", "in_progress", "completed", "failed", "cancelled"],
+      "default": "pending",
+      "description": "Current status of audit run"
+    },
+    {
+      "name": "gate_zero_passed",
+      "type": "BOOLEAN",
+      "default": false,
+      "description": "Gate Zero passed: 45-chapter canonical normalization verified"
+    },
+    {
+      "name": "canonical_chapter_count",
+      "type": "INTEGER",
+      "description": "Number of canonical chapters (must be 45 for Gate Zero pass)"
+    },
+    {
+      "name": "schema_valid",
+      "type": "BOOLEAN",
+      "default": false,
+      "description": "No schema drift detected"
+    },
+    {
+      "name": "started_at",
+      "type": "TIMESTAMP",
+      "default": "CURRENT_TIMESTAMP",
+      "description": "When audit started"
+    },
+    {
+      "name": "completed_at",
+      "type": "TIMESTAMP",
+      "nullable": true,
+      "description": "When audit completed"
+    },
+    {
+      "name": "audit_engine_version",
+      "type": "VARCHAR(20)",
+      "description": "Version of audit engine used (e.g., 13.0)"
+    },
+    {
+      "name": "total_findings",
+      "type": "INTEGER",
+      "default": 0,
+      "description": "Total number of findings"
+    },
+    {
+      "name": "critical_findings",
+      "type": "INTEGER",
+      "default": 0,
+      "description": "Count of critical severity findings"
+    },
+    {
+      "name": "high_findings",
+      "type": "INTEGER",
+      "default": 0,
+      "description": "Count of high severity findings"
+    },
+    {
+      "name": "omega_score",
+      "type": "DECIMAL(3,1)",
+      "nullable": true,
+      "description": "Overall audit quality score (Ω, 1-10 scale)"
+    },
+    {
+      "name": "evidence_completeness",
+      "type": "DECIMAL(3,2)",
+      "nullable": true,
+      "description": "Percentage of findings with verbatim evidence_quotes (0.0-1.0)"
+    },
+    {
+      "name": "known_defects_count",
+      "type": "INTEGER",
+      "default": 0,
+      "description": "Count of known/pre-computed defects"
+    },
+    {
+      "name": "remediation_tasks_generated",
+      "type": "INTEGER",
+      "default": 0,
+      "description": "Number of remediation tasks created from this audit"
+    },
+    {
+      "name": "notes",
+      "type": "TEXT",
+      "nullable": true,
+      "description": "Audit notes and comments"
+    },
+    {
+      "name": "metadata",
+      "type": "JSONB",
+      "nullable": true,
+      "description": "Extended audit data (gate status, severity distribution, etc.)"
+    },
+    {
+      "name": "created_at",
+      "type": "TIMESTAMP",
+      "default": "CURRENT_TIMESTAMP",
+      "description": "Record creation timestamp"
+    }
+  ],
+  "indexes": [
+    {
+      "name": "idx_audit_runs_manuscript",
+      "columns": ["manuscript_id"],
+      "unique": false
+    },
+    {
+      "name": "idx_audit_runs_version",
+      "columns": ["version_id"],
+      "unique": false
+    },
+    {
+      "name": "idx_audit_runs_status",
+      "columns": ["status"],
+      "unique": false
+    },
+    {
+      "name": "idx_audit_runs_gate_zero",
+      "columns": ["gate_zero_passed"],
+      "unique": false
+    }
+  ]
+}

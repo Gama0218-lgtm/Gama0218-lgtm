@@ -1,0 +1,31 @@
+{
+  "name": "litcentral-v13",
+  "version": "13.0.0",
+  "description": "LitCentral v13 - Manuscript audit and revision platform with Gate Zero normalization",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint src --fix"
+  },
+  "keywords": [
+    "manuscript",
+    "audit",
+    "revision",
+    "litcentral"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "axios": "^1.4.0"
+  },
+  "devDependencies": {
+    "vite": "^4.3.0",
+    "@vitejs/plugin-react": "^4.0.0",
+    "eslint": "^8.40.0"
+  }
+}

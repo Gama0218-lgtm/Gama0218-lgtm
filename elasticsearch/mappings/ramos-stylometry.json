@@ -1,0 +1,53 @@
+{
+  "settings": {
+    "number_of_shards": 1,
+    "number_of_replicas": 1
+  },
+  "mappings": {
+    "dynamic": "strict",
+    "properties": {
+      "doc_type":             { "type": "keyword" },
+      "chapter_num":          { "type": "integer" },
+      "chapter_title":        { "type": "text", "fields": { "keyword": { "type": "keyword" } } },
+      "scope":                { "type": "keyword" },
+      "function_word_freq":   { "type": "object", "enabled": true },
+      "function_word_vector": {
+        "type": "dense_vector",
+        "dims": 200,
+        "index": true,
+        "similarity": "cosine"
+      },
+      "type_token_ratio":     { "type": "float" },
+      "lexical_diversity":    { "type": "float" },
+      "yule_k":               { "type": "float" },
+      "hapax_ratio":          { "type": "float" },
+      "avg_sentence_length":  { "type": "float" },
+      "stdev_sentence_length":{ "type": "float" },
+      "median_sentence_length":{ "type": "float" },
+      "mean_word_length":     { "type": "float" },
+      "punctuation_density":  { "type": "float" },
+      "dialogue_density":     { "type": "float" },
+      "sensory_density":      { "type": "float" },
+      "code_switch_density":  { "type": "float" },
+      "flesch_kincaid_grade": { "type": "float" },
+      "flesch_reading_ease":  { "type": "float" },
+      "gunning_fog":          { "type": "float" },
+      "smog_index":           { "type": "float" },
+      "ari":                  { "type": "float" },
+      "passive_voice_pct":    { "type": "float" },
+      "adverb_pct":           { "type": "float" },
+      "comparative_distance_to": {
+        "type": "nested",
+        "properties": {
+          "author":       { "type": "keyword" },
+          "title":        { "type": "keyword" },
+          "delta_distance":{ "type": "float" },
+          "method":       { "type": "keyword" }
+        }
+      },
+      "stylo_run_id":         { "type": "keyword" },
+      "stylo_run_timestamp":  { "type": "date" },
+      "pipeline_version":     { "type": "keyword" }
+    }
+  }
+}

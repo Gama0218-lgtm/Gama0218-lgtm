@@ -1,0 +1,53 @@
+{
+  "settings": {
+    "number_of_shards": 1,
+    "number_of_replicas": 1
+  },
+  "mappings": {
+    "dynamic": "strict",
+    "properties": {
+      "doc_type":            { "type": "keyword" },
+      "source":              { "type": "keyword" },
+      "source_url":          { "type": "keyword" },
+      "source_collection":   { "type": "keyword" },
+      "record_id":           { "type": "keyword" },
+      "title":               { "type": "text", "fields": { "keyword": { "type": "keyword" } } },
+      "text":                { "type": "text" },
+      "embedding": {
+        "type": "dense_vector",
+        "dims": 1536,
+        "index": true,
+        "similarity": "cosine"
+      },
+      "embedding_model":     { "type": "keyword" },
+      "embedding_timestamp": { "type": "date" },
+      "date":                { "type": "date" },
+      "date_text":           { "type": "keyword" },
+      "name":                { "type": "text", "fields": { "keyword": { "type": "keyword" } } },
+      "surname":             { "type": "keyword" },
+      "given_name":          { "type": "keyword" },
+      "service_number":      { "type": "keyword" },
+      "rank":                { "type": "keyword" },
+      "branch":              { "type": "keyword" },
+      "unit":                { "type": "keyword" },
+      "mos":                 { "type": "keyword" },
+      "casualty_type":       { "type": "keyword" },
+      "casualty_date":       { "type": "date" },
+      "place":               { "type": "text", "fields": { "keyword": { "type": "keyword" } } },
+      "country":             { "type": "keyword" },
+      "province":            { "type": "keyword" },
+      "ethnicity_marker":    { "type": "keyword" },
+      "hispanic_indicator":  { "type": "boolean" },
+      "document_type":       { "type": "keyword" },
+      "foia_request_id":     { "type": "keyword" },
+      "congressional_session":{ "type": "keyword" },
+      "page_reference":      { "type": "keyword" },
+      "text_hash":           { "type": "keyword" },
+      "ingestion_timestamp": { "type": "date" },
+      "pipeline_version":    { "type": "keyword" },
+      "confidence":          { "type": "float" },
+      "linked_chapter_refs": { "type": "integer" },
+      "linked_claim_ids":    { "type": "keyword" }
+    }
+  }
+}

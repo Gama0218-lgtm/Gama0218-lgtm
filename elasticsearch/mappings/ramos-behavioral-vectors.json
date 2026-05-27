@@ -1,0 +1,42 @@
+{
+  "settings": {
+    "number_of_shards": 1,
+    "number_of_replicas": 1
+  },
+  "mappings": {
+    "dynamic": "strict",
+    "properties": {
+      "doc_type":           { "type": "keyword" },
+      "chapter_num":        { "type": "integer" },
+      "chapter_title":      { "type": "text", "fields": { "keyword": { "type": "keyword" } } },
+      "act":                { "type": "keyword" },
+      "agency":             { "type": "float" },
+      "risk":               { "type": "float" },
+      "compassion":         { "type": "float" },
+      "alignment":          { "type": "float" },
+      "code_switch":        { "type": "float" },
+      "spiritual":          { "type": "float" },
+      "identity_resonance": { "type": "float" },
+      "trauma_intensity":   { "type": "float" },
+      "moral_conflict":     { "type": "float" },
+      "sensory_density":    { "type": "float" },
+      "historical_density": { "type": "float" },
+      "narrative_velocity": { "type": "float" },
+      "pov_consistency":    { "type": "float" },
+      "cls":                { "type": "float" },
+      "bis":                { "type": "float" },
+      "sii":                { "type": "float" },
+      "mrf":                { "type": "float" },
+      "omega_score":        { "type": "float" },
+      "omega_formula":      { "type": "keyword" },
+      "autocrit_score":     { "type": "float" },
+      "restraint_score":    { "type": "float" },
+      "cl_moe_crossover":   { "type": "float" },
+      "scoring_model":      { "type": "keyword" },
+      "scoring_version":    { "type": "keyword" },
+      "scoring_timestamp":  { "type": "date" },
+      "confidence":         { "type": "float" },
+      "notes":              { "type": "text" }
+    }
+  }
+}

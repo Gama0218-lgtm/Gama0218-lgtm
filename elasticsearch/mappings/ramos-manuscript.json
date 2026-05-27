@@ -1,0 +1,119 @@
+{
+  "settings": {
+    "number_of_shards": 1,
+    "number_of_replicas": 1,
+    "analysis": {
+      "filter": {
+        "shingle_2_3": {
+          "type": "shingle",
+          "min_shingle_size": 2,
+          "max_shingle_size": 3
+        }
+      },
+      "analyzer": {
+        "preserve_linguistic_features": {
+          "type": "custom",
+          "tokenizer": "standard",
+          "filter": ["lowercase"]
+        },
+        "preserve_original_case": {
+          "type": "custom",
+          "tokenizer": "standard",
+          "filter": []
+        },
+        "shingle_analyzer": {
+          "type": "custom",
+          "tokenizer": "standard",
+          "filter": ["lowercase", "shingle_2_3"]
+        }
+      }
+    }
+  },
+  "mappings": {
+    "dynamic": "strict",
+    "properties": {
+      "doc_type":               { "type": "keyword" },
+      "doc_id":                 { "type": "keyword" },
+      "chapter_num":            { "type": "integer" },
+      "chapter_title":          { "type": "text", "fields": { "keyword": { "type": "keyword" } } },
+      "scene_num":              { "type": "integer" },
+      "paragraph_num":          { "type": "integer" },
+      "passage_num":            { "type": "integer" },
+      "act":                    { "type": "keyword" },
+      "text": {
+        "type": "text",
+        "analyzer": "preserve_linguistic_features",
+        "fields": {
+          "original_case": { "type": "text", "analyzer": "preserve_original_case" },
+          "shingles":      { "type": "text", "analyzer": "shingle_analyzer" },
+          "keyword":       { "type": "keyword", "ignore_above": 8192 }
+        }
+      },
+      "text_hash":              { "type": "keyword" },
+      "embedding": {
+        "type": "dense_vector",
+        "dims": 1536,
+        "index": true,
+        "similarity": "cosine"
+      },
+      "embedding_model":        { "type": "keyword" },
+      "embedding_dims":         { "type": "integer" },
+      "embedding_timestamp":    { "type": "date" },
+      "word_count":             { "type": "integer" },
+      "char_count":             { "type": "integer" },
+      "sentence_count":         { "type": "integer" },
+      "dialogue_pct":           { "type": "float" },
+      "spanish_token_pct":      { "type": "float" },
+      "code_switch_count":      { "type": "integer" },
+      "flesch_kincaid_grade":   { "type": "float" },
+      "flesch_reading_ease":    { "type": "float" },
+      "lexical_diversity":      { "type": "float" },
+      "avg_sentence_length":    { "type": "float" },
+      "character_mentions":     { "type": "keyword" },
+      "historical_refs":        { "type": "keyword" },
+      "place_mentions":         { "type": "keyword" },
+      "military_unit_mentions": { "type": "keyword" },
+      "date_mentions":          { "type": "keyword" },
+      "pov":                    { "type": "keyword" },
+      "tense":                  { "type": "keyword" },
+      "register":               { "type": "keyword" },
+      "behavioral_vectors": {
+        "properties": {
+          "agency":            { "type": "float" },
+          "risk":              { "type": "float" },
+          "compassion":        { "type": "float" },
+          "alignment":         { "type": "float" },
+          "code_switch":       { "type": "float" },
+          "spiritual":         { "type": "float" },
+          "identity_resonance":{ "type": "float" },
+          "trauma_intensity":  { "type": "float" },
+          "moral_conflict":    { "type": "float" },
+          "sensory_density":   { "type": "float" },
+          "historical_density":{ "type": "float" },
+          "narrative_velocity":{ "type": "float" }
+        }
+      },
+      "omega_score":            { "type": "float" },
+      "contradiction_flags":    { "type": "keyword" },
+      "chapter_metadata": {
+        "properties": {
+          "chapter_title":           { "type": "text", "fields": { "keyword": { "type": "keyword" } } },
+          "act":                     { "type": "keyword" },
+          "chapter_word_count":      { "type": "integer" },
+          "chapter_paragraph_count": { "type": "integer" }
+        }
+      },
+      "source_file":          { "type": "keyword" },
+      "extraction_timestamp": { "type": "date" },
+      "pipeline_version":     { "type": "keyword" },
+      "enrichment_runs": {
+        "type": "nested",
+        "properties": {
+          "stage":     { "type": "keyword" },
+          "version":   { "type": "keyword" },
+          "timestamp": { "type": "date" }
+        }
+      }
+    }
+  }
+}

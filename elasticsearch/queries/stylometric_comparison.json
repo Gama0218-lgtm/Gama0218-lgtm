@@ -1,0 +1,26 @@
+{
+  "description": "Compare a manuscript chapter's stylometric profile against literary canon excerpts. Strategy: kNN over the function-word vector in ramos-corpus-comparison using the same vector recorded in ramos-stylometry for the target chapter.",
+  "endpoint": "GET /ramos-corpus-comparison/_search",
+  "body": {
+    "size": 20,
+    "_source": {
+      "includes": [
+        "author", "title", "year_published", "genre", "movement",
+        "stylometric_features", "comp_category"
+      ]
+    },
+    "knn": {
+      "field": "embedding",
+      "query_vector": "REPLACE_WITH_CHAPTER_EMBEDDING",
+      "k": 20,
+      "num_candidates": 200
+    },
+    "aggs": {
+      "by_author":   { "terms": { "field": "author", "size": 20 } },
+      "by_movement": { "terms": { "field": "movement", "size": 20 } },
+      "avg_flesch_kincaid": {
+        "avg": { "field": "stylometric_features.flesch_kincaid_grade" }
+      }
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "settings": {
+    "number_of_shards": 1,
+    "number_of_replicas": 1
+  },
+  "mappings": {
+    "dynamic": "strict",
+    "properties": {
+      "doc_type":            { "type": "keyword" },
+      "claim_id":            { "type": "keyword" },
+      "claim_text":          { "type": "text" },
+      "claim_type":          { "type": "keyword" },
+      "manuscript_chapter":  { "type": "integer" },
+      "manuscript_paragraph":{ "type": "integer" },
+      "manuscript_doc_id":   { "type": "keyword" },
+      "source_type":         { "type": "keyword" },
+      "source_index":        { "type": "keyword" },
+      "source_doc_id":       { "type": "keyword" },
+      "source_url":          { "type": "keyword" },
+      "source_citation":     { "type": "text" },
+      "evidence_text":       { "type": "text" },
+      "evidence_score":      { "type": "float" },
+      "support_relation":    { "type": "keyword" },
+      "confidence":          { "type": "float" },
+      "verification_status": { "type": "keyword" },
+      "verified_by":         { "type": "keyword" },
+      "verification_notes":  { "type": "text" },
+      "verification_timestamp":{ "type": "date" },
+      "linked_evidence_ids": { "type": "keyword" },
+      "contradiction_with":  { "type": "keyword" },
+      "pipeline_version":    { "type": "keyword" },
+      "created_at":          { "type": "date" },
+      "updated_at":          { "type": "date" }
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "description": "Per-chapter behavioral vector aggregation. Returns the average of each behavioral dimension and the Omega composite score across the chapter, suitable for plotting narrative-arc trajectories.",
+  "endpoint": "GET /ramos-manuscript/_search",
+  "body": {
+    "size": 0,
+    "query": {
+      "bool": {
+        "filter": [{ "term": { "doc_type": "paragraph" } }]
+      }
+    },
+    "aggs": {
+      "chapters": {
+        "terms": { "field": "chapter_num", "size": 50, "order": { "_key": "asc" } },
+        "aggs": {
+          "act":                { "terms": { "field": "act", "size": 5 } },
+          "avg_agency":         { "avg": { "field": "behavioral_vectors.agency" } },
+          "avg_risk":           { "avg": { "field": "behavioral_vectors.risk" } },
+          "avg_compassion":     { "avg": { "field": "behavioral_vectors.compassion" } },
+          "avg_alignment":      { "avg": { "field": "behavioral_vectors.alignment" } },
+          "avg_code_switch":    { "avg": { "field": "behavioral_vectors.code_switch" } },
+          "avg_spiritual":      { "avg": { "field": "behavioral_vectors.spiritual" } },
+          "avg_trauma":         { "avg": { "field": "behavioral_vectors.trauma_intensity" } },
+          "avg_moral_conflict": { "avg": { "field": "behavioral_vectors.moral_conflict" } },
+          "avg_omega":          { "avg": { "field": "omega_score" } },
+          "avg_dialogue_pct":   { "avg": { "field": "dialogue_pct" } },
+          "avg_spanish_pct":    { "avg": { "field": "spanish_token_pct" } },
+          "avg_flesch_kincaid": { "avg": { "field": "flesch_kincaid_grade" } },
+          "total_words":        { "sum": { "field": "word_count" } }
+        }
+      },
+      "by_act": {
+        "terms": { "field": "act", "size": 5 },
+        "aggs": {
+          "avg_omega":  { "avg": { "field": "omega_score" } },
+          "avg_agency": { "avg": { "field": "behavioral_vectors.agency" } },
+          "avg_trauma": { "avg": { "field": "behavioral_vectors.trauma_intensity" } }
+        }
+      }
+    }
+  }
+}

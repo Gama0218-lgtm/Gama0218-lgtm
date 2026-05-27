@@ -1,0 +1,73 @@
+{
+  "description": "Find paragraphs that make overlapping factual claims but diverge in detail (candidate contradictions). Strategy: cluster by historical_refs / military_unit_mentions / date_mentions, then return high-text-similarity / low-overlap pairs for human review. This query returns the per-cluster paragraph rosters; pair-wise scoring is done client-side using the script in queries/contradiction_detection.notes.md.",
+  "endpoint": "GET /ramos-manuscript/_search",
+  "body": {
+    "size": 0,
+    "query": {
+      "bool": {
+        "filter": [
+          { "term": { "doc_type": "paragraph" } },
+          {
+            "bool": {
+              "should": [
+                { "exists": { "field": "historical_refs" } },
+                { "exists": { "field": "military_unit_mentions" } },
+                { "exists": { "field": "date_mentions" } }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "aggs": {
+      "by_unit": {
+        "terms": { "field": "military_unit_mentions", "size": 200, "min_doc_count": 2 },
+        "aggs": {
+          "paragraphs": {
+            "top_hits": {
+              "size": 20,
+              "_source": {
+                "includes": [
+                  "doc_id", "chapter_num", "paragraph_num", "text",
+                  "date_mentions", "place_mentions", "character_mentions"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "by_date": {
+        "terms": { "field": "date_mentions", "size": 200, "min_doc_count": 2 },
+        "aggs": {
+          "paragraphs": {
+            "top_hits": {
+              "size": 20,
+              "_source": {
+                "includes": [
+                  "doc_id", "chapter_num", "paragraph_num", "text",
+                  "military_unit_mentions", "place_mentions", "character_mentions"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "by_historical_ref": {
+        "terms": { "field": "historical_refs", "size": 200, "min_doc_count": 2 },
+        "aggs": {
+          "paragraphs": {
+            "top_hits": {
+              "size": 20,
+              "_source": {
+                "includes": [
+                  "doc_id", "chapter_num", "paragraph_num", "text",
+                  "date_mentions", "military_unit_mentions", "place_mentions", "character_mentions"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

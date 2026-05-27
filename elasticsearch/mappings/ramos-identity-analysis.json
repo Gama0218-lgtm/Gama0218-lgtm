@@ -1,0 +1,41 @@
+{
+  "settings": {
+    "number_of_shards": 1,
+    "number_of_replicas": 1
+  },
+  "mappings": {
+    "dynamic": "strict",
+    "properties": {
+      "doc_type":              { "type": "keyword" },
+      "record_id":             { "type": "keyword" },
+      "full_name":             { "type": "text", "fields": { "keyword": { "type": "keyword" } } },
+      "surname":               { "type": "keyword" },
+      "given_name":            { "type": "keyword" },
+      "middle_name":           { "type": "keyword" },
+      "source":                { "type": "keyword" },
+      "source_url":            { "type": "keyword" },
+      "source_record_id":      { "type": "keyword" },
+      "service_number":        { "type": "keyword" },
+      "branch":                { "type": "keyword" },
+      "unit":                  { "type": "keyword" },
+      "rank":                  { "type": "keyword" },
+      "casualty_status":       { "type": "keyword" },
+      "ethnicity_inference":   { "type": "keyword" },
+      "ethnicity_confidence":  { "type": "float" },
+      "ethnicity_method":      { "type": "keyword" },
+      "spanish_surname_match": { "type": "boolean" },
+      "surname_origin":        { "type": "keyword" },
+      "genealogy_link":        { "type": "keyword" },
+      "cmohs_link":            { "type": "keyword" },
+      "virtual_wall_link":     { "type": "keyword" },
+      "vvmf_link":             { "type": "keyword" },
+      "hometown_state":        { "type": "keyword" },
+      "hometown_city":         { "type": "keyword" },
+      "linked_evidence_ids":   { "type": "keyword" },
+      "linked_chapter_refs":   { "type": "integer" },
+      "notes":                 { "type": "text" },
+      "ingestion_timestamp":   { "type": "date" },
+      "pipeline_version":      { "type": "keyword" }
+    }
+  }
+}

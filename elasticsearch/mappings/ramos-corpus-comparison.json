@@ -1,0 +1,54 @@
+{
+  "settings": {
+    "number_of_shards": 1,
+    "number_of_replicas": 1
+  },
+  "mappings": {
+    "dynamic": "strict",
+    "properties": {
+      "doc_type":            { "type": "keyword" },
+      "author":              { "type": "keyword" },
+      "author_full_name":    { "type": "text", "fields": { "keyword": { "type": "keyword" } } },
+      "title":               { "type": "text", "fields": { "keyword": { "type": "keyword" } } },
+      "year_published":      { "type": "integer" },
+      "publisher":           { "type": "keyword" },
+      "isbn":                { "type": "keyword" },
+      "loc_subject_headings":{ "type": "keyword" },
+      "genre":               { "type": "keyword" },
+      "movement":            { "type": "keyword" },
+      "language":            { "type": "keyword" },
+      "excerpt_id":          { "type": "keyword" },
+      "excerpt_position":    { "type": "keyword" },
+      "text":                { "type": "text", "analyzer": "standard" },
+      "embedding": {
+        "type": "dense_vector",
+        "dims": 1536,
+        "index": true,
+        "similarity": "cosine"
+      },
+      "embedding_model":     { "type": "keyword" },
+      "stylometric_features": {
+        "properties": {
+          "function_word_freq":   { "type": "object", "enabled": true },
+          "avg_sentence_length":  { "type": "float" },
+          "lexical_diversity":    { "type": "float" },
+          "flesch_kincaid_grade": { "type": "float" },
+          "type_token_ratio":     { "type": "float" },
+          "mean_word_length":     { "type": "float" },
+          "punctuation_density":  { "type": "float" }
+        }
+      },
+      "comp_category":       { "type": "keyword" },
+      "submission_criteria_match": {
+        "properties": {
+          "pulitzer":  { "type": "boolean" },
+          "pen":       { "type": "boolean" },
+          "faulkner":  { "type": "boolean" }
+        }
+      },
+      "ingestion_timestamp": { "type": "date" },
+      "pipeline_version":    { "type": "keyword" },
+      "source_attribution":  { "type": "text" }
+    }
+  }
+}

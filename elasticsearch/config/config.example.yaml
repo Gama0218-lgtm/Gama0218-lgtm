@@ -1,0 +1,37 @@
+elasticsearch:
+  endpoint: "https://your-deployment.es.io"
+  api_key: "REPLACE_WITH_ES_API_KEY"
+  verify_certs: true
+  request_timeout: 60
+
+embedding:
+  provider: "openai"            # "openai" | "sentence-transformers"
+  openai_api_key: "REPLACE_WITH_OPENAI_API_KEY"
+  openai_model: "text-embedding-3-small"
+  openai_dims: 1536
+  local_model: "all-MiniLM-L6-v2"
+  local_dims: 384
+  batch_size: 16
+  rate_limit_sleep_seconds: 0.02
+
+pipeline:
+  version: "1.0.0"
+  preserve_linguistic_features: true
+  chunking:
+    chapter_pattern: '^(Chapter|CHAPTER|CAPÍTULO)\s+([0-9IVXLCDM]+)'
+    scene_separator: '^(\*\*\*|###|----+)'
+    min_paragraph_words: 3
+  enrichment:
+    use_spacy: true
+    spacy_model: "en_core_web_lg"
+    compute_readability: true
+    extract_entities: true
+
+indices:
+  manuscript: "ramos-manuscript"
+  behavioral: "ramos-behavioral-vectors"
+  historical: "ramos-historical-evidence"
+  corpus: "ramos-corpus-comparison"
+  citation: "ramos-citation-network"
+  stylometry: "ramos-stylometry"
+  identity: "ramos-identity-analysis"

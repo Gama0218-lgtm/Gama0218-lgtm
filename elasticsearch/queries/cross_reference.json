@@ -1,0 +1,59 @@
+{
+  "description": "Cross-reference a manuscript paragraph against the historical evidence index. Strategy: pull the paragraph's embedding and its NER tags, then run a hybrid (kNN + filter-by-surname/unit/date) search across ramos-historical-evidence. Replace PARAGRAPH_VECTOR and the filter values with values from the source paragraph.",
+  "endpoint": "GET /ramos-historical-evidence/_search",
+  "body": {
+    "size": 20,
+    "_source": {
+      "excludes": ["embedding"]
+    },
+    "retriever": {
+      "rrf": {
+        "retrievers": [
+          {
+            "standard": {
+              "query": {
+                "bool": {
+                  "should": [
+                    { "terms": { "surname":     "REPLACE_WITH_SURNAMES_FROM_PARAGRAPH" } },
+                    { "terms": { "unit":        "REPLACE_WITH_UNITS_FROM_PARAGRAPH" } },
+                    { "terms": { "place.keyword":"REPLACE_WITH_PLACES_FROM_PARAGRAPH" } },
+                    {
+                      "match": {
+                        "text": {
+                          "query":    "REPLACE_WITH_PARAGRAPH_TEXT",
+                          "operator": "or",
+                          "minimum_should_match": "30%"
+                        }
+                      }
+                    }
+                  ],
+                  "minimum_should_match": 1
+                }
+              }
+            }
+          },
+          {
+            "knn": {
+              "field": "embedding",
+              "query_vector": "REPLACE_WITH_PARAGRAPH_VECTOR",
+              "k": 50,
+              "num_candidates": 200
+            }
+          }
+        ],
+        "rank_window_size": 100,
+        "rank_constant": 60
+      }
+    },
+    "aggs": {
+      "by_source":        { "terms": { "field": "source",        "size": 20 } },
+      "by_document_type": { "terms": { "field": "document_type", "size": 20 } },
+      "hispanic_indicator_split": {
+        "terms": { "field": "hispanic_indicator", "size": 2 }
+      },
+      "date_range": {
+        "date_histogram": { "field": "date", "calendar_interval": "year" }
+      }
+    }
+  }
+}

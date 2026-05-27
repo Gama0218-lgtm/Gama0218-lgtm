@@ -33,3 +33,20 @@ yarn-error.log*
 # OS
 Thumbs.db
 .DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.venv/
+venv/
+
+# Forensic pipeline artifacts (manuscript source and generated corpora are
+# kept out of git — the engine is committed; the manuscript is not).
+elasticsearch/config/config.yaml
+elasticsearch/data/
+*.docx
+manuscript_structured.json
+manuscript_with_embeddings.json

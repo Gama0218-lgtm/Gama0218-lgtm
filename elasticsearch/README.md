@@ -1,6 +1,6 @@
 # Ramos Forensic Manuscript Analytics Engine
 
-Elasticsearch-based forensic literary-historical validation engine for the Ramos manuscript (245,000 words, 43 chapters, hybrid literary-historical investigative corpus).
+Elasticsearch-based forensic literary-historical validation engine for the Ramos manuscript (~243,000 words, 45 chapters, hybrid literary-historical investigative corpus).
 
 ## Architecture
 

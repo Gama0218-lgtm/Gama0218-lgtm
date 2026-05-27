@@ -91,6 +91,18 @@ class StructuralTests(unittest.TestCase):
         for marker in SCENE_BREAKS[:3]:
             self.assertTrue(C.is_scene_break(marker), f"failed: {marker!r}")
 
+    def test_scene_break_space_separated_asterisks(self):
+        # The Ramos manuscript uses "* * *" with spaces — must be detected.
+        self.assertTrue(C.is_scene_break("* * *"))
+        self.assertTrue(C.is_scene_break("*  *  *"))
+        self.assertTrue(C.is_scene_break("  * * *  "))
+
+    def test_act_parsing_from_heading(self):
+        self.assertEqual(C.parse_act_from_heading("Chapter 1: The Sacred Mountain (ACT I)"), "Act I")
+        self.assertEqual(C.parse_act_from_heading("Chapter 19 Los Obligados   (ACT II)"), "Act II")
+        self.assertEqual(C.parse_act_from_heading("Chapter 35: The Birthday Brief (ACT III)"), "Act III")
+        self.assertIsNone(C.parse_act_from_heading("Chapter 20: THE GENESIS EQUATION"))
+
     def test_sentence_splitter_respects_ellipses(self):
         # Ellipses must NOT be mistaken for sentence-ending periods.
         s = "He paused... then said something. She nodded."

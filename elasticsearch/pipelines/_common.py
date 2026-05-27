@@ -26,8 +26,23 @@ CHAPTER_PATTERN = re.compile(
     re.IGNORECASE,
 )
 
-# Scene/section dividers commonly used in literary manuscripts.
-SCENE_SEPARATOR = re.compile(r"^\s*(\*{3,}|#{3,}|-{3,}|=+|·{3,}|◇{3,})\s*$")
+# Scene/section dividers commonly used in literary manuscripts. Includes
+# space-separated asterisks ("* * *"), centered-bullet dividers ("•  •  •"),
+# and the more compact "***", "###", "---" forms.
+SCENE_SEPARATOR = re.compile(
+    r"^\s*(?:"
+    r"(?:\*\s*){3,}"
+    r"|(?:#\s*){3,}"
+    r"|(?:-\s*){3,}"
+    r"|=+"
+    r"|(?:·\s*){3,}"
+    r"|(?:◇\s*){3,}"
+    r"|(?:•\s*){3,}"
+    r")\s*$"
+)
+
+# Acts are encoded inside chapter headings, e.g. "Chapter 1: ... (ACT I)".
+ACT_PATTERN = re.compile(r"\(\s*ACT\s+([IVX]+)\s*\)", re.IGNORECASE)
 
 # Dialogue detection: ASCII straight quotes, curly quotes, and Spanish dashes
 # (— ... —) so bilingual code-switched dialogue isn't lost.
@@ -119,6 +134,15 @@ def is_chapter_heading(line: str) -> tuple[bool, int | None, str]:
 
 def is_scene_break(line: str) -> bool:
     return bool(SCENE_SEPARATOR.match(line))
+
+
+def parse_act_from_heading(heading: str) -> str | None:
+    """Return 'Act I' / 'Act II' / 'Act III' if the heading carries an act tag."""
+    match = ACT_PATTERN.search(heading)
+    if not match:
+        return None
+    numeral = match.group(1).upper()
+    return f"Act {numeral}"
 
 
 def split_sentences(text: str) -> list[str]:

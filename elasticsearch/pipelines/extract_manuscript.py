@@ -27,6 +27,7 @@ except ImportError as exc:
     raise
 
 from elasticsearch.pipelines._common import (
+    CHAPTER_PATTERN,
     ExtractionContext,
     PIPELINE_VERSION,
     count_dialogue_chars,
@@ -35,6 +36,8 @@ from elasticsearch.pipelines._common import (
     is_chapter_heading,
     is_scene_break,
     lexical_diversity,
+    parse_act_from_heading,
+    parse_chapter_number,
     spanish_token_ratio,
     split_sentences,
     text_hash,
@@ -63,6 +66,8 @@ def _paragraph_doc(
     *,
     text: str,
     chapter_num: int,
+    chapter_seq: int,
+    chapter_label_num: int | None,
     chapter_title: str,
     scene_num: int,
     paragraph_num: int,
@@ -82,8 +87,13 @@ def _paragraph_doc(
 
     return {
         "doc_type": "paragraph",
-        "doc_id": doc_id(ctx.source_file, chapter_num, paragraph_num),
-        "chapter_num": chapter_num,
+        "doc_id": doc_id(ctx.source_file, chapter_seq, paragraph_num),
+        # chapter_num is the canonical sequence (1..N), guaranteed unique
+        # and monotonically increasing. chapter_label_num preserves the
+        # original manuscript label (may repeat or be out of order).
+        "chapter_num": chapter_seq,
+        "chapter_seq": chapter_seq,
+        "chapter_label_num": chapter_label_num,
         "chapter_title": chapter_title,
         "scene_num": scene_num,
         "paragraph_num": paragraph_num,
@@ -130,6 +140,34 @@ def _paragraph_doc(
     }
 
 
+def _detect_chapter_from_paragraph(para) -> tuple[bool, int | None, str]:
+    """Word style is the primary signal; regex is a fallback.
+
+    A real chapter heading is authored as ``Heading 1`` in this manuscript.
+    Restated chapter labels that appear as body paragraphs (e.g. an editor
+    note re-typed inside a scene) use the ``Normal`` style and must NOT be
+    treated as chapter starts.
+    """
+    text = para.text.strip()
+    if not text:
+        return False, None, ""
+
+    style_name = (para.style.name if para.style else "") or ""
+    is_word_heading = "Heading 1" in style_name or style_name == "Title"
+
+    # If Word styled it as a heading and the text starts with "Chapter", trust it.
+    if is_word_heading:
+        match = CHAPTER_PATTERN.match(text)
+        if match:
+            return True, parse_chapter_number(match.group(2)), text
+        # Word-styled heading without a "Chapter N" prefix — still a heading,
+        # but with no parsable number. Treat it as the title page banner.
+        return True, None, text
+
+    # Body paragraph that re-states a chapter label: do NOT treat as a chapter.
+    return False, None, ""
+
+
 def extract_manuscript(docx_path: str, output_path: str) -> list[dict[str, Any]]:
     source_file = Path(docx_path).name
     ctx = ExtractionContext(source_file=source_file)
@@ -137,11 +175,14 @@ def extract_manuscript(docx_path: str, output_path: str) -> list[dict[str, Any]]
     doc = docx.Document(docx_path)
 
     flattened: list[dict[str, Any]] = []
-    chapter_num = 0
-    chapter_title = "Untitled"
+    chapter_seq = 0
+    chapter_label_num: int | None = None
+    chapter_title = "Front Matter"
     scene_num = 1
     paragraph_counter = 0
     current_act: str | None = None
+    scene_breaks_seen = 0
+    chapter_headings_seen: list[dict[str, Any]] = []
 
     for para in doc.paragraphs:
         # NOTE: only outer whitespace is stripped. We do not collapse internal
@@ -150,30 +191,36 @@ def extract_manuscript(docx_path: str, output_path: str) -> list[dict[str, Any]]
         if not text:
             continue
 
-        is_chap, parsed_num, heading_text = is_chapter_heading(text)
-        if is_chap and parsed_num is not None:
-            chapter_num = parsed_num
+        is_chap, parsed_num, heading_text = _detect_chapter_from_paragraph(para)
+        if is_chap:
+            chapter_seq += 1
+            chapter_label_num = parsed_num
             chapter_title = heading_text
             scene_num = 1
             paragraph_counter = 0
-            # Heuristic "act" inference (researcher can override later).
-            if chapter_num <= 14:
-                current_act = "Act I"
-            elif chapter_num <= 29:
-                current_act = "Act II"
-            else:
-                current_act = "Act III"
+            chapter_headings_seen.append({
+                "chapter_seq": chapter_seq,
+                "chapter_label_num": chapter_label_num,
+                "chapter_title": chapter_title,
+            })
+
+            heading_act = parse_act_from_heading(heading_text)
+            if heading_act:
+                current_act = heading_act
             continue
 
         if is_scene_break(text):
             scene_num += 1
+            scene_breaks_seen += 1
             continue
 
         paragraph_counter += 1
         flattened.append(
             _paragraph_doc(
                 text=text,
-                chapter_num=chapter_num,
+                chapter_num=chapter_seq,
+                chapter_seq=chapter_seq,
+                chapter_label_num=chapter_label_num,
                 chapter_title=chapter_title,
                 scene_num=scene_num,
                 paragraph_num=paragraph_counter,
@@ -182,16 +229,16 @@ def extract_manuscript(docx_path: str, output_path: str) -> list[dict[str, Any]]
             )
         )
 
-    # Compute per-chapter totals and propagate to each paragraph.
+    # Compute per-chapter totals (keyed by chapter_seq) and propagate.
     chapter_word_counts: dict[int, int] = {}
     chapter_para_counts: dict[int, int] = {}
     for d in flattened:
-        ch = d["chapter_num"]
+        ch = d["chapter_seq"]
         chapter_word_counts[ch] = chapter_word_counts.get(ch, 0) + d["word_count"]
         chapter_para_counts[ch] = chapter_para_counts.get(ch, 0) + 1
 
     for d in flattened:
-        ch = d["chapter_num"]
+        ch = d["chapter_seq"]
         d["chapter_metadata"]["chapter_word_count"] = chapter_word_counts[ch]
         d["chapter_metadata"]["chapter_paragraph_count"] = chapter_para_counts[ch]
 
@@ -200,14 +247,40 @@ def extract_manuscript(docx_path: str, output_path: str) -> list[dict[str, Any]]
     with out_path.open("w", encoding="utf-8") as f:
         json.dump(flattened, f, indent=2, ensure_ascii=False)
 
-    chapter_count = len({d["chapter_num"] for d in flattened if d["chapter_num"]})
+    # Side-car chapter audit (helps the researcher reconcile sequence vs
+    # original labels when the manuscript has duplicate or out-of-order
+    # chapter numbering).
+    audit_path = out_path.with_name(out_path.stem + "_chapter_audit.json")
+    audit = []
+    for h in chapter_headings_seen:
+        seq = h["chapter_seq"]
+        audit.append({
+            **h,
+            "word_count": chapter_word_counts.get(seq, 0),
+            "paragraph_count": chapter_para_counts.get(seq, 0),
+        })
+    with audit_path.open("w", encoding="utf-8") as f:
+        json.dump(audit, f, indent=2, ensure_ascii=False)
+
+    chapter_count = len({d["chapter_seq"] for d in flattened if d["chapter_seq"]})
     total_words = sum(d["word_count"] for d in flattened)
+
+    # Detect duplicate or out-of-order label sequences for the researcher.
+    label_nums = [h["chapter_label_num"] for h in chapter_headings_seen if h["chapter_label_num"] is not None]
+    duplicate_labels = sorted({n for n in label_nums if label_nums.count(n) > 1})
+
     print(
-        f"Extracted {len(flattened)} paragraphs across {chapter_count} chapters "
-        f"({total_words:,} words). Pipeline v{PIPELINE_VERSION}. "
-        f"Timestamp {ctx.extraction_timestamp}."
+        f"Extracted {len(flattened)} paragraphs across {chapter_count} chapter sequences "
+        f"({total_words:,} words). {scene_breaks_seen} scene breaks. "
+        f"Pipeline v{PIPELINE_VERSION}. Timestamp {ctx.extraction_timestamp}."
     )
+    if duplicate_labels:
+        print(
+            f"NOTE: duplicate chapter labels in the manuscript: {duplicate_labels}. "
+            f"chapter_seq is the canonical sequence; chapter_label_num preserves the original."
+        )
     print(f"Wrote {output_path}")
+    print(f"Wrote chapter audit: {audit_path}")
     return flattened
 
 

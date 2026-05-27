@@ -35,6 +35,8 @@
       "doc_type":               { "type": "keyword" },
       "doc_id":                 { "type": "keyword" },
       "chapter_num":            { "type": "integer" },
+      "chapter_seq":            { "type": "integer" },
+      "chapter_label_num":      { "type": "integer" },
       "chapter_title":          { "type": "text", "fields": { "keyword": { "type": "keyword" } } },
       "scene_num":              { "type": "integer" },
       "paragraph_num":          { "type": "integer" },

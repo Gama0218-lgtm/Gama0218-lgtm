@@ -10,17 +10,19 @@ import {
   CHAPTER_SCORES, ACT_BANDS, REFERENCE_MEANS, actSummary, notableDips,
 } from "../lib/chapterScores";
 
-const DIP_THRESHOLD = 1.5;
+const OMEGA_DIP = 1.5;   // Ω points below manuscript Ω mean
+const CLS_DIP   = 8.0;   // CLS points below manuscript CLS mean
 
 // SVG layout
 const W = 960;
-const H = 360;
-const PAD = { top: 24, right: 24, bottom: 56, left: 44 };
+const H = 380;
+const PAD = { top: 24, right: 28, bottom: 56, left: 52 };
 const PLOT_W = W - PAD.left - PAD.right;
 const PLOT_H = H - PAD.top - PAD.bottom;
 
-const Y_MIN = 4;
-const Y_MAX = 10;
+// Real workbook range — Ω lives 105-110, CLS lives 75-99
+const Y_MIN = 70;
+const Y_MAX = 112;
 
 const ACT_TINT = {
   teal:   "rgba(46, 196, 182, 0.10)",
@@ -57,32 +59,34 @@ export default function OmegaCLSTrendTab() {
   const [hover, setHover] = useState(null);
   const omegaMean = REFERENCE_MEANS.omega;
   const clsMean   = REFERENCE_MEANS.cls;
-  const acts = useMemo(() => actSummary(DIP_THRESHOLD), []);
-  const dips = useMemo(() => notableDips(DIP_THRESHOLD), []);
+  const acts = useMemo(() => actSummary(OMEGA_DIP, CLS_DIP), []);
+  const dips = useMemo(() => notableDips(OMEGA_DIP, CLS_DIP), []);
 
   const omegaPath = pathFor("omega");
   const clsPath   = pathFor("cls");
 
-  // Y axis ticks every full point
+  // Y ticks every 10 — covers both Ω band (105-110) and CLS band (75-99)
   const yTicks = [];
-  for (let v = Y_MIN; v <= Y_MAX; v += 1) yTicks.push(v);
+  for (let v = 70; v <= 110; v += 10) yTicks.push(v);
+  // Add Ω-band callouts at 105 and 110 since they're the meaningful thresholds
+  const omegaTicks = [105, 110];
 
   // X axis ticks: chapters in 5s + act boundaries
   const xTicks = [1, 5, 10, 15, 20, 25, 30, 35, 40, 45];
 
-  // Pull dip points for both metrics so we can place red markers on the lines
-  const omegaDips = CHAPTER_SCORES.filter((c) => c.omega != null && omegaMean - c.omega >= DIP_THRESHOLD);
-  const clsDips   = CHAPTER_SCORES.filter((c) => c.cls   != null && clsMean   - c.cls   >= DIP_THRESHOLD);
+  const omegaDips = CHAPTER_SCORES.filter((c) => omegaMean - c.omega >= OMEGA_DIP);
+  const clsDips   = CHAPTER_SCORES.filter((c) => clsMean   - c.cls   >= CLS_DIP);
 
   return (
     <div className="omega-cls-trend">
       <h2 style={{ margin: "0 0 6px", fontSize: "1.4rem" }}>📈 Ω / CLS Trend</h2>
       <p className="intro" style={{ marginTop: 0 }}>
-        Audit Quality Score (<strong style={{ color: "#1ec9b0" }}>Ω</strong>) and
-        Chapter-Level Coherence (<strong style={{ color: "#a87bdb" }}>CLS</strong>) plotted across all
-        45 canonical chapters. Act bands group the structure; dashed lines show
-        the reference mean for each metric; red dots flag chapters that fall
-        ≥ {DIP_THRESHOLD} pts below their mean — those are the pacing dips.
+        Audit Quality (<strong style={{ color: "#1ec9b0" }}>Ω</strong>, 105-110 band) and
+        code-switch / cohesion load (<strong style={{ color: "#a87bdb" }}>CLS</strong>, 75-99 band)
+        plotted across all 45 canonical chapters of <em>SGT George Ramos</em>. Act bands group
+        the structure; dashed lines show the manuscript mean for each metric; red dots flag
+        chapters that fall ≥ {OMEGA_DIP} pts below Ω mean or ≥ {CLS_DIP} pts below CLS mean —
+        those are the priority remediation candidates.
       </p>
 
       {/* HEADER METRICS */}
@@ -104,7 +108,7 @@ export default function OmegaCLSTrendTab() {
         <div style={metricCardStyle("#e0524e")}>
           <div style={metricLabel}>NOTABLE DIPS</div>
           <div style={metricValue("#e0524e")}>{dips.length}</div>
-          <div style={metricHint}>≥ {DIP_THRESHOLD} pts below mean</div>
+          <div style={metricHint}>Ω ≥ {OMEGA_DIP} or CLS ≥ {CLS_DIP} below mean</div>
         </div>
         <div style={metricCardStyle("#efb344")}>
           <div style={metricLabel}>WEAKEST CHAPTER</div>
@@ -259,7 +263,7 @@ export default function OmegaCLSTrendTab() {
         <div style={{ display: "flex", flexWrap: "wrap", gap: 16, padding: "8px 12px 4px", color: "#8a93a3", fontFamily: "ui-monospace, monospace", fontSize: 11 }}>
           <span><span style={swatch("#1ec9b0")} />Ω (audit quality)</span>
           <span><span style={swatch("#a87bdb")} />CLS (chapter coherence)</span>
-          <span><span style={{ ...swatch("transparent"), border: "2px solid #e0524e", width: 8, height: 8 }} />red dot · dip ≥ {DIP_THRESHOLD} pts below mean</span>
+          <span><span style={{ ...swatch("transparent"), border: "2px solid #e0524e", width: 8, height: 8 }} />red dot · Ω dip ≥ {OMEGA_DIP} or CLS dip ≥ {CLS_DIP} below mean</span>
           <span><span style={{ ...swatch("transparent"), borderTop: "2px dashed #1ec9b0", width: 14, height: 0, marginRight: 6 }} />reference mean</span>
         </div>
       </div>
@@ -320,7 +324,7 @@ export default function OmegaCLSTrendTab() {
       {/* NOTABLE DIPS LIST */}
       {dips.length > 0 && (
         <>
-          <h3 style={{ margin: "22px 0 10px", fontSize: "1rem", letterSpacing: "0.04em" }}>Notable dips (≥ {DIP_THRESHOLD} pts below mean)</h3>
+          <h3 style={{ margin: "22px 0 10px", fontSize: "1rem", letterSpacing: "0.04em" }}>Notable dips · Ω ≥ {OMEGA_DIP} or CLS ≥ {CLS_DIP} pts below manuscript mean</h3>
           <div style={{ background: "#fff", border: "1px solid #e3e7ee", borderRadius: 8, overflow: "hidden" }}>
             <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
               <thead>

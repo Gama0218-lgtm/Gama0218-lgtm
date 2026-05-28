@@ -42,9 +42,26 @@ export const EXTERNAL_SOURCES = {
     endpoint: "https://www.loc.gov/bibframe",
     rateLimit: { requests: 25, window: 1000 }, // 25 req/sec
     userAgent: "LitCentral/13.0 (research; +https://litcentral.ai)",
-    capabilities: ["lccn_lookup", "control_numbers", "authority_records"],
+    // BIBFRAME v3.1 (March 2026) — BCP47 language + script codes are now
+    // round-tripped through MARC's $7 data-provenance subfield. The submission
+    // pipeline must emit BCP47 for every distinct language in the manuscript.
+    // See docs/audit/BIBFRAME_v3.1_briefing.md
+    capabilities: [
+      "lccn_lookup",
+      "control_numbers",
+      "authority_records",
+      "bibframe_v3.1",
+      "bcp47_provenance",
+    ],
+    conversionSpec: {
+      version: "3.1",
+      marc2bibframe: "https://github.com/lcnetdev/marc2bibframe2",
+      bibframe2marc: "https://github.com/lcnetdev/bibframe2marc",
+      modernMarc: "https://www.loc.gov/marc/ModernMARC-March2026.pdf",
+      announcement: "https://www.loc.gov/bibframe/implementation/index.html",
+    },
     auth: "none",
-    enabled: true
+    enabled: true,
   },
   SEMANTIC_SCHOLAR: {
     id: "semantic_scholar",

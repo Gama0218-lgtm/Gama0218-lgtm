@@ -1,0 +1,96 @@
+{
+  "name": "ClaimsLedger",
+  "type": "object",
+  "properties": {
+    "chapter_number": {
+      "type": "number",
+      "description": "Chapter where the narrative claim appears"
+    },
+    "claim_text": {
+      "type": "string",
+      "description": "The specific narrative assertion or claim from the manuscript"
+    },
+    "claim_type": {
+      "type": "string",
+      "enum": [
+        "historical-fact",
+        "statistical",
+        "legal",
+        "cultural",
+        "military",
+        "biographical",
+        "geographic"
+      ],
+      "description": "Category of claim"
+    },
+    "source_title": {
+      "type": "string",
+      "description": "Title of primary/secondary source"
+    },
+    "source_url": {
+      "type": "string",
+      "description": "URL or archive link to source"
+    },
+    "source_type": {
+      "type": "string",
+      "enum": [
+        "primary",
+        "secondary",
+        "oral-history",
+        "government-record",
+        "academic",
+        "journalism",
+        "archive"
+      ],
+      "description": "Type of source"
+    },
+    "verification_status": {
+      "type": "string",
+      "enum": [
+        "verified",
+        "partially-verified",
+        "disputed",
+        "unverified",
+        "needs-source"
+      ],
+      "default": "unverified"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional context, contradictions, or follow-up needed"
+    },
+    "submission_blocker": {
+      "type": "boolean",
+      "default": false,
+      "description": "True if this unverified claim would block submission"
+    }
+  },
+  "required": [
+    "chapter_number",
+    "claim_text",
+    "claim_type",
+    "verification_status"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

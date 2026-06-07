@@ -1,16 +1,80 @@
-/**
- * src/App.jsx
- * LitCentral v13 - Main App Entry Point
- */
+import { Toaster } from "@/components/ui/toaster"
+import { QueryClientProvider } from '@tanstack/react-query'
+import { queryClientInstance } from '@/lib/query-client'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import PageNotFound from './lib/PageNotFound';
+import { AuthProvider, useAuth } from '@/lib/AuthContext';
+import { AppProvider } from '@/lib/AppContext';
+import AppShell from '@/components/AppShell';
+import UserNotRegisteredError from '@/components/UserNotRegisteredError';
+import Dashboard from './pages/Dashboard';
+import WriterPage from './pages/WriterPage';
+import MarketIntelligencePage from './pages/MarketIntelligencePage';
+import LitIntelReportPage from './pages/LitIntelReportPage';
+import StakeholderDirectoryPage from './pages/StakeholderDirectoryPage';
+import StakeholderProfilerPage from './pages/StakeholderProfilerPage';
+import JAMSPage from './pages/JAMSPage';
+import SprintTrackerPage from './pages/SprintTrackerPage';
+import PromptMasterPage from './pages/PromptMasterPage';
+import AgentPage from './pages/AgentPage';
 
-import React from "react";
-import Dashboard from "./components/Dashboard";
-import "./App.css";
+const AuthenticatedApp = () => {
+  const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
 
-export default function App() {
+  // Show loading spinner while checking app public settings or auth
+  if (isLoadingPublicSettings || isLoadingAuth) {
+    return (
+      <div className="fixed inset-0 flex items-center justify-center">
+        <div className="w-8 h-8 border-4 border-slate-200 border-t-slate-800 rounded-full animate-spin"></div>
+      </div>
+    );
+  }
+
+  // Handle authentication errors
+  if (authError) {
+    if (authError.type === 'user_not_registered') {
+      return <UserNotRegisteredError />;
+    } else if (authError.type === 'auth_required') {
+      // Redirect to login automatically
+      navigateToLogin();
+      return null;
+    }
+  }
+
+  // Render the main app
   return (
-    <div className="app">
-      <Dashboard />
-    </div>
+    <AppShell>
+      <Routes>
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/writer" element={<WriterPage />} />
+        <Route path="/market-intelligence" element={<MarketIntelligencePage />} />
+        <Route path="/lit-intel-report" element={<LitIntelReportPage />} />
+        <Route path="/stakeholders" element={<StakeholderDirectoryPage />} />
+        <Route path="/profiler" element={<StakeholderProfilerPage />} />
+        <Route path="/jams" element={<JAMSPage />} />
+        <Route path="/sprints" element={<SprintTrackerPage />} />
+        <Route path="/prompt-master" element={<PromptMasterPage />} />
+        <Route path="/agent" element={<AgentPage />} />
+        <Route path="*" element={<PageNotFound />} />
+      </Routes>
+    </AppShell>
+  );
+};
+
+
+function App() {
+  return (
+    <AuthProvider>
+      <QueryClientProvider client={queryClientInstance}>
+        <Router>
+          <AppProvider>
+            <AuthenticatedApp />
+          </AppProvider>
+        </Router>
+        <Toaster />
+      </QueryClientProvider>
+    </AuthProvider>
   );
 }
+
+export default App

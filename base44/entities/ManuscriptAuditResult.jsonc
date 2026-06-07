@@ -1,149 +1,166 @@
 {
-  // ManuscriptAuditResult.jsonc (Updated for v13)
-  // Individual audit findings with required evidence_quotes[], severity rubric, and known defect tracking
-  "entity_name": "ManuscriptAuditResult",
-  "table_name": "manuscript_audit_results",
-  "description": "Individual audit findings with verbatim evidence quotes and severity classification",
-  "fields": [
-    {
-      "name": "result_id",
-      "type": "UUID",
-      "primary_key": true,
-      "description": "Unique identifier for this audit finding"
+  "name": "ManuscriptAuditResult",
+  "type": "object",
+  "properties": {
+    "audit_run_id": {
+      "type": "string",
+      "description": "Unique ID for this audit run (timestamp-based)"
     },
-    {
-      "name": "audit_run_id",
-      "type": "UUID",
-      "foreign_key": true,
-      "references": "audit_runs",
-      "description": "Parent audit run"
+    "chapter_number": {
+      "type": "number",
+      "description": "Chapter number (1-44)"
     },
-    {
-      "name": "chapter_id",
-      "type": "INTEGER",
-      "nullable": true,
-      "description": "Chapter number if finding is chapter-specific (1-45)"
+    "chapter_title": {
+      "type": "string"
     },
-    {
-      "name": "section",
-      "type": "VARCHAR(255)",
-      "nullable": true,
-      "description": "Section or subsection identifier"
+    "act": {
+      "type": "string",
+      "enum": [
+        "I",
+        "II",
+        "III"
+      ]
     },
-    {
-      "name": "finding_type",
-      "type": "ENUM",
-      "enum_values": ["clarity", "evidence", "rigor", "consistency", "completeness", "citation", "structure", "other"],
-      "description": "Category of finding"
+    "word_count": {
+      "type": "number"
     },
-    {
-      "name": "title",
-      "type": "VARCHAR(255)",
-      "description": "Brief title of the finding"
+    "omega_score": {
+      "type": "number"
     },
-    {
-      "name": "description",
-      "type": "TEXT",
-      "description": "Detailed description of the issue"
+    "cls_score": {
+      "type": "number",
+      "description": "Cultural Language Score"
     },
-    {
-      "name": "evidence_quotes",
-      "type": "JSONB",
-      "description": "Array of verbatim quotes from manuscript: { quotes: [ { quote_text, line_number, context } ] }"
+    "bis_score": {
+      "type": "number",
+      "description": "Behavioral Integrity Score"
     },
-    {
-      "name": "severity",
-      "type": "INTEGER",
-      "description": "Severity rubric (1-10 scale: 1=negligible to 10=terminal)"
+    "sii_score": {
+      "type": "number",
+      "description": "Sensory Immersion Index"
     },
-    {
-      "name": "severity_label",
-      "type": "VARCHAR(50)",
-      "description": "Severity label (negligible, minimal, minor, light, moderate, significant, major, critical, severe, terminal)"
+    "mrf_score": {
+      "type": "number",
+      "description": "Multi-Register Frequency"
     },
-    {
-      "name": "is_known_defect",
-      "type": "BOOLEAN",
-      "default": false,
-      "description": "Is this a known/pre-computed defect from defect ledger?"
+    "dialogue_pct": {
+      "type": "number",
+      "description": "Percentage of dialogue vs prose"
     },
-    {
-      "name": "known_defect_id",
-      "type": "VARCHAR(100)",
-      "nullable": true,
-      "description": "Reference to known defect in ledger"
+    "sensory_density": {
+      "type": "number",
+      "description": "Sensory references per 1000 words"
     },
-    {
-      "name": "remediation_suggestion",
-      "type": "TEXT",
-      "nullable": true,
-      "description": "Suggested fix or remediation"
+    "pov_violations": {
+      "type": "number"
     },
-    {
-      "name": "remediation_task_id",
-      "type": "UUID",
-      "foreign_key": true,
-      "references": "remediation_tasks",
-      "nullable": true,
-      "description": "Associated remediation task if created"
+    "continuity_issues": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of continuity issues found"
     },
-    {
-      "name": "status",
-      "type": "ENUM",
-      "enum_values": ["open", "assigned", "in_revision", "resolved", "acknowledged", "wont_fix"],
-      "default": "open",
-      "description": "Current status of this finding"
+    "anachronisms": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     },
-    {
-      "name": "priority",
-      "type": "ENUM",
-      "enum_values": ["critical", "high", "medium", "low"],
-      "description": "Priority for remediation"
+    "voice_drift_flags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     },
-    {
-      "name": "assigned_to",
-      "type": "VARCHAR(255)",
-      "nullable": true,
-      "description": "Assigned reviewer or author"
+    "character_flags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     },
-    {
-      "name": "metadata",
-      "type": "JSONB",
-      "nullable": true,
-      "description": "Additional finding metadata"
+    "structural_flags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
     },
-    {
-      "name": "created_at",
-      "type": "TIMESTAMP",
-      "default": "CURRENT_TIMESTAMP",
-      "description": "Record creation timestamp"
+    "agency_score": {
+      "type": "number",
+      "description": "1-5 protagonist agency score"
+    },
+    "overall_severity": {
+      "type": "string",
+      "enum": [
+        "CLEAN",
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "CRITICAL"
+      ]
+    },
+    "summary": {
+      "type": "string",
+      "description": "2-3 sentence editorial summary"
+    },
+    "priority_fix": {
+      "type": "string",
+      "description": "Single most urgent fix needed"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "processing",
+        "complete",
+        "error"
+      ]
     }
+  },
+  "required": [
+    "audit_run_id",
+    "chapter_number",
+    "status"
   ],
-  "indexes": [
-    {
-      "name": "idx_audit_results_audit_run",
-      "columns": ["audit_run_id"],
-      "unique": false
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}"
     },
-    {
-      "name": "idx_audit_results_chapter",
-      "columns": ["chapter_id"],
-      "unique": false
+    "read": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
     },
-    {
-      "name": "idx_audit_results_severity",
-      "columns": ["severity"],
-      "unique": false
+    "update": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
     },
-    {
-      "name": "idx_audit_results_status",
-      "columns": ["status"],
-      "unique": false
-    },
-    {
-      "name": "idx_audit_results_known_defect",
-      "columns": ["is_known_defect"],
-      "unique": false
+    "delete": {
+      "$or": [
+        {
+          "created_by": "{{user.email}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
     }
-  ]
+  }
 }

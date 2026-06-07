@@ -26,7 +26,6 @@ const TAB_GROUPS = [
     id: "core",
     label: "Core",
     icon: LayoutGrid,
-    color: "text-blue-400",
     tabs: [
       { id: "overview",  label: "Overview" },
       { id: "chapters",  label: "Chapters" },
@@ -40,7 +39,6 @@ const TAB_GROUPS = [
     id: "analysis",
     label: "Analysis",
     icon: BarChart3,
-    color: "text-purple-400",
     tabs: [
       { id: "arcs",      label: "Char Arcs" },
       { id: "emotion",   label: "Emotion" },
@@ -59,7 +57,6 @@ const TAB_GROUPS = [
     id: "platform",
     label: "Platform",
     icon: Layers,
-    color: "text-teal-400",
     tabs: [
       { id: "characters", label: "Characters" },
       { id: "glossary",   label: "Glossary" },
@@ -81,7 +78,6 @@ const TAB_GROUPS = [
     id: "research",
     label: "Research",
     icon: FlaskConical,
-    color: "text-yellow-400",
     tabs: [
       { id: "beta",       label: "Beta" },
       { id: "research",   label: "Research" },
@@ -100,7 +96,6 @@ const TAB_GROUPS = [
     id: "liveops",
     label: "Live Ops",
     icon: Radio,
-    color: "text-red-400",
     tabs: [
       { id: "platform",   label: "Platform" },
       { id: "aiintel",    label: "AI Intel" },
@@ -144,7 +139,7 @@ export default function Sidebar() {
   return (
     <div
       className={`flex flex-col h-full bg-card border-r border-border transition-all duration-200 ${
-        sidebarCollapsed ? "w-14" : "w-56"
+        sidebarCollapsed ? "w-14" : "w-52"
       } shrink-0`}
     >
       {/* Logo area */}
@@ -162,13 +157,6 @@ export default function Sidebar() {
       {/* Scrollable nav area */}
       <div className="flex-1 overflow-y-auto overflow-x-hidden py-2">
         {/* Pages */}
-        {!sidebarCollapsed && (
-          <div className="px-3 pt-1 pb-0.5">
-            <span className="text-[9px] font-bold font-mono tracking-widest text-muted-foreground uppercase">
-              Pages
-            </span>
-          </div>
-        )}
         {PAGES.map((page) => {
           const Icon = page.icon;
           const active = location.pathname === page.path;
@@ -177,13 +165,11 @@ export default function Sidebar() {
               key={page.path}
               onClick={() => navigate(page.path)}
               title={sidebarCollapsed ? page.label : undefined}
-              className={`w-full flex items-center gap-2.5 px-3 py-1.5 text-[11px] font-mono transition-colors
-                ${active
-                  ? "bg-accent/15 text-accent font-bold"
+              className={`w-full flex items-center gap-2.5 px-3 py-1.5 text-[11px] font-mono transition-colors duration-150 ${
+                active
+                  ? "border-l-2 border-accent text-foreground font-semibold"
                   : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
-                }
-                ${sidebarCollapsed ? "justify-center" : ""}
-              `}
+              } ${sidebarCollapsed ? "justify-center" : ""}`}
             >
               <Icon className="w-3.5 h-3.5 shrink-0" />
               {!sidebarCollapsed && <span className="truncate">{page.label}</span>}
@@ -191,19 +177,12 @@ export default function Sidebar() {
           );
         })}
 
-        {/* Divider + tabs section */}
+        {/* Divider */}
         <div className={`mt-2 mb-1 ${sidebarCollapsed ? "px-2" : "px-3"}`}>
           <div className="border-t border-border" />
         </div>
 
-        {!sidebarCollapsed && (
-          <div className="px-3 pt-1 pb-0.5">
-            <span className="text-[9px] font-bold font-mono tracking-widest text-muted-foreground uppercase">
-              Dashboard
-            </span>
-          </div>
-        )}
-
+        {/* Tab groups */}
         {TAB_GROUPS.map((group) => {
           const GroupIcon = group.icon;
           const isExpanded = expandedGroups[group.id];
@@ -220,8 +199,8 @@ export default function Sidebar() {
                   if (first) { handleTabClick(first.id); setSidebarCollapsed(false); }
                 }}
                 title={group.label}
-                className={`w-full flex justify-center py-2 transition-colors ${
-                  groupHasActive ? group.color : "text-muted-foreground hover:text-foreground"
+                className={`w-full flex justify-center py-2 transition-colors duration-150 ${
+                  groupHasActive ? "text-foreground" : "text-muted-foreground hover:text-foreground"
                 }`}
               >
                 <GroupIcon className="w-3.5 h-3.5" />
@@ -233,8 +212,8 @@ export default function Sidebar() {
             <div key={group.id}>
               <button
                 onClick={() => toggleGroup(group.id)}
-                className={`w-full flex items-center gap-2 px-3 py-1.5 text-[10px] font-bold font-mono uppercase tracking-wider transition-colors ${
-                  groupHasActive ? group.color : "text-muted-foreground hover:text-foreground"
+                className={`w-full flex items-center gap-2 px-3 py-1.5 text-[11px] font-medium transition-colors duration-150 ${
+                  groupHasActive ? "text-foreground" : "text-muted-foreground hover:text-foreground"
                 }`}
               >
                 <GroupIcon className="w-3 h-3 shrink-0" />
@@ -248,13 +227,12 @@ export default function Sidebar() {
                   <button
                     key={tab.id}
                     onClick={() => handleTabClick(tab.id)}
-                    className={`w-full flex items-center gap-2 pl-8 pr-3 py-1 text-[11px] font-mono transition-colors ${
+                    className={`w-full flex items-center pl-7 pr-3 py-1 text-[11px] font-mono transition-colors duration-150 ${
                       isActive
-                        ? "text-foreground bg-secondary/60 font-semibold"
+                        ? "border-l-2 border-accent/70 bg-secondary/30 text-foreground font-medium"
                         : "text-muted-foreground hover:text-foreground hover:bg-secondary/30"
                     }`}
                   >
-                    <span className={`w-1 h-1 rounded-full shrink-0 ${isActive ? "bg-accent" : "bg-border"}`} />
                     <span className="truncate">{tab.label}</span>
                   </button>
                 );
@@ -268,11 +246,10 @@ export default function Sidebar() {
       <div className="border-t border-border p-2 shrink-0">
         <button
           onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-          className={`w-full flex items-center gap-2 px-2 py-1.5 rounded text-muted-foreground hover:text-foreground hover:bg-secondary/50 text-[10px] font-mono transition-colors ${sidebarCollapsed ? "justify-center" : ""}`}
+          className="w-full flex items-center justify-center px-2 py-1.5 rounded text-muted-foreground hover:text-foreground hover:bg-secondary/50 transition-colors duration-150"
           title={sidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
         >
           {sidebarCollapsed ? <ChevronRight className="w-3.5 h-3.5" /> : <ChevronLeft className="w-3.5 h-3.5" />}
-          {!sidebarCollapsed && <span>Collapse</span>}
         </button>
       </div>
     </div>

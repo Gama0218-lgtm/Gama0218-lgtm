@@ -1,0 +1,47 @@
+{
+  "name": "SyncState",
+  "type": "object",
+  "properties": {
+    "page_token": {
+      "type": "string",
+      "description": "Google Drive Changes API page token for incremental sync"
+    },
+    "watched_file_id": {
+      "type": "string",
+      "description": "Google Drive file ID being watched for changes"
+    },
+    "watched_file_name": {
+      "type": "string",
+      "description": "Human-readable name of the watched file"
+    },
+    "last_synced_at": {
+      "type": "string",
+      "description": "ISO timestamp of the last successful sync"
+    }
+  },
+  "required": [
+    "page_token"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

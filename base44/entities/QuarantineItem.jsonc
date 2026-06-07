@@ -1,0 +1,103 @@
+{
+  "name": "QuarantineItem",
+  "type": "object",
+  "properties": {
+    "chapter_number": {
+      "type": "number"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "draft-annotation",
+        "title-format",
+        "heading-format",
+        "name-error",
+        "anachronism",
+        "continuity",
+        "structural",
+        "word-overuse",
+        "historical",
+        "punctuation",
+        "formatting"
+      ]
+    },
+    "severity": {
+      "type": "string",
+      "enum": [
+        "CRITICAL",
+        "HIGH",
+        "MED",
+        "LOW"
+      ]
+    },
+    "flag": {
+      "type": "string",
+      "description": "Short description of the issue"
+    },
+    "detail": {
+      "type": "string",
+      "description": "Full detail and recommended fix"
+    },
+    "location": {
+      "type": "string",
+      "description": "Specific location in chapter (paragraph, page, line)"
+    },
+    "recommended_fix": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "quarantined",
+        "in-progress",
+        "resolved"
+      ],
+      "default": "quarantined"
+    },
+    "resolution_note": {
+      "type": "string"
+    },
+    "version_found": {
+      "type": "string",
+      "description": "Manuscript version this was found in"
+    },
+    "submission_blocker": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "chapter_number",
+    "category",
+    "severity",
+    "flag",
+    "status"
+  ],
+  "rls": {
+    "create": {
+      "created_by": "{{user.email}}"
+    },
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "created_by": "{{user.email}}"
+        }
+      ]
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

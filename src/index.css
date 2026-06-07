@@ -1,11 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /**
  * src/index.css
- * Global styles for LitCentral v13
+ * Global styles for LitCentral v13 + JAMNet
  */
 
 :root {
   --primary: #2c3e50;
-  --secondary: #3498db;
+  --secondary-legacy: #3498db;
   --success: #27ae60;
   --warning: #f39c12;
   --danger: #e74c3c;
@@ -13,7 +17,24 @@
   --dark: #34495e;
   --border-radius: 8px;
   --box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  /* JAMNet dark intel theme — HSL triplets for Tailwind tokens */
+  --background: 222 28% 7%;
+  --foreground: 210 20% 96%;
+  --card: 222 24% 10%;
+  --secondary: 222 18% 16%;
+  --border: 222 16% 20%;
+  --muted-foreground: 220 10% 64%;
+  --gold:   42  92% 58%;
+  --teal:   170 70% 48%;
+  --purple: 268 78% 66%;
+  --orange: 22  92% 58%;
+  --red:    0   78% 60%;
+  --blue:   210 90% 60%;
+  --green:  142 70% 48%;
 }
+
+.jam-app { background: hsl(var(--background)); color: hsl(var(--foreground)); }
 
 * {
   margin: 0;

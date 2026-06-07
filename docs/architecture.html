@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LitCentral + JAMNet — C4 Architecture</title>
+  <meta name="description" content="C4 architecture for LitCentral v13 manuscript audit + JAMNet TruthEngine360 stakeholder intelligence." />
+  <style>
+    :root {
+      --bg: #0b0d12;
+      --bg-2: #11141c;
+      --card: #14181f;
+      --border: #232a36;
+      --fg: #f1f3f6;
+      --muted: #8a93a3;
+      --gold: #efb344;
+      --teal: #1ec9b0;
+      --purple: #a87bdb;
+      --orange: #ef6f2a;
+      --red: #e0524e;
+      --blue: #3f97e8;
+      --green: #2cc26d;
+      --grad: linear-gradient(90deg, var(--gold), var(--teal), var(--purple));
+    }
+    html[data-theme="light"] {
+      --bg: #f5f7fa;
+      --bg-2: #ffffff;
+      --card: #ffffff;
+      --border: #e3e7ee;
+      --fg: #11141c;
+      --muted: #5e6776;
+      --gold: #b8841e;
+      --teal: #138e7c;
+      --purple: #7a4cc7;
+      --orange: #c44e15;
+      --red: #b5302c;
+      --blue: #2a73c0;
+      --green: #21924f;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--fg); font-family: ui-monospace, "JetBrains Mono", "Fira Code", SFMono-Regular, Menlo, monospace; }
+    body { line-height: 1.5; -webkit-font-smoothing: antialiased; }
+    a { color: var(--teal); }
+    .stripe { height: 4px; background: var(--grad); }
+    .wrap { max-width: 1280px; margin: 0 auto; padding: 28px 24px 60px; }
+
+    header.top { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; padding: 8px 24px; border-bottom: 1px solid var(--border); background: var(--bg-2); position: sticky; top: 0; z-index: 10; backdrop-filter: blur(6px); }
+    .kicker { font-size: 10px; letter-spacing: 0.22em; color: var(--muted); text-transform: uppercase; }
+    .brand { display: flex; align-items: baseline; gap: 10px; }
+    .brand h1 { margin: 4px 0 0; font-size: 18px; letter-spacing: 0.05em; }
+    .badge { display: inline-block; font-size: 9px; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--border); color: var(--muted); }
+    .badge.gold { color: var(--gold); border-color: color-mix(in srgb, var(--gold) 35%, transparent); background: color-mix(in srgb, var(--gold) 8%, transparent); }
+    .badge.teal { color: var(--teal); border-color: color-mix(in srgb, var(--teal) 35%, transparent); background: color-mix(in srgb, var(--teal) 8%, transparent); }
+    .badge.purple { color: var(--purple); border-color: color-mix(in srgb, var(--purple) 35%, transparent); background: color-mix(in srgb, var(--purple) 8%, transparent); }
+    .topright { display: flex; gap: 8px; align-items: center; }
+    .btn { background: transparent; border: 1px solid var(--border); color: var(--fg); padding: 6px 10px; font-family: inherit; font-size: 10px; letter-spacing: 0.12em; border-radius: 6px; cursor: pointer; }
+    .btn:hover { border-color: color-mix(in srgb, var(--teal) 60%, transparent); color: var(--teal); }
+
+    .intro { padding: 28px 0 8px; max-width: 880px; }
+    .intro h2 { margin: 0 0 8px; font-size: 22px; letter-spacing: 0.04em; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .intro p { margin: 8px 0; color: var(--muted); font-size: 13px; }
+
+    .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 24px 0; }
+    @media (max-width: 720px) { .kpis { grid-template-columns: repeat(2, 1fr); } }
+    .kpi { padding: 14px; border: 1px solid var(--border); background: var(--card); border-radius: 10px; }
+    .kpi .label { font-size: 9px; letter-spacing: 0.18em; color: var(--muted); }
+    .kpi .value { font-size: 26px; font-weight: 800; margin: 6px 0 2px; }
+    .kpi .hint { font-size: 10px; color: var(--muted); }
+    .kpi.gold   .value { color: var(--gold); }
+    .kpi.teal   .value { color: var(--teal); }
+    .kpi.purple .value { color: var(--purple); }
+    .kpi.red    .value { color: var(--red); }
+
+    section { margin: 36px 0; }
+    section h3 { display: flex; align-items: center; gap: 10px; margin: 0 0 12px; font-size: 13px; letter-spacing: 0.22em; }
+    section h3 .num { font-size: 9px; padding: 3px 8px; border-radius: 999px; background: var(--bg-2); border: 1px solid var(--border); color: var(--muted); letter-spacing: 0.18em; }
+    section h3 .accent.gold   { color: var(--gold); }
+    section h3 .accent.teal   { color: var(--teal); }
+    section h3 .accent.purple { color: var(--purple); }
+    section h3 .accent.orange { color: var(--orange); }
+    section h3 .accent.blue   { color: var(--blue); }
+    section h3 .accent.red    { color: var(--red); }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    @media (max-width: 980px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 640px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; } }
+
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 14px; }
+    .card .title { font-size: 11px; letter-spacing: 0.16em; }
+    .card .sub { font-size: 10px; color: var(--muted); margin-top: 2px; }
+    .card.gold   { border-color: color-mix(in srgb, var(--gold) 40%, transparent); }
+    .card.gold   .title { color: var(--gold); }
+    .card.teal   { border-color: color-mix(in srgb, var(--teal) 40%, transparent); }
+    .card.teal   .title { color: var(--teal); }
+    .card.purple { border-color: color-mix(in srgb, var(--purple) 40%, transparent); }
+    .card.purple .title { color: var(--purple); }
+    .card.orange { border-color: color-mix(in srgb, var(--orange) 40%, transparent); }
+    .card.orange .title { color: var(--orange); }
+    .card.blue   { border-color: color-mix(in srgb, var(--blue) 40%, transparent); }
+    .card.blue   .title { color: var(--blue); }
+    .card.red    { border-color: color-mix(in srgb, var(--red) 40%, transparent); }
+    .card.red    .title { color: var(--red); }
+
+    /* C4 Level 1 system box */
+    .context-system { padding: 28px; border: 1px solid var(--border); background: var(--card); border-radius: 14px; text-align: center; position: relative; }
+    .context-system .name { font-size: 18px; font-weight: 800; letter-spacing: 0.04em; }
+    .context-system .sys-sub { color: var(--muted); font-size: 11px; margin-top: 4px; }
+    .context-actors { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 18px; }
+    @media (max-width: 720px) { .context-actors { grid-template-columns: repeat(2, 1fr); } }
+    .actor { padding: 12px; border: 1px dashed var(--border); border-radius: 10px; background: var(--bg-2); }
+    .actor .who { font-weight: 700; font-size: 11px; letter-spacing: 0.1em; }
+    .actor .why { font-size: 10px; color: var(--muted); margin-top: 4px; }
+
+    /* C4 Level 2 containers */
+    .container-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    @media (max-width: 980px) { .container-grid { grid-template-columns: repeat(2, 1fr); } }
+    .ctr { padding: 14px; border: 1px solid var(--border); background: var(--card); border-radius: 10px; }
+    .ctr .role { font-size: 9px; color: var(--muted); letter-spacing: 0.18em; }
+    .ctr .name { font-weight: 700; margin: 4px 0; font-size: 12px; }
+    .ctr .tech { font-size: 10px; color: var(--muted); }
+    .ctr.frontend { border-color: color-mix(in srgb, var(--teal) 45%, transparent); }
+    .ctr.frontend .role, .ctr.frontend .name { color: var(--teal); }
+    .ctr.edge     { border-color: color-mix(in srgb, var(--orange) 45%, transparent); }
+    .ctr.edge .role, .ctr.edge .name { color: var(--orange); }
+    .ctr.api      { border-color: color-mix(in srgb, var(--gold) 45%, transparent); }
+    .ctr.api .role, .ctr.api .name { color: var(--gold); }
+    .ctr.auth     { border-color: color-mix(in srgb, var(--purple) 45%, transparent); }
+    .ctr.auth .role, .ctr.auth .name { color: var(--purple); }
+    .ctr.worker   { border-color: color-mix(in srgb, var(--blue) 45%, transparent); }
+    .ctr.worker .role, .ctr.worker .name { color: var(--blue); }
+    .ctr.report   { border-color: color-mix(in srgb, var(--gold) 45%, transparent); }
+    .ctr.report .role, .ctr.report .name { color: var(--gold); }
+    .ctr.db       { border-color: color-mix(in srgb, var(--teal) 45%, transparent); }
+    .ctr.db .role, .ctr.db .name { color: var(--teal); }
+    .ctr.store    { border-color: color-mix(in srgb, var(--red) 45%, transparent); }
+    .ctr.store .role, .ctr.store .name { color: var(--red); }
+
+    /* C4 Level 3 pipeline */
+    .pipeline { display: flex; align-items: stretch; gap: 6px; flex-wrap: wrap; }
+    .step { flex: 1 1 0; min-width: 100px; padding: 12px 10px; border: 1px solid var(--border); background: var(--card); border-radius: 10px; text-align: center; font-size: 10px; letter-spacing: 0.12em; color: var(--muted); position: relative; }
+    .step strong { display: block; color: var(--fg); font-size: 11px; letter-spacing: 0.16em; margin-bottom: 4px; }
+    .step.gold strong { color: var(--gold); }
+    .step.teal strong { color: var(--teal); }
+    .step.purple strong { color: var(--purple); }
+    .step.blue strong { color: var(--blue); }
+    .step.red strong { color: var(--red); }
+    .arrow { align-self: center; color: var(--muted); font-size: 14px; padding: 0 2px; }
+
+    /* Tables */
+    table.report { width: 100%; border-collapse: collapse; font-size: 11px; }
+    table.report th, table.report td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border); }
+    table.report th { color: var(--muted); font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; font-size: 9px; }
+    table.report tr:hover td { background: color-mix(in srgb, var(--teal) 6%, transparent); }
+
+    /* Code */
+    pre.code { background: var(--bg-2); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; font-size: 11px; line-height: 1.5; overflow-x: auto; }
+    pre.code .kw { color: var(--purple); }
+    pre.code .str { color: var(--teal); }
+    pre.code .com { color: var(--muted); font-style: italic; }
+    pre.code .ident { color: var(--gold); }
+
+    /* Misc */
+    ul.bullets { margin: 0; padding-left: 18px; font-size: 12px; color: var(--muted); }
+    ul.bullets li { margin: 4px 0; }
+    ul.bullets li::marker { color: var(--teal); }
+    .checklist li { list-style: none; padding-left: 0; }
+    .checklist li::before { content: "✓ "; color: var(--teal); font-weight: 700; }
+    footer { border-top: 1px solid var(--border); margin-top: 60px; padding: 18px 24px; text-align: center; color: var(--muted); font-size: 10px; letter-spacing: 0.14em; }
+  </style>
+</head>
+<body>
+  <div class="stripe"></div>
+
+  <header class="top">
+    <div class="brand">
+      <div>
+        <div class="kicker">Architecture Kit</div>
+        <h1>LitCentral + JAMNet — C4 Architecture</h1>
+      </div>
+      <span class="badge gold">v13</span>
+      <span class="badge teal">TruthEngine360</span>
+      <span class="badge purple">Multi-Tenant</span>
+    </div>
+    <div class="topright">
+      <a class="btn" href="./ARCHITECTURE.md">SOURCE .MD</a>
+      <a class="btn" href="./ARCHITECTURE_VARIANTS.md">VARIANTS .MD</a>
+      <button class="btn" id="themeToggle" aria-label="Toggle theme">TOGGLE THEME</button>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="intro">
+      <div class="kicker">AWS · Cloud-Native · Multi-Tenant</div>
+      <h2>Comprehensive systems architecture for the LitCentral + JAMNet platform</h2>
+      <p>This companion page is a polished presentation layer for <a href="./ARCHITECTURE.md">ARCHITECTURE.md</a>. It surfaces visual placeholders for system context, container structure, component interactions, reporting modules, and implementation blueprints — keep the markdown as the source of truth and share this page for walkthroughs.</p>
+    </div>
+
+    <div class="kpis">
+      <div class="kpi gold">
+        <div class="label">AVAILABILITY</div>
+        <div class="value">99.95%</div>
+        <div class="hint">Target SLA</div>
+      </div>
+      <div class="kpi teal">
+        <div class="label">LATENCY</div>
+        <div class="value">&lt;300ms</div>
+        <div class="hint">P95 API</div>
+      </div>
+      <div class="kpi purple">
+        <div class="label">SCALE</div>
+        <div class="value">Auto</div>
+        <div class="hint">Horizontal</div>
+      </div>
+      <div class="kpi red">
+        <div class="label">SECURITY</div>
+        <div class="value">MFA</div>
+        <div class="hint">Privileged roles</div>
+      </div>
+    </div>
+
+    <section>
+      <h3><span class="num">C4 LEVEL 1</span><span class="accent gold">SYSTEM CONTEXT</span></h3>
+      <div class="context-system">
+        <div class="name">LitCentral + JAMNet</div>
+        <div class="sys-sub">Multi-tenant SaaS — manuscript audit (Gate Zero → One → Two) + JAMNet TruthEngine360 stakeholder intelligence</div>
+        <div class="context-actors">
+          <div class="actor"><div class="who">Field Operator</div><div class="why">Runs Social Listening Grid, files dispatches</div></div>
+          <div class="actor"><div class="who">Stakeholder Researcher</div><div class="why">Maintains CRM, exports listening digests</div></div>
+          <div class="actor"><div class="who">Manuscript Author</div><div class="why">Submits, runs gates, accepts revisions</div></div>
+          <div class="actor"><div class="who">Tenant Admin</div><div class="why">Configures auth, retention, integrations</div></div>
+        </div>
+        <div class="context-actors" style="margin-top: 10px;">
+          <div class="actor"><div class="who">Identity Provider</div><div class="why">OIDC SSO + MFA</div></div>
+          <div class="actor"><div class="who">Social Platforms</div><div class="why">X, Reddit, YouTube, TikTok, Meta, LinkedIn, RSS</div></div>
+          <div class="actor"><div class="who">Academic APIs</div><div class="why">Crossref, OpenLibrary, Google Books, LoC, Semantic Scholar, TMDB</div></div>
+          <div class="actor"><div class="who">Object Storage</div><div class="why">Frozen versions, exports, audit packs</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h3><span class="num">C4 LEVEL 2</span><span class="accent teal">CONTAINER VIEW</span></h3>
+      <div class="container-grid">
+        <div class="ctr frontend">
+          <div class="role">FRONTEND</div>
+          <div class="name">Web / Mobile</div>
+          <div class="tech">React + Vite + Tailwind · CDN static</div>
+        </div>
+        <div class="ctr edge">
+          <div class="role">EDGE</div>
+          <div class="name">WAF + ALB</div>
+          <div class="tech">TLS, rate shaping, bot mitigation</div>
+        </div>
+        <div class="ctr api">
+          <div class="role">API</div>
+          <div class="name">Stateless Service</div>
+          <div class="tech">Node/TS · Fargate / k8s · HPA</div>
+        </div>
+        <div class="ctr auth">
+          <div class="role">AUTH</div>
+          <div class="name">OIDC</div>
+          <div class="tech">JWT + tenant claim · MFA gated</div>
+        </div>
+        <div class="ctr worker">
+          <div class="role">WORKERS</div>
+          <div class="name">Async Jobs</div>
+          <div class="tech">Listening adapters · digests · audits</div>
+        </div>
+        <div class="ctr report">
+          <div class="role">REPORTS</div>
+          <div class="name">Exports</div>
+          <div class="tech">Markdown · CSV · PDF builders</div>
+        </div>
+        <div class="ctr db">
+          <div class="role">DB</div>
+          <div class="name">Aurora</div>
+          <div class="tech">Postgres + RLS, multi-AZ</div>
+        </div>
+        <div class="ctr store">
+          <div class="role">S3</div>
+          <div class="name">Exports</div>
+          <div class="tech">Versioned · per-tenant prefix</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h3><span class="num">STANDARD SECTIONS</span><span class="accent purple">WHAT THE TEMPLATE INCLUDES</span></h3>
+      <div class="grid-2">
+        <div class="card teal">
+          <div class="title">CONTEXT &amp; TRUST</div>
+          <div class="sub">System context, actors, channels, trust boundaries.</div>
+        </div>
+        <div class="card gold">
+          <div class="title">CONTAINER INVENTORY</div>
+          <div class="sub">Containers mapped to AWS deployment shape.</div>
+        </div>
+        <div class="card purple">
+          <div class="title">COMPONENT INTERACTIONS</div>
+          <div class="sub">API, auth, caching, events, auditing flow.</div>
+        </div>
+        <div class="card orange">
+          <div class="title">CONTRACTS &amp; EVENTS</div>
+          <div class="sub">API contract templates, event schemas, data flow.</div>
+        </div>
+        <div class="card blue">
+          <div class="title">REPORTING &amp; METRICS</div>
+          <div class="sub">Modules, metrics catalog, dashboards, SLOs.</div>
+        </div>
+        <div class="card red">
+          <div class="title">IMPLEMENTATION STARTER</div>
+          <div class="sub">Structurizr DSL, middleware, reporting jobs.</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h3><span class="num">REPORTING + METRICS</span><span class="accent blue">OPERATIONAL REPORTING MODULES</span></h3>
+      <table class="report">
+        <thead>
+          <tr><th>Module</th><th>Focus</th><th>Primary outputs</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Operational dashboard</td><td>Latency, errors, throughput, saturation</td><td>Alerts, health views</td></tr>
+          <tr><td>Business reporting</td><td>Usage, billing, conversion, retention</td><td>Scheduled reports, exports</td></tr>
+          <tr><td>Security reporting</td><td>Auth events, anomalies, privileged access</td><td>Security dashboards</td></tr>
+          <tr><td>Compliance reporting</td><td>Retention, evidence, export history</td><td>Audit evidence packs</td></tr>
+          <tr><td>JAMNet listening digests</td><td>Volume, sentiment, reach, fired alerts</td><td>Markdown + CSV digests per tenant</td></tr>
+          <tr><td>Audit reports</td><td>Ω score, evidence completeness, gates</td><td>Per-manuscript audit PDFs</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h3><span class="num">C4 LEVEL 3</span><span class="accent orange">COMPONENT INTERACTIONS</span></h3>
+      <div class="pipeline">
+        <div class="step teal"><strong>Client</strong>Web / Mobile</div>
+        <div class="arrow">→</div>
+        <div class="step purple"><strong>Auth MW</strong>JWT + tenant</div>
+        <div class="arrow">→</div>
+        <div class="step gold"><strong>Domain Svc</strong>Business logic</div>
+        <div class="arrow">→</div>
+        <div class="step blue"><strong>Repository</strong>RLS-scoped</div>
+        <div class="arrow">→</div>
+        <div class="step teal"><strong>DB</strong>Aurora</div>
+      </div>
+      <div class="pipeline" style="margin-top: 10px;">
+        <div class="step gold"><strong>Policy</strong>RBAC/ABAC decision</div>
+        <div class="arrow">↔</div>
+        <div class="step red"><strong>Audit + Events</strong>Append-only · fanout</div>
+      </div>
+      <div class="grid-2" style="margin-top: 14px;">
+        <div class="card purple">
+          <div class="title">LISTENING PIPELINE (ASYNC)</div>
+          <div class="sub">Adapter Workers → Listening Engine → Rules Engine → Alerts + Digest. The engine is implemented today in <code>src/lib/socialListening.js</code>.</div>
+        </div>
+        <div class="card teal">
+          <div class="title">AUDIT PIPELINE</div>
+          <div class="sub">Author submits → Gate Zero normalize → ManuscriptVersion (SHA-256) → Gate One evidence audit (Ω) → Gate Two revision + blinded review.</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h3><span class="num">IMPLEMENTATION STARTER</span><span class="accent gold">CODING BLUEPRINT</span></h3>
+      <div class="grid-2">
+        <pre class="code"><span class="com">// Structurizr DSL — System Context + Containers</span>
+<span class="kw">workspace</span> <span class="str">"LitCentral + JAMNet"</span> <span class="str">"C4 architecture for the platform"</span> {
+  <span class="kw">model</span> {
+    <span class="ident">user</span>      = <span class="kw">person</span> <span class="str">"Field Operator"</span>
+    <span class="ident">researcher</span>= <span class="kw">person</span> <span class="str">"Stakeholder Researcher"</span>
+    <span class="ident">author</span>    = <span class="kw">person</span> <span class="str">"Manuscript Author"</span>
+    <span class="ident">admin</span>     = <span class="kw">person</span> <span class="str">"Tenant Admin"</span>
+
+    <span class="ident">system</span> = <span class="kw">softwareSystem</span> <span class="str">"LitCentral + JAMNet"</span> {
+      <span class="ident">web</span>    = <span class="kw">container</span> <span class="str">"Web App"</span>        <span class="str">"React + Vite"</span>
+      <span class="ident">api</span>    = <span class="kw">container</span> <span class="str">"API"</span>            <span class="str">"Stateless service"</span>
+      <span class="ident">worker</span> = <span class="kw">container</span> <span class="str">"Workers"</span>        <span class="str">"Adapters + jobs"</span>
+      <span class="ident">db</span>     = <span class="kw">container</span> <span class="str">"Database"</span>       <span class="str">"Aurora + RLS"</span>
+    }
+
+    <span class="ident">user</span>   -&gt; <span class="ident">web</span> <span class="str">"Uses (JAMNet)"</span>
+    <span class="ident">author</span> -&gt; <span class="ident">web</span> <span class="str">"Uses (LitCentral)"</span>
+    <span class="ident">web</span>    -&gt; <span class="ident">api</span> <span class="str">"JSON/HTTPS"</span>
+    <span class="ident">api</span>    -&gt; <span class="ident">db</span>  <span class="str">"Reads/writes (RLS)"</span>
+  }
+  <span class="kw">views</span> {
+    <span class="kw">systemContext</span> <span class="ident">system</span> <span class="str">"SystemContext"</span> { <span class="kw">include</span> *; <span class="kw">autoLayout</span> lr }
+    <span class="kw">container</span>     <span class="ident">system</span> <span class="str">"Containers"</span>    { <span class="kw">include</span> *; <span class="kw">autoLayout</span> lr }
+  }
+}</pre>
+
+        <pre class="code"><span class="com">// Auth middleware — tenant-scoped policy gate</span>
+<span class="kw">export async function</span> <span class="ident">authorize</span>(request, response, next) {
+  <span class="kw">const</span> token    = extractBearerToken(request.headers.authorization);
+  <span class="kw">const</span> claims   = <span class="kw">await</span> verifyJwt(token, jwksClient);
+  <span class="kw">const</span> tenantId = resolveTenant(request, claims);
+
+  <span class="kw">const</span> decision = <span class="kw">await</span> policyEngine.evaluate({
+    subject:  { userId: claims.sub, roles: claims.roles || [], tenantId },
+    action:   request.method,
+    resource: request.route.path,
+  });
+
+  <span class="kw">if</span> (!decision.allow) <span class="kw">return</span> response.status(403).json({ code: <span class="str">'forbidden'</span> });
+  request.context = { claims, tenantId };
+  next();
+}</pre>
+      </div>
+
+      <pre class="code" style="margin-top: 12px;"><span class="com">// Nightly listening digest — schedule this in a worker / cron</span>
+<span class="kw">import</span> { fetchMentions, aggregateMetrics, evaluateRules, buildDigestMarkdown } <span class="kw">from</span> <span class="str">"../src/lib/socialListening.js"</span>;
+
+<span class="kw">export async function</span> <span class="ident">nightlyDigest</span>({ tenantId, uploader }) {
+  <span class="kw">const</span> since   = Date.now() - 24 * 60 * 60_000;
+  <span class="kw">const</span> posts   = <span class="kw">await</span> fetchMentions({ since });
+  <span class="kw">const</span> metrics = aggregateMetrics(posts);
+  <span class="kw">const</span> alerts  = evaluateRules({ metrics, baseline: <span class="kw">null</span> });
+  <span class="kw">const</span> md      = buildDigestMarkdown({ window: <span class="str">"24h"</span>, metrics, alerts, posts });
+
+  <span class="kw">await</span> uploader.put(`tenants/${tenantId}/digests/${<span class="kw">new</span> Date().toISOString()}.md`, md);
+  <span class="kw">if</span> (alerts.length) <span class="kw">await</span> notify(tenantId, alerts);
+  <span class="kw">return</span> { tenantId, mentions: metrics.total, alerts: alerts.length };
+}</pre>
+    </section>
+
+    <section>
+      <h3><span class="num">OPINIONATED VARIANTS</span><span class="accent purple">CHOOSE A SHAPE</span></h3>
+      <p style="color: var(--muted); font-size: 12px; margin: 0 0 14px;">
+        Three opinionated patterns extend the base template. Pick by team size, scaling profile, and how async the workload is. Full doc: <a href="./ARCHITECTURE_VARIANTS.md">ARCHITECTURE_VARIANTS.md</a>.
+      </p>
+      <div class="grid-3">
+        <div class="card teal">
+          <div class="title">VARIANT 1 · MODULAR MONOLITH</div>
+          <div class="sub">Best fit · early-to-mid SaaS, small platform team, strong domain cohesion.</div>
+          <ul class="bullets" style="margin-top: 8px;">
+            <li>One backend, strict internal modules</li>
+            <li>One Aurora DB, schema-separated</li>
+            <li>One worker (SQS + EventBridge)</li>
+            <li>Strength: fast delivery, simple ops</li>
+            <li>Tradeoff: lower independent scaling</li>
+          </ul>
+        </div>
+        <div class="card gold">
+          <div class="title">VARIANT 2 · MICROSERVICES</div>
+          <div class="sub">Best fit · large surface, multiple teams, unequal scaling profiles.</div>
+          <ul class="bullets" style="margin-top: 8px;">
+            <li>Per-domain services + data ownership</li>
+            <li>API Gateway / ALB ingress</li>
+            <li>EventBridge + SQS event backbone</li>
+            <li>Strength: team autonomy + indep. deploy</li>
+            <li>Tradeoff: platform complexity</li>
+          </ul>
+        </div>
+        <div class="card purple">
+          <div class="title">VARIANT 3 · EVENT-DRIVEN SAAS</div>
+          <div class="sub">Best fit · workflow-heavy, async integrations, analytics-rich products.</div>
+          <ul class="bullets" style="margin-top: 8px;">
+            <li>Command API + event backbone</li>
+            <li>Outbox / replay / dedupe components</li>
+            <li>Tenant-scoped events + observability</li>
+            <li>Strength: loose coupling, resilient</li>
+            <li>Tradeoff: eventual consistency complexity</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card" style="margin-top: 12px; border-color: color-mix(in srgb, var(--teal) 40%, transparent);">
+        <div class="title" style="color: var(--teal);">APPLIED TO LITCENTRAL + JAMNET</div>
+        <div class="sub" style="margin-top: 6px;">
+          Today the platform is best modeled as a <strong>modular monolith with an event-driven reporting + listening pipeline</strong>: one web app, one API surface, one database, and a listening / digest engine (<code>src/lib/socialListening.js</code>) that is already event-loop-shaped via <code>startAutomation</code>. When listening volume contends a single worker pool, lift just the listening + reporting subsystem into a separate service before splitting the rest.
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h3><span class="num">CHECKLIST</span><span class="accent green">STANDARD REVIEW SURFACE</span></h3>
+      <ul class="bullets checklist">
+        <li>System context, actors, channels, trust boundaries</li>
+        <li>Container inventory with cloud deployment mappings</li>
+        <li>Component interactions (sync + async pipelines)</li>
+        <li>API contract templates + event schema</li>
+        <li>Reporting modules, metrics catalog, dashboards</li>
+        <li>Implementation starter (Structurizr DSL, auth middleware, reporting jobs)</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    Source of truth: <a href="./ARCHITECTURE.md">ARCHITECTURE.md</a> · Companion: this page · Generated for LitCentral + JAMNet
+  </footer>
+
+  <script>
+    (function () {
+      var btn = document.getElementById("themeToggle");
+      var saved = localStorage.getItem("arch-theme");
+      if (saved) document.documentElement.setAttribute("data-theme", saved);
+      btn.addEventListener("click", function () {
+        var cur = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+        document.documentElement.setAttribute("data-theme", cur);
+        localStorage.setItem("arch-theme", cur);
+      });
+    })();
+  </script>
+</body>
+</html>

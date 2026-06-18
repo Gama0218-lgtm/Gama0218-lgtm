@@ -1,0 +1,325 @@
+================================================================================
+  LITCENTRAL HYBRID OMEGA + TE360 — FULL DUAL-FRAMEWORK AUDIT REPORT
+  Alba's Voice (Revised & Cleaned)
+  Gabriel Arce | AUMER Foundation
+================================================================================
+  Seal Timestamp : 2026-06-18 11:11 UTC
+  Manuscript SHA : bd5cd4966c17a0d3d8baa3d88170e301a585622999eb2fa50590f5596ebf0b1e
+  Formula (OMEGA): Ω = 71.443 + 0.124·CLS + 0.118·BIS + 0.089·SII + 0.067·MRF
+  Formula (TE360): OMEGA = BR+CS+AS+TB+(EE×0.67)+(MP×0.67)
+  R² = 0.947 | α = 0.938 | N=67 | seed=42
+
+  MANUSCRIPT SCORECARD
+--------------------------------------------------------------------------------
+  Total Chapters   : 67
+  Total Words      : 375,831
+  Mean Ω           : 108.197  (σ 0.711)
+  Ω Range          : 103.98 – 108.79
+  Mean TE360       : 110.0
+  Omega Elite ≥105 : 66 / 67 chapters
+  Below Omega <100 : 0 chapters
+  TE360 Omega Elite: 0 chapters (≥135)
+  TE360 Omega      : 4 chapters (≥120)
+  Anomalies        : 7
+
+  GATE STATUS
+--------------------------------------------------------------------------------
+  HOLD — address anomalies before submission
+
+  CHAPTER SCORES — HYBRID OMEGA
+--------------------------------------------------------------------------------
+   Ch   Words        Ω  Tier                CLS    BIS    SII    MRF  Title
+  ----------------------------------------------------------------------------------------------------
+    1   5,064   108.77  OMEGA ELITE       100.0   94.2   79.9  100.0  Chapter 1: Caja de zapatos
+    2   6,405   108.52  OMEGA ELITE       100.0   92.7   79.1  100.0  Chapter 2: Kino de Magdalena
+    3   6,599   108.53  OMEGA ELITE       100.0   93.1   78.7  100.0  Chapter 3: Guardia del Pozo
+    4   5,374   107.32  OMEGA ELITE       100.0   86.4   75.5   97.9  Chapter 4: La Reforma Ashfall
+    5   5,494   108.46  OMEGA ELITE       100.0   92.3   78.9  100.0  Chapter 5: The Bridge and the Weapon
+    6   4,026   108.38  OMEGA ELITE       100.0   91.9   78.6  100.0  Chapter 6: The Wolf of Chihuahua: A Revo
+    7   5,084   106.89  OMEGA ELITE       100.0   83.0   73.6  100.0  Chapter 7: The Wolf of Chihuahua: A Revo
+    8   4,282   108.16  OMEGA ELITE       100.0   90.6   77.9  100.0  Chapter 8: La Caida
+    9   5,939   107.70  OMEGA ELITE       100.0   88.6   75.3  100.0  Chapter 9: Mis treinta años
+   10   6,055   108.38  OMEGA ELITE       100.0   92.2   78.2  100.0  Chapter 10: La Fronter
+   11   5,025   108.08  OMEGA ELITE       100.0   90.8   76.7  100.0  Chapter 11: El Cuarto Negro
+   12   6,262   108.58  OMEGA ELITE       100.0   93.7   78.5  100.0  Chapter 12: Tejiendo Secretos
+   13   6,970   108.43  OMEGA ELITE       100.0   92.3   78.6  100.0  Chapter 13: Parque de la Amistad
+   14   4,935   107.94  OMEGA ELITE       100.0   90.2   75.8  100.0  Chapter 14: Vámonos a Tujungo
+   15   4,822   108.03  OMEGA ELITE       100.0   90.7   76.3  100.0  Chapter 15: Aviene Alba, Aviene Alba
+   16   5,171   107.39  OMEGA ELITE       100.0   87.0   73.9  100.0  Chapter 16: El Don y la Dona
+   17   5,392   107.98  OMEGA ELITE       100.0   89.9   76.7  100.0  Chapter 17: Las Lágrimas del Fierra
+   18   6,346   108.61  OMEGA ELITE       100.0   93.7   78.8  100.0  Chapter 18: Redención en las Sombras
+   19   5,473   108.26  OMEGA ELITE       100.0   91.2   78.2  100.0  Chapter 19: El Encuentro de los Hermanos
+   20   8,040   108.69  OMEGA ELITE       100.0   93.7   79.7  100.0  Chapter 20: La Basicia de La Virgen
+   21   5,884   108.37  OMEGA ELITE       100.0   91.8   78.6  100.0  Chapter 21: El Toro
+   22   5,101   107.01  OMEGA ELITE       100.0   85.8   73.2   97.4  Chapter 22: El Dia de Gracia
+   23   5,549   108.72  OMEGA ELITE       100.0   93.9   79.8  100.0  Chapter 23: San Valentin
+   24   6,283   108.61  OMEGA ELITE       100.0   93.7   78.8  100.0  Chapter 24: AVISO DE EMBARGO
+   25   5,973   108.67  OMEGA ELITE       100.0   93.6   79.6  100.0  Chapter 25: El Princepe de Tijuana
+   26  10,329   108.39  OMEGA ELITE       100.0   92.0   78.7  100.0  Chapter 26: Estoy Perdido
+   27   2,224   108.40  OMEGA ELITE       100.0   92.2   78.5  100.0  Chapter 27: El Don Y Ray-Ray
+   28   5,728   108.66  OMEGA ELITE       100.0   93.5   79.6  100.0  Chapter 28: Adios mi Capitan
+   29   5,597   108.66  OMEGA ELITE       100.0   93.5   79.5  100.0  Chapter 29: Se va, se va, se vaaaaa
+   30   5,100   106.41  OMEGA ELITE        98.8   86.0   72.7   90.9  Chapter 30: Las Seperentes de LA Villa
+   31   8,940   108.43  OMEGA ELITE       100.0   92.2   78.8  100.0  Chapter 31: Los Californos
+   32   3,711   108.14  OMEGA ELITE       100.0   90.5   77.8   99.9  Chapter 32: El Legado de José Gabriel Ar
+   33   7,123   107.95  OMEGA ELITE       100.0   91.8   77.7   94.9  Chapter 33: La Sagrada Comisión
+   34   6,301   108.66  OMEGA ELITE       100.0   93.7   79.3  100.0  Chapter 34: La Última Resistencia
+   35   7,725   108.57  OMEGA ELITE       100.0   93.1   79.2  100.0  Chapter 35: Me voy a Las Vega
+   36   6,219   107.91  OMEGA ELITE       100.0   90.1   75.8  100.0  Chapter 36: La Conquesta de 1690
+   37   4,939   108.79  OMEGA ELITE       100.0   94.6   79.6  100.0  Chapter 37: La Cuata
+   38   6,045   108.54  OMEGA ELITE       100.0   92.9   79.0  100.0  Chapter 38: Mechania 501
+   39   3,806   107.51  OMEGA ELITE       100.0   87.3   74.9  100.0  Chapter 39: La Reina y sus Chamoli8
+   40     394   103.98  OMEGA              84.7   84.3   74.3   81.7  Chapter 40: Mi Sangre, Mi Cuerpo, Mi Vot !
+   41   5,435   108.19  OMEGA ELITE       100.0   91.1   77.5  100.0  Chapter 41: Fotografia
+   42   6,478   108.18  OMEGA ELITE       100.0   91.4   76.9  100.0  Chapter 42: El Hijo Pródigo Regres9
+   43   5,225   108.30  OMEGA ELITE       100.0   91.4   78.3  100.0  Chapter 43: Engine 33
+   44   5,088   108.54  OMEGA ELITE       100.0   92.9   79.0  100.0  Chapter 44: A Sacred Calling
+   45   5,781   107.74  OMEGA ELITE       100.0   88.8   75.4  100.0  Chapter 45: Los Guardianes de Sinoquepue
+   46   4,749   108.30  OMEGA ELITE       100.0   92.4   77.1  100.0  Chapter 46: Petición Tribuna
+   47   4,936   108.33  OMEGA ELITE       100.0   91.6   78.5  100.0  Chapter 47: El Paso de Moisés: Entre las
+   48   3,541   108.60  OMEGA ELITE       100.0   93.2   79.2  100.0  Chapter 48: Noche Buena at Colonia Villa
+   49   6,694   108.59  OMEGA ELITE       100.0   93.1   79.3  100.0  Chapter 49: La Angelica Enfermera
+   50   4,907   108.42  OMEGA ELITE       100.0   92.9   77.7  100.0  Chapter 50: Bajo la Luna
+   51   6,285   108.25  OMEGA ELITE       100.0   91.7   77.5  100.0  Chapter 51: Las 20 Promesas Divina8
+   52   5,489   108.52  OMEGA ELITE       100.0   92.7   79.1  100.0  Chapter 52: El Niño Apestoso
+   53   5,640   108.53  OMEGA ELITE       100.0   92.8   79.1  100.0  Chapter 53: Llamas de la Constitution
+   54   5,598   108.34  OMEGA ELITE       100.0   91.6   78.5  100.0  Chapter 54: Pasando la Antorcha
+   55   8,038   108.55  OMEGA ELITE       100.0   92.9   79.2  100.0  Chapter 55: Donde el fuego se encuentra 
+   56   5,838   108.60  OMEGA ELITE       100.0   93.2   79.3  100.0  Chapter 56: La Matriarca Renacida de los
+   57   4,874   108.59  OMEGA ELITE       100.0   93.3   79.1  100.0  Chapter 57: Los Papeles
+   58   5,634   108.16  OMEGA ELITE       100.0   91.6   76.6  100.0  Chapter 58: La Fiesta sin Mariachi
+   59   5,585   106.99  OMEGA ELITE       100.0   87.1   75.3   92.1  Chapter 59: La Tormenta
+   60   5,509   108.57  OMEGA ELITE       100.0   93.9   78.1  100.0  Chapter 60: Despida de Marchi
+   61   6,296   108.40  OMEGA ELITE       100.0   92.0   78.7  100.0  Chapter 61: Estrella Rota
+   62   5,361   108.65  OMEGA ELITE       100.0   93.8   79.1  100.0  Chapter 62: LA Esperanza del Alba I
+   63   6,097   108.79  OMEGA ELITE       100.0   94.3   80.0  100.0  Chapter 63: La Esperanza de Alba II
+   64   8,479   108.68  OMEGA ELITE       100.0   93.8   79.4  100.0  Chapter 64: La Ezperamza de Alba III
+   65   3,829   108.47  OMEGA ELITE       100.0   92.8   79.0   99.2  Chapter 65: The Terminel Reckoning
+   66   5,637   108.22  OMEGA ELITE       100.0   91.6   77.1  100.0  Chapter 66: Colonia Verde
+   67   3,079   108.25  OMEGA ELITE       100.0   92.1   76.8  100.0  Chapter 67: Colonia Verda II
+
+  TE360 EDITORIAL SCORECARD — 7-DIMENSION ANALYSIS
+--------------------------------------------------------------------------------
+   Ch   BR/30   CS/30   AS/30   TB/30   EE/20   MP/20    TE360  Tier            Title
+  --------------------------------------------------------------------------------------------------------------
+   38    27.7    30.0    26.4    22.8    11.5    16.3    125.5  OMEGA           Chapter 38: Mechania 501
+    2    26.9    30.0    26.2    22.9    11.5    14.0    123.1  OMEGA           Chapter 2: Kino de Magdalena
+   46    26.1    30.0    25.3    22.4    11.6    15.7    122.1  OMEGA           Chapter 46: Petición Tribuna
+    5    29.4    25.9    26.9    22.6    11.6    13.3    121.5  OMEGA           Chapter 5: The Bridge and the Weapon
+   53    23.9    30.0    27.0    22.7    11.5    12.0    119.3  PLATINUM        Chapter 53: Llamas de la Constitution
+    1    27.5    26.8    25.5    22.5    11.2    13.9    119.1  PLATINUM        Chapter 1: Caja de zapatos
+   44    29.8    23.3    28.6    22.5    11.5    10.7    119.1  PLATINUM        Chapter 44: A Sacred Calling
+   56    26.2    28.7    25.3    22.8    11.4    12.7    119.1  PLATINUM        Chapter 56: La Matriarca Renacida de l
+   43    30.0    22.9    27.3    22.6    11.9    12.1    118.9  PLATINUM        Chapter 43: Engine 33
+   64    27.2    26.6    25.5    23.5    11.3    12.4    118.7  PLATINUM        Chapter 64: La Ezperamza de Alba III
+   57    24.2    30.0    26.5    22.5    11.4    11.6    118.6  PLATINUM        Chapter 57: Los Papeles
+   35    27.3    25.5    24.7    23.3    11.5    14.8    118.4  PLATINUM        Chapter 35: Me voy a Las Vega
+   29    30.0    21.7    27.9    22.7    11.4    11.4    117.6  PLATINUM        Chapter 29: Se va, se va, se vaaaaa
+   67    25.1    29.3    24.3    21.9    11.5    13.7    117.5  PLATINUM        Chapter 67: Colonia Verda II
+   24    27.4    24.3    24.8    22.9    11.3    13.1    115.7  PLATINUM        Chapter 24: AVISO DE EMBARGO
+   63    27.2    24.3    24.8    22.8    11.2    12.2    114.8  PLATINUM        Chapter 63: La Esperanza de Alba II
+   18    26.4    24.2    26.2    22.9    11.3     9.8    113.8  PLATINUM        Chapter 18: Redención en las Sombras
+   28    28.7    20.9    27.0    22.7    11.3    10.3    113.8  PLATINUM        Chapter 28: Adios mi Capitan
+   31    25.6    24.1    25.5    23.7    11.7     9.9    113.4  PLATINUM        Chapter 31: Los Californos
+   47    24.3    26.5    25.2    22.5    11.8    10.3    113.3  PLATINUM        Chapter 47: El Paso de Moisés: Entre l
+   12    25.2    25.1    23.1    22.9    11.3    13.3    112.8  PLATINUM        Chapter 12: Tejiendo Secretos
+   13    26.6    22.9    23.7    23.1    11.6    13.0    112.8  PLATINUM        Chapter 13: Parque de la Amistad
+   27    25.4    25.3    22.7    20.7    11.7    16.2    112.8  PLATINUM        Chapter 27: El Don Y Ray-Ray
+   45    23.7    25.6    21.6    22.7    12.5    15.5    112.4  PLATINUM        Chapter 45: Los Guardianes de Sinoquep
+   49    24.5    25.4    25.1    23.0    11.4    10.1    112.4  PLATINUM        Chapter 49: La Angelica Enfermera
+   54    23.9    26.2    24.8    22.7    11.8    10.3    112.4  PLATINUM        Chapter 54: Pasando la Antorcha
+    8    28.2    21.4    25.0    22.3    12.1    10.9    112.3  PLATINUM        Chapter 8: La Caida
+    7    26.4    21.7    23.1    22.5    13.8    13.3    111.9  PLATINUM        Chapter 7: The Wolf of Chihuahua: A Re
+   52    24.0    26.4    22.9    22.6    11.5    12.2    111.8  PLATINUM        Chapter 52: El Niño Apestoso
+   21    23.1    27.0    21.8    21.8    11.8    14.4    111.3  PLATINUM        Chapter 21: El Toro
+   50    28.0    20.8    24.5    22.5    11.5    11.4    111.1  PLATINUM        Chapter 50: Bajo la Luna
+   65    29.8    18.8    25.5    22.1    11.5    10.7    111.1  PLATINUM        Chapter 65: The Terminel Reckoning
+   20    23.0    26.1    23.8    23.4    11.3    10.7    111.0  PLATINUM        Chapter 20: La Basicia de La Virgen
+   23    25.6    23.0    25.1    22.7    11.3    10.5    111.0  PLATINUM        Chapter 23: San Valentin
+   55    27.5    19.6    25.9    23.4    11.5     9.1    110.2  PLATINUM        Chapter 55: Donde el fuego se encuentr
+   14    27.7    20.4    24.3    22.5    12.1    10.6    110.1  PLATINUM        Chapter 14: Vámonos a Tujungo
+   25    24.7    23.7    24.7    22.8    11.3     9.8    110.0  PLATINUM        Chapter 25: El Princepe de Tijuana
+    4    27.3    19.7    23.3    22.6    13.0    12.2    109.8  PLATINUM        Chapter 4: La Reforma Ashfall
+    6    26.8    20.8    23.3    22.2    11.7    12.0    109.0  PLATINUM        Chapter 6: The Wolf of Chihuahua: A Re
+   66    27.0    20.3    23.6    22.7    11.8    10.9    108.8  PLATINUM        Chapter 66: Colonia Verde
+   48    23.6    24.6    24.1    22.1    11.4     9.9    108.7  PLATINUM        Chapter 48: Noche Buena at Colonia Vil
+   39    23.1    23.7    23.1    22.1    12.8    11.2    108.1  PLATINUM        Chapter 39: La Reina y sus Chamoli8
+   19    21.7    26.5    23.0    21.6    11.9    10.6    107.9  PLATINUM        Chapter 19: El Encuentro de los Herman
+   42    20.0    28.3    21.9    21.9    11.8    11.6    107.8  PLATINUM        Chapter 42: El Hijo Pródigo Regres9
+    3    22.3    24.9    23.0    23.0    11.5    10.0    107.6  PLATINUM        Chapter 3: Guardia del Pozo
+   34    25.4    20.6    24.5    22.9    11.3     9.0    107.0  PLATINUM        Chapter 34: La Última Resistencia
+   51    23.9    21.9    23.4    22.9    11.8    10.2    106.8  PLATINUM        Chapter 51: Las 20 Promesas Divina8
+   36    23.4    22.4    20.7    22.9    12.1    13.5    106.6  PLATINUM        Chapter 36: La Conquesta de 1690
+   33    26.9    18.4    23.0    23.1    11.8    10.3    106.2  PLATINUM        Chapter 33: La Sagrada Comisión
+   59    25.2    18.8    21.5    22.7    13.9    11.2    105.0  PLATINUM        Chapter 59: La Tormenta
+   41    22.0    23.8    20.4    22.6    11.9    11.6    104.5  PLATINUM        Chapter 41: Fotografia
+   26    23.8    19.8    22.9    24.1    11.7     8.9    104.4  PLATINUM        Chapter 26: Estoy Perdido
+    9    25.1    18.6    23.6    22.8    12.5     8.7    104.3  PLATINUM        Chapter 9: Mis treinta años
+   60    25.0    19.0    23.4    22.7    11.3     9.6    104.1  PLATINUM        Chapter 60: Despida de Marchi
+   37    21.8    23.2    22.0    22.5    11.1    10.6    104.0  PLATINUM        Chapter 37: La Cuata
+   61    24.8    19.0    23.5    22.9    11.7     8.7    103.9  PLATINUM        Chapter 61: Estrella Rota
+   62    24.2    20.1    23.2    22.6    11.3     9.3    103.9  PLATINUM        Chapter 62: LA Esperanza del Alba I
+   32    25.9    17.5    24.0    22.1    12.1     8.6    103.4  PLATINUM        Chapter 32: El Legado de José Gabriel 
+   15    23.0    21.1    20.5    22.4    12.0    11.3    102.6  PLATINUM        Chapter 15: Aviene Alba, Aviene Alba
+   58    23.7    19.8    20.7    21.7    11.7    11.2    101.2  PLATINUM        Chapter 58: La Fiesta sin Mariachi
+   10    21.9    20.5    21.4    22.8    11.7     9.6    100.9  PLATINUM        Chapter 10: La Fronter
+   17    21.3    19.0    20.4    22.6    12.2     9.4     97.8  GOLD            Chapter 17: Las Lágrimas del Fierra
+   11    21.5    18.4    20.6    22.5    12.0     8.5     96.7  GOLD            Chapter 11: El Cuarto Negro
+   22    20.9    18.2    19.8    22.5    13.0     9.8     96.7  GOLD            Chapter 22: El Dia de Gracia
+   16    20.0    17.9    19.0    22.6    12.6     9.1     94.0  GOLD            Chapter 16: El Don y la Dona
+   30    20.7    17.0    19.5    22.5    13.0     8.4     94.0  GOLD            Chapter 30: Las Seperentes de LA Villa
+   40    20.3    16.5    19.0    20.1    14.5     8.1     91.0  GOLD            Chapter 40: Mi Sangre, Mi Cuerpo, Mi V
+
+  CRAFT AUDIT — MARLOWE FLAGS
+--------------------------------------------------------------------------------
+  Ch.03 — Chapter 3: Guardia del Pozo
+    ⚑ DIALOGUE LOW: 0.0% (<8% — prose-heavy)
+  Ch.04 — Chapter 4: La Reforma Ashfall
+    ⚑ PASSIVE HIGH: 4.09/k
+  Ch.07 — Chapter 7: The Wolf of Chihuahua: A Revolutio
+    ⚑ PASSIVE HIGH: 5.7/k
+  Ch.09 — Chapter 9: Mis treinta años
+    ⚑ DIALOGUE LOW: 1.6% (<8% — prose-heavy)
+    ⚑ PASSIVE HIGH: 3.03/k
+  Ch.10 — Chapter 10: La Fronter
+    ⚑ DIALOGUE LOW: 5.6% (<8% — prose-heavy)
+  Ch.11 — Chapter 11: El Cuarto Negro
+    ⚑ DIALOGUE LOW: 0.0% (<8% — prose-heavy)
+  Ch.16 — Chapter 16: El Don y la Dona
+    ⚑ DIALOGUE LOW: 6.6% (<8% — prose-heavy)
+    ⚑ PASSIVE HIGH: 3.29/k
+  Ch.17 — Chapter 17: Las Lágrimas del Fierra
+    ⚑ DIALOGUE LOW: 7.1% (<8% — prose-heavy)
+  Ch.18 — Chapter 18: Redención en las Sombras
+    ⚑ DIALOGUE LOW: 0.0% (<8% — prose-heavy)
+  Ch.19 — Chapter 19: El Encuentro de los Hermanos
+    ⚑ DIALOGUE LOW: 2.4% (<8% — prose-heavy)
+  Ch.20 — Chapter 20: La Basicia de La Virgen
+    ⚑ DIALOGUE LOW: 4.7% (<8% — prose-heavy)
+  Ch.22 — Chapter 22: El Dia de Gracia
+    ⚑ PASSIVE HIGH: 3.92/k
+  Ch.25 — Chapter 25: El Princepe de Tijuana
+    ⚑ DIALOGUE LOW: 0.7% (<8% — prose-heavy)
+  Ch.26 — Chapter 26: Estoy Perdido
+    ⚑ DIALOGUE LOW: 0.7% (<8% — prose-heavy)
+  Ch.27 — Chapter 27: El Don Y Ray-Ray
+    ⚑ DIALOGUE HIGH: 60.3% (>60% drop risk)
+  Ch.30 — Chapter 30: Las Seperentes de LA Villa
+    ⚑ DIALOGUE LOW: 2.0% (<8% — prose-heavy)
+    ⚑ SENTENCE LENGTH: avg 29.7 words (FK grade risk)
+  Ch.31 — Chapter 31: Los Californos
+    ⚑ DIALOGUE LOW: 1.4% (<8% — prose-heavy)
+  Ch.32 — Chapter 32: El Legado de José Gabriel Arce
+    ⚑ DIALOGUE LOW: 2.3% (<8% — prose-heavy)
+  Ch.34 — Chapter 34: La Última Resistencia
+    ⚑ DIALOGUE LOW: 0.0% (<8% — prose-heavy)
+  Ch.39 — Chapter 39: La Reina y sus Chamoli8
+    ⚑ PASSIVE HIGH: 3.68/k
+  Ch.40 — Chapter 40: Mi Sangre, Mi Cuerpo, Mi Voto
+    ⚑ SHORT: 394 words (min 1,500 recommended)
+    ⚑ DIALOGUE LOW: 0.0% (<8% — prose-heavy)
+    ⚑ PASSIVE HIGH: 5.08/k
+  Ch.47 — Chapter 47: El Paso de Moisés: Entre las Agua
+    ⚑ DIALOGUE LOW: 0.0% (<8% — prose-heavy)
+  Ch.48 — Chapter 48: Noche Buena at Colonia Villa
+    ⚑ DIALOGUE LOW: 0.0% (<8% — prose-heavy)
+  Ch.49 — Chapter 49: La Angelica Enfermera
+    ⚑ DIALOGUE LOW: 0.3% (<8% — prose-heavy)
+  Ch.53 — Chapter 53: Llamas de la Constitution
+    ⚑ DIALOGUE LOW: 0.0% (<8% — prose-heavy)
+  Ch.54 — Chapter 54: Pasando la Antorcha
+    ⚑ DIALOGUE LOW: 0.6% (<8% — prose-heavy)
+  Ch.55 — Chapter 55: Donde el fuego se encuentra con e
+    ⚑ DIALOGUE LOW: 3.0% (<8% — prose-heavy)
+  Ch.57 — Chapter 57: Los Papeles
+    ⚑ DIALOGUE LOW: 0.7% (<8% — prose-heavy)
+  Ch.59 — Chapter 59: La Tormenta
+    ⚑ PASSIVE HIGH: 3.76/k
+  Ch.61 — Chapter 61: Estrella Rota
+    ⚑ DIALOGUE LOW: 0.0% (<8% — prose-heavy)
+  Ch.62 — Chapter 62: LA Esperanza del Alba I
+    ⚑ DIALOGUE LOW: 4.0% (<8% — prose-heavy)
+
+  STRUCTURAL ANOMALIES
+--------------------------------------------------------------------------------
+  Ch.10  Ω=108.38      La Fronter → La Frontera
+  Ch.39  Ω=107.51      La Reina y sus Chamoli8 → La Reina y sus Chamolas (confirm spelling)
+  Ch.40  Ω=103.98      SHORT CHAPTER (394 words) — expand memoir interlude to 2,000+ words
+  Ch.42  Ω=108.18      El Hijo Pródigo Regres9 → El Hijo Pródigo Regresa
+  Ch.51  Ω=108.25      Las 20 Promesas Divina8 → Las 20 Promesas Divinas
+  Ch.64  Ω=108.68      La Ezperamza de Alba III → La Esperanza de Alba III
+  Ch.65  Ω=108.47      The Terminel Reckoning → The Terminal Reckoning
+
+  PRIORITY FIX MATRIX (gap to Ω=111)
+--------------------------------------------------------------------------------
+   Ch        Ω     Gap    CLS    BIS    CS/k   Dial%  Primary Lever
+  --------------------------------------------------------------------------------
+   40   103.98    7.02   84.7   84.3    2.54     0.0  CLS
+   30   106.41    4.59   98.8   86.0    4.90     2.0  CLS
+    7   106.89    4.11  100.0   83.0   14.56    39.0  BIS
+   59   106.99    4.01  100.0   87.1    4.48    25.5  CLS
+   22   107.01    3.99  100.0   85.8    6.27    12.9  BIS
+    4   107.32    3.68  100.0   86.4    5.77    32.8  BIS
+   16   107.39    3.61  100.0   87.0    7.54     6.6  BIS
+   39   107.51    3.49  100.0   87.3   36.26    14.4  BIS
+    9   107.70    3.30  100.0   88.6   13.47     1.6  SII
+   45   107.74    3.26  100.0   88.8   29.58    52.9  SII
+   36   107.91    3.09  100.0   90.1   17.85    39.7  SII
+   14   107.94    3.06  100.0   90.2   17.83    15.5  SII
+   33   107.95    3.05  100.0   91.8    5.48    17.2  SII
+   17   107.98    3.02  100.0   89.9   13.54     7.1  SII
+   15   108.03    2.97  100.0   90.7   18.87    21.6  SII
+   11   108.08    2.92  100.0   90.8   13.33     0.0  SII
+   32   108.14    2.86  100.0   90.5    7.28     2.3  SII
+    8   108.16    2.84  100.0   90.6   22.89    16.3  SII
+   58   108.16    2.84  100.0   91.6   11.00    22.7  SII
+   42   108.18    2.82  100.0   91.4   64.99     8.1  SII
+
+  CLS DENSITY ANALYSIS — CODE-SWITCH DISTRIBUTION
+--------------------------------------------------------------------------------
+  Highest CS density:
+    Ch.53   101.06/k  Chapter 53: Llamas de la Constitution
+    Ch.57    88.02/k  Chapter 57: Los Papeles
+    Ch.02    68.38/k  Chapter 2: Kino de Magdalena
+    Ch.42    64.99/k  Chapter 42: El Hijo Pródigo Regres9
+    Ch.46    64.01/k  Chapter 46: Petición Tribuna
+  Lowest CS density:
+    Ch.40     2.54/k  Chapter 40: Mi Sangre, Mi Cuerpo, Mi Voto
+    Ch.59     4.48/k  Chapter 59: La Tormenta
+    Ch.30     4.90/k  Chapter 30: Las Seperentes de LA Villa
+    Ch.33     5.48/k  Chapter 33: La Sagrada Comisión
+    Ch.04     5.77/k  Chapter 4: La Reforma Ashfall
+
+  ACT STRUCTURE ANALYSIS
+--------------------------------------------------------------------------------
+  ACT I (Ch.1–22)         Words: 123,743  Mean Ω: 108.11  Range: 106.89–108.77  TE360: 108.5
+  ACT II (Ch.23–44)       Words: 124,212  Mean Ω: 108.1  Range: 103.98–108.79  TE360: 109.7
+  ACT III (Ch.45–67)      Words: 127,876  Mean Ω: 108.37  Range: 106.99–108.79  TE360: 111.6
+
+  PATH TO Ω=111 — LEVER ANALYSIS
+--------------------------------------------------------------------------------
+  CLS (bilingual density)         coeff=0.124  current=99.8  target=100  est.+Ω=0.02  +CLS insertions
+  BIS (behavioral integrity)      coeff=0.118  current=91.6  target=100  est.+Ω=0.99  +active voice, concrete scene
+  SII (sensory immersion)         coeff=0.089  current=77.8  target=100  est.+Ω=1.98  +sensory anchors
+  MRF (motif/reference field)     coeff=0.067  current=99.3  target=100  est.+Ω=0.05  +motif density
+  TOTAL PROJECTED GAIN                                              est.+Ω=3.04
+  CURRENT MEAN                                                      108.197
+  PROJECTED AFTER FULL PASS                                         111.24
+
+  CERTIFICATION ASSESSMENT
+--------------------------------------------------------------------------------
+  Manuscript Status   : CONDITIONAL PASS
+  Omega Elite chapters: 66/67  (99%)
+  Gate Decision       : Apply 7 fixes (6 titles + Ch.40 expand) → Full Omega Elite
+  TE360 Assessment    : Strong bilingual architecture. CS dimension excels.
+                        AS (Ancestral Synesthesia) has room to grow in Act I.
+  Unique Strengths    : Highest CS/k in manuscript (Ch.53: 100.5/k) — exceptional
+                        bilingual saturation. Zero chapters below Omega floor.
+  Comparison to SGT Ramos v15: Alba's Voice baseline is 1.29 Ω pts higher.
+                        Requires far less intervention to reach Ω=111.
+
+================================================================================
+  Report generated: 2026-06-18 11:11 UTC
+  SHA-256: bd5cd4966c17a0d3d8baa3d88170e301a585622999eb2fa50590f5596ebf0b1e
+================================================================================
+  JSON audit saved: data/alba_voice_full_audit.json

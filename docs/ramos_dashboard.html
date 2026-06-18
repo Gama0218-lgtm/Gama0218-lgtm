@@ -1,0 +1,1519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SGT George Ramos — Omega Rankings / Issue Registry</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Special+Elite&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;700&display=swap');
+
+  :root {
+    --void: #0a0a0a;
+    --ink: #1a1a1a;
+    --parchment: #f0ead6;
+    --aged: #e2d9c0;
+    --oxblood: #6b0f1a;
+    --blood: #8b1a1a;
+    --bright-blood: #c0392b;
+    --gold: #c9a84c;
+    --gold-dim: #8a6f2e;
+    --gray-pencil: #9e9e8a;
+    --ibm-green: #00ff41;
+    --ibm-dark: #001a00;
+    --band-below: #6b0f1a;
+    --band-gray: #4a4a2a;
+    --band-omega: #1a3a1a;
+    --band-elite: #1a1a4a;
+    --text-primary: #f0ead6;
+    --text-dim: #9e9e8a;
+    --border: #3a3a2a;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--void);
+    color: var(--text-primary);
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 15px;
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  .report-header {
+    background: var(--ink);
+    border-bottom: 2px solid var(--oxblood);
+    padding: 32px 40px 24px;
+    position: relative;
+  }
+  .report-header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--oxblood), var(--gold), var(--oxblood));
+  }
+  .header-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .header-title {
+    font-family: 'Special Elite', serif;
+    font-size: 26px;
+    color: var(--parchment);
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+  .header-sub {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--gray-pencil);
+    margin-bottom: 20px;
+  }
+  .header-stats {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+  }
+  .stat-block { text-align: center; }
+  .stat-val {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--gold);
+    display: block;
+  }
+  .stat-lbl {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+  }
+
+  /* ── BAND DIVIDERS ── */
+  .band-header {
+    padding: 14px 40px 12px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .band-below  { background: #1a0507; border-top: 2px solid var(--oxblood); border-bottom: 1px solid #3a0a10; }
+  .band-gray   { background: #1a1a0a; border-top: 2px solid #6a6a30; border-bottom: 1px solid #3a3a18; }
+  .band-omega  { background: #071207; border-top: 2px solid #2a6a2a; border-bottom: 1px solid #143014; }
+  .band-elite  { background: #07070f; border-top: 2px solid #2a2a8a; border-bottom: 1px solid #141430; }
+
+  .band-icon { font-size: 20px; }
+  .band-name {
+    font-family: 'Special Elite', serif;
+    font-size: 17px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .band-range {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+  }
+  .band-count {
+    margin-left: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    background: rgba(255,255,255,0.05);
+    padding: 2px 10px;
+    border-radius: 2px;
+  }
+  .band-name-below { color: #e05555; }
+  .band-name-gray  { color: #c8c870; }
+  .band-name-omega { color: #55c855; }
+  .band-name-elite { color: #7777ee; }
+
+  /* ── TABLE ── */
+  .chapters-wrap { padding: 0 40px 12px; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+  }
+  thead th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    padding: 8px 10px 6px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 56px;
+    background: var(--void);
+    z-index: 5;
+  }
+  thead th.num { text-align: right; }
+
+  tr.ch-row {
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    transition: background 0.15s;
+  }
+  tr.ch-row:hover { background: rgba(255,255,255,0.04); }
+
+  td {
+    padding: 9px 10px;
+    vertical-align: top;
+    font-size: 13px;
+  }
+  td.ch-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-dim);
+    text-align: right;
+    width: 36px;
+  }
+  td.ch-title {
+    font-family: 'EB Garamond', serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--parchment);
+    width: 240px;
+  }
+  td.ch-act {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    text-align: center;
+    width: 34px;
+  }
+  td.ch-words {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    text-align: right;
+    width: 54px;
+  }
+  td.ch-omega {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: right;
+    width: 58px;
+  }
+  td.ch-dia {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-align: right;
+    width: 48px;
+  }
+  td.ch-issues {
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--text-dim);
+  }
+
+  /* ── OMEGA COLOR CODING ── */
+  .omega-below  { color: #e05555; }
+  .omega-gray   { color: #c8c870; }
+  .omega-omega  { color: #55c855; }
+  .omega-elite  { color: #7777ee; }
+
+  /* ── ISSUE TAGS ── */
+  .tag {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.5px;
+    padding: 2px 6px;
+    border-radius: 2px;
+    margin: 2px 2px 2px 0;
+    text-transform: uppercase;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+  .tag-crit    { background: #3a0a10; color: #ff6b6b; border: 1px solid #6b1020; }
+  .tag-high    { background: #2a1a00; color: #ffaa44; border: 1px solid #6b4400; }
+  .tag-dia     { background: #1a1a0a; color: #c8c870; border: 1px solid #4a4a20; }
+  .tag-sii     { background: #1a0a1a; color: #c878c8; border: 1px solid #4a204a; }
+  .tag-cls     { background: #0a1a1a; color: #78c8c8; border: 1px solid #204a4a; }
+  .tag-beh     { background: #0a0a1a; color: #7878ee; border: 1px solid #20204a; }
+  .tag-bis     { background: #1a100a; color: #e0aa66; border: 1px solid #5a3a1a; }
+  .tag-spirit  { background: #0a100a; color: #66aa66; border: 1px solid #1a401a; }
+  .tag-dup     { background: #2a0a2a; color: #ff77ff; border: 1px solid #6a1a6a; }
+  .tag-struct  { background: #1a1a1a; color: #aaaaaa; border: 1px solid #444444; }
+  .tag-clean   { background: transparent; color: #3a6a3a; border: 1px solid #2a4a2a; font-size: 9px; }
+
+  td.dia-low    { color: #c8c870; }
+  td.dia-ok     { color: #55c855; }
+  td.dia-none   { color: #e05555; }
+
+  /* ── CATEGORY DEFICIT SUMMARY ── */
+  .deficit-section {
+    background: #0f0f07;
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--gold);
+    margin: 24px 40px;
+    padding: 20px 24px;
+  }
+  .deficit-title {
+    font-family: 'Special Elite', serif;
+    font-size: 15px;
+    color: var(--gold);
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+  }
+  .deficit-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .deficit-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    padding: 12px 14px;
+  }
+  .deficit-card-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+  }
+  .deficit-count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--gold);
+  }
+  .deficit-desc {
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-top: 4px;
+    line-height: 1.4;
+  }
+
+  /* ── CRITICAL FLAGS BOX ── */
+  .flags-section {
+    background: #0f0205;
+    border: 1px solid #3a0a10;
+    border-left: 3px solid var(--oxblood);
+    margin: 0 40px 24px;
+    padding: 20px 24px;
+  }
+  .flags-title {
+    font-family: 'Special Elite', serif;
+    font-size: 15px;
+    color: #e05555;
+    letter-spacing: 1px;
+    margin-bottom: 14px;
+  }
+  .flag-item {
+    display: grid;
+    grid-template-columns: 100px 100px 1fr 160px;
+    gap: 8px;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    align-items: start;
+    font-size: 12px;
+  }
+  .flag-item:last-child { border-bottom: none; }
+  .flag-pri { font-family: 'JetBrains Mono', monospace; font-size: 10px; }
+  .flag-ch  { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--gold); }
+  .flag-desc { color: var(--text-dim); line-height: 1.4; }
+  .flag-remedy {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: #55aa55;
+    line-height: 1.4;
+  }
+
+  /* ── OMEGA FORMULA FOOTER ── */
+  .formula-bar {
+    background: var(--ibm-dark);
+    border-top: 1px solid #003300;
+    padding: 12px 40px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ibm-green);
+    letter-spacing: 1px;
+    opacity: 0.8;
+  }
+  .formula-bar span { opacity: 0.5; margin: 0 12px; }
+
+  /* ── SECTION DIVIDER ── */
+  .section-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 0 40px;
+  }
+
+  /* ── NOTE LINE ── */
+  .note-line {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 12px;
+    color: var(--text-dim);
+    padding: 4px 40px 16px;
+  }
+
+  /* column widths */
+  col.c-ch    { width: 36px; }
+  col.c-title { width: 240px; }
+  col.c-act   { width: 34px; }
+  col.c-words { width: 54px; }
+  col.c-omega { width: 58px; }
+  col.c-dia   { width: 48px; }
+  col.c-issues { }
+
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="report-header">
+  <div class="header-eyebrow">TruthEngine360 · AUMER Foundation · LITCENTRAL SPSS v12</div>
+  <div class="header-title">SGT George Ramos: The Mathematics of Vietnam</div>
+  <div class="header-sub">45-Chapter Omega Rankings — Issue Registry — Path to 111 Elite</div>
+  <div class="header-stats">
+    <div class="stat-block">
+      <span class="stat-val">104.94</span>
+      <span class="stat-lbl">Current Mean Ω</span>
+    </div>
+    <div class="stat-block">
+      <span class="stat-val">111.0</span>
+      <span class="stat-lbl">Elite Target</span>
+    </div>
+    <div class="stat-block">
+      <span class="stat-val">+6.06</span>
+      <span class="stat-lbl">Mean Gap</span>
+    </div>
+    <div class="stat-block">
+      <span class="stat-val">247,181</span>
+      <span class="stat-lbl">Total Words</span>
+    </div>
+    <div class="stat-block">
+      <span class="stat-val">0</span>
+      <span class="stat-lbl">Chapters at 111+</span>
+    </div>
+    <div class="stat-block">
+      <span class="stat-val">4</span>
+      <span class="stat-lbl">Critical Flags</span>
+    </div>
+    <div class="stat-block">
+      <span class="stat-val">25/45</span>
+      <span class="stat-lbl">Low Dialogue (&lt;20%)</span>
+    </div>
+    <div class="stat-block">
+      <span class="stat-val">0.947</span>
+      <span class="stat-lbl">Model R²</span>
+    </div>
+  </div>
+</div>
+
+<!-- CRITICAL FLAGS -->
+<div class="flags-section">
+  <div class="flags-title">🔴 CRITICAL FLAGS — Submission Killers / Data Integrity</div>
+  <div class="flag-item">
+    <div class="flag-pri"><span class="tag tag-crit">🔴 CRITICAL</span></div>
+    <div class="flag-ch">Ch.1 + Ch.34</div>
+    <div class="flag-desc">Manuscript artifacts in live text. Ch.1 Line 1 = "REVISED CHAPTER — FIRST PASS" (first thing any agent sees). Ch.34 last line = "PASS 2 COMPLETE — LITCENTRAL HYBRID DIAGNOSTIC" (LitCentral paste). Both chapters are Omega-quality — the artifacts alone suppress score by ~3.0Ω each.</div>
+    <div class="flag-remedy">→ DELETE line 1 of Ch.1 and last line of Ch.34. Zero prose change needed.</div>
+  </div>
+  <div class="flag-item">
+    <div class="flag-pri"><span class="tag tag-crit">🔴 CRITICAL</span></div>
+    <div class="flag-ch">Ch.9 + Ch.10</div>
+    <div class="flag-desc">700+ line near-identical opening sequence shared between both chapters. Reads as authorial error, not thematic callback. Highest-risk duplication in the manuscript — hits CLS and BIS simultaneously.</div>
+    <div class="flag-remedy">→ Ch.9 = first-contact, kinetic, present tense. Ch.10 = aftermath/burial, reflective, ceremonial. Zero overlapping lines.</div>
+  </div>
+  <div class="flag-item">
+    <div class="flag-pri"><span class="tag tag-crit">🔴 CRITICAL</span></div>
+    <div class="flag-ch">Ch.10</div>
+    <div class="flag-desc">Rodriguez / Ramirez name swap approximately 60% through the chapter. Character registry violation — affects all downstream chapters where either character appears.</div>
+    <div class="flag-remedy">→ Find/replace Ch.10. Cross-check character registry across all 45 chapters.</div>
+  </div>
+  <div class="flag-item">
+    <div class="flag-pri"><span class="tag tag-crit">🔴 CRITICAL</span></div>
+    <div class="flag-ch">Ch.40 + Ch.45</div>
+    <div class="flag-desc">Character death date in Ch.40 conflicts with the same character's appearance in Ch.45. Timeline contradiction — submission-level continuity error.</div>
+    <div class="flag-remedy">→ Add explicit date/location stamps to both chapters. Establish and lock authoritative chronology.</div>
+  </div>
+  <div class="flag-item">
+    <div class="flag-pri"><span class="tag tag-high">🟠 HIGH</span></div>
+    <div class="flag-ch">Ch.38</div>
+    <div class="flag-desc">Last line = "*E*" — truncated word/sentence. May be Johnson's harmonica E-note (intentional) or editing artifact. Suppresses Ω by ~3.0. Author decision required.</div>
+    <div class="flag-remedy">→ If intentional: expand to full sentence. If artifact: delete.</div>
+  </div>
+  <div class="flag-item">
+    <div class="flag-pri"><span class="tag tag-high">🟠 HIGH</span></div>
+    <div class="flag-ch">Ch.24</div>
+    <div class="flag-desc">Last line = "2 / 2" — Microsoft Word page number saved as chapter text. Single-line artifact suppressing score by ~3.0Ω.</div>
+    <div class="flag-remedy">→ DELETE last line of Ch.24.</div>
+  </div>
+  <div class="flag-item">
+    <div class="flag-pri"><span class="tag tag-high">🟠 HIGH</span></div>
+    <div class="flag-ch">Ch.36</div>
+    <div class="flag-desc">3,706 words — 31% below chapter mean of 5,493. James Wilkins post-revision chapter. Shortest chapter in manuscript. Structural underweight penalizes SII and BIS.</div>
+    <div class="flag-remedy">→ Expand ~1,800w: Wilkins backstory (400w), Ramos/Wilkins first exchange (400w), brotherhood sequence (600w+).</div>
+  </div>
+  <div class="flag-item">
+    <div class="flag-pri"><span class="tag tag-high">🟠 HIGH</span></div>
+    <div class="flag-ch">Ch.45</div>
+    <div class="flag-desc">Ch.45 reveals 4 men used "Ramos" identity — but no prior seeding in Ch.5, Ch.36, or Ch.42. Revelation lands without foreshadowing. Structural integrity gap.</div>
+    <div class="flag-remedy">→ Seed: Ch.5 (roster discrepancy, 1 line), Ch.36 (rumor, enlistment variant), Ch.42 (partial name echo).</div>
+  </div>
+  <div class="flag-item">
+    <div class="flag-pri"><span class="tag tag-high">🟠 HIGH</span></div>
+    <div class="flag-ch">Manuscript</div>
+    <div class="flag-desc">Anachronisms: M249 SAW (fielded 1984, not Vietnam-era), magnetic stripe ID card (1973), Khe Sanh date error. Any editor with military knowledge flags these immediately.</div>
+    <div class="flag-remedy">→ M249 → M60 or M1919A4. Remove magnetic stripe reference. Fix Khe Sanh to 1968 dates.</div>
+  </div>
+  <div class="flag-item">
+    <div class="flag-pri"><span class="tag tag-struct">🟡 MEDIUM</span></div>
+    <div class="flag-ch">Ch.16 + Ch.17</div>
+    <div class="flag-desc">Both chapters end with the same structural line. Reads as copy-paste error rather than intentional echo. If intentional, must be documented as architectural decision.</div>
+    <div class="flag-remedy">→ Author confirms intent. If intentional: add metadata note. If accidental: Ch.17 needs new closing.</div>
+  </div>
+  <div class="flag-item">
+    <div class="flag-pri"><span class="tag tag-struct">🟡 MEDIUM</span></div>
+    <div class="flag-ch">Ch.42</div>
+    <div class="flag-desc">Bathroom prayer scene remains placeholder/unresolved. Spiritual vector (v_spirit=0.43) below chapter's own structural requirement. Ch.42 is the NERO O-stage narrative anchor — undercompletion hurts SII manuscript-wide.</div>
+    <div class="flag-remedy">→ Write prayer scene 300–500w. Lean into spiritual vector. Targets SII+2, BIS+1.</div>
+  </div>
+  <div class="flag-item">
+    <div class="flag-pri"><span class="tag tag-struct">🟡 MEDIUM</span></div>
+    <div class="flag-ch">Ch.23, 24, 25, 37</div>
+    <div class="flag-desc">Title truncations in manuscript header lines: "Sparr1," "BRIEFING3," "Sacred Hear," "Reveng6." These appear in metadata and agent submissions.</div>
+    <div class="flag-remedy">→ Fix chapter titles in manuscript header lines. Update data layer.</div>
+  </div>
+</div>
+
+<!-- CATEGORY DEFICITS -->
+<div class="deficit-section">
+  <div class="deficit-title">CATEGORY DEFICITS — Manuscript-Wide (45 Chapters)</div>
+  <div class="deficit-grid">
+    <div class="deficit-card">
+      <div class="deficit-card-title">Low Dialogue (&lt;20%)</div>
+      <div class="deficit-count">25</div>
+      <div class="deficit-desc">of 45 chapters. Systemic issue. Single largest driver of suppressed BIS scores. Target floor: 25%. Each +5% dialogue ≈ +0.6Ω.</div>
+    </div>
+    <div class="deficit-card">
+      <div class="deficit-card-title">Low SII (&lt;80)</div>
+      <div class="deficit-count">13</div>
+      <div class="deficit-desc">of 45 chapters. Spanish immersion deficit. 3rd highest-weighted component. Ch.4 worst at SII=72 (Pentagon register — partially justified).</div>
+    </div>
+    <div class="deficit-card">
+      <div class="deficit-card-title">Low CLS (&lt;84)</div>
+      <div class="deficit-count">16</div>
+      <div class="deficit-desc">of 45 chapters. Highest-weighted component (0.124). Most at CLS=82–83. Tightening syntax complexity and code-switching density lifts this.</div>
+    </div>
+    <div class="deficit-card">
+      <div class="deficit-card-title">Low Beh. Integrity (&lt;0.45)</div>
+      <div class="deficit-count">15</div>
+      <div class="deficit-desc">of 45 chapters. Character-voice consistency metric. Ch.43 worst at 0.39. Correlates strongly with low dialogue — both driven by same structural gap.</div>
+    </div>
+    <div class="deficit-card">
+      <div class="deficit-card-title">Low BIS (&lt;87)</div>
+      <div class="deficit-count">6</div>
+      <div class="deficit-desc">of 45 chapters. 2nd highest-weighted component (0.118). Concentrated in Act III chapters. Ch.3 and Ch.44 worst. BIS lifts with scene density.</div>
+    </div>
+    <div class="deficit-card">
+      <div class="deficit-card-title">Low Spiritual Vector (&lt;0.32)</div>
+      <div class="deficit-count">9</div>
+      <div class="deficit-desc">of 45 chapters. Ch.16 and Ch.17 worst at 0.28. Yaqui cosmology / ancestral presence signal. Critical for genre identity. Not same as SII.</div>
+    </div>
+  </div>
+</div>
+
+<!-- RESEARCH LIBRARY — FULL DOMAIN COVERAGE -->
+<div class="flags-section" style="border-left: 3px solid #c9a84c; margin-top:24px;">
+  <div class="flags-title" style="color:#c9a84c;">📚 RESEARCH LIBRARY — Chicano Genre · Magical Realism · Yaqui Cosmology</div>
+  <div style="font-family:'JetBrains Mono',monospace; font-size:10px; color:#9e9e8a; letter-spacing:1px; margin-bottom:16px;">
+    Three domains. Sources ranked by authority. Use while modeling. Governance gate remains open — these sources authorize modeling, not publication.
+  </div>
+
+  <!-- DOMAIN I -->
+  <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;color:#c9a84c;text-transform:uppercase;padding:6px 0 4px;border-bottom:1px solid #3a3a2a;margin-bottom:8px;">
+    I · CHICANO LITERATURE — Genre Definition &amp; Canon
+  </div>
+  <div style="font-family:'EB Garamond',serif;font-size:13px;color:#9e9e8a;font-style:italic;margin-bottom:10px;padding-left:4px;">
+    Emerged 1960s US-Mexico border, Chicano Movement. Bilingualism, magical realism, innovative integration of fiction and autobiography. Early benchmarks: Rivera's <em>...y no se lo tragó la tierra</em> (1971) and Anaya's <em>Bless Me, Ultima</em> (1972).
+  </div>
+
+  <div class="flag-item">
+    <div class="flag-pri"><span class="tag" style="background:#1a1a4a;color:#c9a84c;border:1px solid #c9a84c44;">CANON</span></div>
+    <div class="flag-ch">Publisher Anchor</div>
+    <div class="flag-desc"><strong>University of Arizona Press — Chicano &amp; Chicana Literature (Tatum)</strong><br>
+      "One of the most dynamic, growing, and vital parts of contemporary U.S. literature." Your target publisher is also the scholarly anchor for this genre.<br>
+      <a href="https://uapress.arizona.edu/book/chicano-and-chicana-literature" target="_blank" style="color:#c9a84c;font-family:'JetBrains Mono',monospace;font-size:10px;">uapress.arizona.edu — Chicano and Chicana Literature</a>
+    </div>
+    <div class="flag-remedy">→ Read imprint framing. This is the house. Know how they position the tradition.</div>
+  </div>
+
+  <div class="flag-item">
+    <div class="flag-pri"><span class="tag" style="background:#1a1a4a;color:#c9a84c;border:1px solid #c9a84c44;">REF</span></div>
+    <div class="flag-ch">Genre Reference</div>
+    <div class="flag-desc">
+      <a href="https://en.wikipedia.org/wiki/Chicano_literature" target="_blank" style="color:#c9a84c;font-family:'JetBrains Mono',monospace;font-size:10px;">Wikipedia — Chicano Literature (updated monthly)</a>
+      &nbsp;|&nbsp;
+      <a href="https://anaya.unm.edu/chicanoliterature" target="_blank" style="color:#c9a84c;font-family:'JetBrains Mono',monospace;font-size:10px;">Rudolfo Anaya Digital Archive (UNM)</a>
+      &nbsp;|&nbsp;
+      <a href="https://faculty.georgetown.edu/bassr/tamlit/essays/chicano.html" target="_blank" style="color:#c9a84c;font-family:'JetBrains Mono',monospace;font-size:10px;">Georgetown — Teaching Chicano Literature: An Historical Approach (Paredes)</a>
+    </div>
+    <div class="flag-remedy">→ Anaya archive is the canonical author resource. Georgetown essay is craft + history together.</div>
+  </div>
+
+  <div class="flag-item">
+    <div class="flag-pri"><span class="tag" style="background:#1a1a4a;color:#555540;border:1px solid #55554044;">DB</span></div>
+    <div class="flag-ch">Scholarly Databases</div>
+    <div class="flag-desc">
+      <a href="https://www.mla.org/Publications/MLA-International-Bibliography" target="_blank" style="color:#9e9e8a;font-family:'JetBrains Mono',monospace;font-size:10px;">MLA International Bibliography — 2.3M+ citations (primary scholarly database)</a>
+      &nbsp;|&nbsp;
+      <a href="https://library.sjsu.edu/c.php?g=230131&p=1527350" target="_blank" style="color:#9e9e8a;font-family:'JetBrains Mono',monospace;font-size:10px;">ChicanIndex — only specialized Chicano reference database (SJSU)</a>
+    </div>
+    <div class="flag-remedy">→ Use for deep citation searches when you need peer-reviewed sources on specific claims.</div>
+  </div>
+
+  <!-- DOMAIN II -->
+  <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;color:#c9a84c;text-transform:uppercase;padding:14px 0 4px;border-bottom:1px solid #3a3a2a;margin-bottom:8px;">
+    II · CHICANO MAGICAL REALISM — Critical Scholarship + Vietnam Intersection
+  </div>
+  <div style="font-family:'EB Garamond',serif;font-size:13px;color:#9e9e8a;font-style:italic;margin-bottom:10px;padding-left:4px;">
+    MR "blurs the lines between reality and fiction and arises from a demand for myth to explain the beginnings which escape history's narrative." Chicano fiction blends realism with folklore, spirituality, and magical realism, challenging dominant narratives while celebrating cultural resilience.
+  </div>
+
+  <div class="flag-item">
+    <div class="flag-pri"><span class="tag" style="background:#1a1a4a;color:#c9a84c;border:1px solid #c9a84c44;">PRIMARY</span></div>
+    <div class="flag-ch">MR Theory</div>
+    <div class="flag-desc"><strong>Roland Walter — Magical Realism in Contemporary Chicano Fiction</strong><br>
+      The primary critical text. Covers full theoretical framework, character archetypes, and narrative logic of MR in Chicano prose. This is the scholarly foundation for your MR architecture.<br>
+      <a href="https://philpapers.org/rec/WALMRI-2" target="_blank" style="color:#c9a84c;font-family:'JetBrains Mono',monospace;font-size:10px;">philpapers.org/rec/WALMRI-2</a>
+      &nbsp;|&nbsp;
+      <a href="https://books.google.com/books/about/Magical_Realism_in_Contemporary_Chicano.html?id=dkdvAAAAMAAJ" target="_blank" style="color:#c9a84c;font-family:'JetBrains Mono',monospace;font-size:10px;">Google Books preview</a>
+    </div>
+    <div class="flag-remedy">→ Read before any revision to Ch.01 ceremony content. Validates your register architecture.</div>
+  </div>
+
+  <div class="flag-item">
+    <div class="flag-pri"><span class="tag" style="background:#6b0f1a;color:#fca5a5;border:1px solid #fca5a544;">DIRECT COMP</span></div>
+    <div class="flag-ch">Vietnam + Chicano</div>
+    <div class="flag-desc"><strong>Melgosa (2013) — "Memory and Trauma: Chicano Autobiographies and the Vietnam War"</strong><br>
+      In: <em>Landscapes of Writing in Chicano Literature</em> (Palgrave). Studies six Chicano Vietnam War veteran autobiographies using trauma theory. Cites <em>A Patriot After All: The Story of a Chicano Vietnam Vet</em> (UNM Press, 1999) — the closest published predecessor to SGT Ramos.<br>
+      <a href="https://link.springer.com/chapter/10.1057/9781137353450_9" target="_blank" style="color:#c9a84c;font-family:'JetBrains Mono',monospace;font-size:10px;">link.springer.com — Melgosa chapter</a>
+    </div>
+    <div class="flag-remedy">→ This is your most direct scholarly comp. Your manuscript sits inside this exact tradition.</div>
+  </div>
+
+  <div class="flag-item">
+    <div class="flag-pri"><span class="tag" style="background:#1a1a4a;color:#c9a84c;border:1px solid #c9a84c44;">PROTEST</span></div>
+    <div class="flag-ch">Chicano Anti-War</div>
+    <div class="flag-desc">
+      <strong>Lorena Oropeza — ¡Raza Sí! ¡Guerra No! (UC Press 2005)</strong> — Anti-Vietnam War activism as pivot in the Chicano movement. Mexican Americans' stand against the war pushed racial identity formation.<br>
+      <a href="https://muse.jhu.edu/article/201764" target="_blank" style="color:#c9a84c;font-family:'JetBrains Mono',monospace;font-size:10px;">muse.jhu.edu — Oropeza</a>
+      &nbsp;|&nbsp;
+      <strong>Lea Ybarra — Vietnam Veteranos</strong> — 24 veterans + families: personal accounts of military experience in Vietnam.<br>
+      <a href="https://muse.jhu.edu/article/214570" target="_blank" style="color:#c9a84c;font-family:'JetBrains Mono',monospace;font-size:10px;">muse.jhu.edu — Ybarra</a>
+    </div>
+    <div class="flag-remedy">→ Historical and testimonial anchors. Contextualizes George's dual identity — soldier and Chicano.</div>
+  </div>
+
+  <div class="flag-item">
+    <div class="flag-pri"><span class="tag" style="background:#1a1a4a;color:#555540;border:1px solid #55554044;">REF</span></div>
+    <div class="flag-ch">Craft + Reading Lists</div>
+    <div class="flag-desc">
+      <a href="https://fullcoll.libguides.com/c.php?g=1440567&p=10699815" target="_blank" style="color:#9e9e8a;font-family:'JetBrains Mono',monospace;font-size:10px;">Fullerton College — Chicano Fiction with MR (annotated reading list)</a>
+      &nbsp;|&nbsp;
+      <a href="https://dumas.ccsd.cnrs.fr/dumas-00843317/document" target="_blank" style="color:#9e9e8a;font-family:'JetBrains Mono',monospace;font-size:10px;">Ana Castillo / So Far from God — MR technique analysis (CNRS full PDF)</a>
+      &nbsp;|&nbsp;
+      <a href="https://scholarworks.gsu.edu/cgi/viewcontent.cgi?article=1295&context=english_theses" target="_blank" style="color:#9e9e8a;font-family:'JetBrains Mono',monospace;font-size:10px;">GSU Thesis — MR in Chicano Literature (full PDF)</a>
+    </div>
+    <div class="flag-remedy">→ Craft-level reads. Confirm register separation in Ch.01 is architecturally correct for the genre.</div>
+  </div>
+
+  <!-- DOMAIN III -->
+  <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;color:#c9a84c;text-transform:uppercase;padding:14px 0 4px;border-bottom:1px solid #3a3a2a;margin-bottom:8px;">
+    III · YAQUI COSMOLOGY — Academic Sources (Five Worlds, Deer Dance, Ceremony)
+  </div>
+  <div style="font-family:'EB Garamond',serif;font-size:13px;color:#9e9e8a;font-style:italic;margin-bottom:10px;padding-left:4px;">
+    The sacred deer moves from the <em>yo ania</em> to the <em>huya ania</em>, and dances in the <em>sea ania</em> (flower world). When killed in the dance, it transforms into flowers — renewal, interconnectedness, sacrifice. The Surem are those who refused baptism and fled to preserve <em>yoania</em> — a relationship with the world itself.
+  </div>
+
+  <div class="flag-item">
+    <div class="flag-pri"><span class="tag" style="background:#1a3a1a;color:#86efac;border:1px solid #86efac44;">DEFINITIVE</span></div>
+    <div class="flag-ch">Primary Source</div>
+    <div class="flag-desc"><strong>Muriel Thayer Painter &amp; Edward Spicer — With Good Heart: Yaqui Beliefs and Ceremonies in Pascua Village</strong><br>
+      The definitive ethnographic source. Contains huya ania, yoania, Surem, sewa, deer singers, pascolas, the full ceremonial system. Primary source for any academic claim about Yaqui ceremony.<br>
+      <a href="https://books.google.com/books/about/With_Good_Heart.html?id=m6t1AAAAMAAJ" target="_blank" style="color:#c9a84c;font-family:'JetBrains Mono',monospace;font-size:10px;">Google Books — With Good Heart</a>
+      &nbsp;|&nbsp;
+      <a href="https://muse.jhu.edu/pub/208/oa_monograph/chapter/2532969" target="_blank" style="color:#c9a84c;font-family:'JetBrains Mono',monospace;font-size:10px;">MUSE open access — yoania section</a>
+    </div>
+    <div class="flag-remedy">→ THE scholarly anchor for Ch.01 ceremony claims. Read the yoania section before SE-002 decision.</div>
+  </div>
+
+  <div class="flag-item">
+    <div class="flag-pri"><span class="tag" style="background:#1a1a4a;color:#c9a84c;border:1px solid #c9a84c44;">PEER</span></div>
+    <div class="flag-ch">Deer Dance System</div>
+    <div class="flag-desc"><strong>ResearchGate — "Hunting for History in Potam Pueblo: Yoeme Deer Dancing Epistemology"</strong><br>
+      Reconstructs the full Yaqui cosmological system. Relates the cosmos to the Deer Dancer and Pascola clowns. Examines the master symbol, Sewa (Flower). Demonstrates Yaqui religious logic does not correspond to Catholic grace theory.<br>
+      <a href="https://www.researchgate.net/publication/249014393_Hunting_for_History_in_Potam_Pueblo_A_Yoeme_Yaqui_Indian_Deer_Dancing_Epistemology" target="_blank" style="color:#c9a84c;font-family:'JetBrains Mono',monospace;font-size:10px;">researchgate.net — Deer Dancing Epistemology</a>
+    </div>
+    <div class="flag-remedy">→ Best peer-reviewed source for the ceremony architecture in Ch.01. Obsidian mirror + four directions + deer dance.</div>
+  </div>
+
+  <div class="flag-item">
+    <div class="flag-pri"><span class="tag" style="background:#1a1a4a;color:#c9a84c;border:1px solid #c9a84c44;">REF</span></div>
+    <div class="flag-ch">Five Worlds + Cosmology</div>
+    <div class="flag-desc">
+      <a href="https://study.com/academy/lesson/yaqui-history-language-facts-people.html" target="_blank" style="color:#c9a84c;font-family:'JetBrains Mono',monospace;font-size:10px;">Study.com — Yaqui History, Language &amp; Culture (accessible five-worlds overview)</a><br>
+      <a href="https://janestclair.net/enchanted-yaqui-worlds/" target="_blank" style="color:#c9a84c;font-family:'JetBrains Mono',monospace;font-size:10px;">Jane St. Clair — The Five Enchanted Worlds of the Yaqui People</a>
+      &nbsp;(Huya Ania = wilderness world, every plant/animal/rock communicate; Yo Ania = caves, source of power to the Surem)<br>
+      <a href="https://www.indianreservation.info/the-yaqui-deer-dance-sacred-ceremony-and-cultural-performance-art/" target="_blank" style="color:#c9a84c;font-family:'JetBrains Mono',monospace;font-size:10px;">Indian Reservation — Yaqui Deer Dance (water drum, flower world, ceremony detail)</a>
+      &nbsp;|&nbsp;
+      <a href="https://en.wikipedia.org/wiki/Yaqui" target="_blank" style="color:#c9a84c;font-family:'JetBrains Mono',monospace;font-size:10px;">Wikipedia — Yaqui (updated daily)</a>
+    </div>
+    <div class="flag-remedy">→ Use for huya ania / yoania / Surem definitions while modeling. Painter/Spicer for publication-level claims.</div>
+  </div>
+
+  <div class="flag-item">
+    <div class="flag-pri"><span class="tag" style="background:#1a1a4a;color:#555540;border:1px solid #55554044;">GOVERNANCE</span></div>
+    <div class="flag-ch">Governance Gate</div>
+    <div class="flag-desc">
+      <a href="https://www.pascuayaqui-nsn.gov/culture/" target="_blank" style="color:#9e9e8a;font-family:'JetBrains Mono',monospace;font-size:10px;">Pascua Yaqui Tribe — Official Culture Page (consultation contact)</a>
+      &nbsp;|&nbsp;
+      <a href="https://www.nps.gov/articles/yoeme.htm" target="_blank" style="color:#9e9e8a;font-family:'JetBrains Mono',monospace;font-size:10px;">NPS: Native Peoples of the Sonoran Desert — The Yoeme</a>
+    </div>
+    <div class="flag-remedy">→ These sources are for modeling — not publication authorization. Yaqui Nation consultation precedes any ceremony content going to press. P0 governance gate remains UNRESOLVED.</div>
+  </div>
+
+</div>
+
+<div class="note-line">Chapters sorted worst → best by Ω Effective within each band. Ω Effective = Ω Raw minus artifact penalties. All artifact-penalized chapters show actual underlying quality in notes.</div>
+
+<!-- ══════════════ BAND: BELOW ══════════════ -->
+<div class="band-header band-below">
+  <span class="band-icon">🔴</span>
+  <span class="band-name band-name-below">BELOW</span>
+  <span class="band-range">Ω &lt; 103.00</span>
+  <span class="band-count">4 chapters — all artifact-penalized</span>
+</div>
+<div class="chapters-wrap">
+<table>
+<colgroup><col class="c-ch"><col class="c-title"><col class="c-act"><col class="c-words"><col class="c-omega"><col class="c-dia"><col class="c-issues"></colgroup>
+<thead><tr>
+  <th class="num">CH</th><th>TITLE</th><th>ACT</th><th class="num">WORDS</th><th class="num">Ω EFF</th><th class="num">DIA%</th><th>ISSUES CITED</th>
+</tr></thead>
+<tbody>
+
+<tr class="ch-row">
+  <td class="ch-num">1</td>
+  <td class="ch-title">The Sacred Mountain Revelation</td>
+  <td class="ch-act">I</td>
+  <td class="ch-words">5,792</td>
+  <td class="ch-omega omega-below">102.17</td>
+  <td class="ch-dia dia-none">17.2%</td>
+  <td class="ch-issues">
+    <span class="tag tag-crit">ARTIFACT</span> Line 1 = "REVISED CHAPTER — FIRST PASS" — suppressing ~3.0Ω. Underlying raw score 105.17. <strong>CR-1.0 DELTA confirms artifact appears RESOLVED in uploaded file.</strong> If master docx is clean, effective Ω recovers to 105.17.<br>
+    <span class="tag tag-dia">LOW DIALOGUE 17.2%</span> Root cause: ceremony-dominant chapter. Narrated action is architecturally correct for Yaqui register. <strong>Carlos mechanism:</strong> Carlos (translator, currently 0 initiations in social physics) can convert narrated Chieftain speech into English-register dialogue — governance-safe, no new ceremony content added. +1,171w to reach 35% floor. Projected Ω range with full hybrid sprint: 110.93–112.33.<br>
+    <span class="tag tag-sii">SII=82</span> At floor. Jasmine-napalm constant ABSENT — one intrusive combat memory flash during ceremony closes this gap. Author decision needed.<br>
+    <span class="tag" style="background:#1a3a1a;color:#86efac;border:1px solid #86efac44;">⚠ FORMULA CHALLENGE</span> CR-2.0 composite Ω=100.58 applies uniform manuscript benchmarks to a ceremony chapter. Penalties for 100% sensory coverage (micro-transition beats structurally unanchored by design) and strict dialogue floor (ceremony chapters trend narrated) are miscalibrated for this genre. Real effective gap to 111: ~3–4 pts. Agency=8.8/scene, active voice=99%, neuro-engagement=100.0 — chapter quality is exceptional. Do not rewrite until research phase complete.
+  </td>
+</tr>
+
+<tr class="ch-row">
+  <td class="ch-num">38</td>
+  <td class="ch-title">Last Dance</td>
+  <td class="ch-act">III</td>
+  <td class="ch-words">5,569</td>
+  <td class="ch-omega omega-below">102.26</td>
+  <td class="ch-dia dia-low">22.4%</td>
+  <td class="ch-issues">
+    <span class="tag tag-crit">ARTIFACT</span> Last line = "*E*" — truncated word or sentence, suppressing ~3.0Ω. Underlying raw score would be ~105.2.<br>
+    <span class="tag tag-high">AUTHOR DECISION REQUIRED</span> Is "*E*" intentional (Johnson's harmonica E-note) or editing artifact? If intentional → expand to full sentence. If artifact → delete. One author call resolves this entirely.
+  </td>
+</tr>
+
+<tr class="ch-row">
+  <td class="ch-num">24</td>
+  <td class="ch-title">SACRED HEART BRIEFING</td>
+  <td class="ch-act">II</td>
+  <td class="ch-words">5,425</td>
+  <td class="ch-omega omega-below">102.51</td>
+  <td class="ch-dia dia-low">23.6%</td>
+  <td class="ch-issues">
+    <span class="tag tag-crit">ARTIFACT</span> Last line = "2 / 2" — Microsoft Word page number saved into manuscript text, suppressing ~3.0Ω. Underlying raw score ~105.5.<br>
+    <span class="tag tag-struct">TITLE TRUNCATION</span> Header reads "BRIEFING3" — fix in data layer.<br>
+    <span class="tag tag-struct">NOTE</span> Single-line delete resolves entirely. No prose change needed.
+  </td>
+</tr>
+
+<tr class="ch-row">
+  <td class="ch-num">34</td>
+  <td class="ch-title">Sixty-Eight</td>
+  <td class="ch-act">III</td>
+  <td class="ch-words">4,996</td>
+  <td class="ch-omega omega-below">102.69</td>
+  <td class="ch-dia dia-low">20.4%</td>
+  <td class="ch-issues">
+    <span class="tag tag-crit">ARTIFACT</span> Last line = "PASS 2 COMPLETE — LITCENTRAL HYBRID DIAGNOSTIC" — LitCentral diagnostic accidentally pasted into manuscript close. Suppressing ~3.0Ω. Underlying raw score ~105.7.<br>
+    <span class="tag tag-struct">NOTE</span> LITCENTRAL audit rated this chapter Omega Elite quality. Single-line delete resolves entirely. No prose change needed.
+  </td>
+</tr>
+
+</tbody>
+</table>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ══════════════ BAND: GRAY AREA ══════════════ -->
+<div class="band-header band-gray">
+  <span class="band-icon">🟡</span>
+  <span class="band-name band-name-gray">GRAY AREA</span>
+  <span class="band-range">Ω 103.00 – 105.99</span>
+  <span class="band-count">33 chapters — bulk of manuscript</span>
+</div>
+<div class="chapters-wrap">
+<table>
+<colgroup><col class="c-ch"><col class="c-title"><col class="c-act"><col class="c-words"><col class="c-omega"><col class="c-dia"><col class="c-issues"></colgroup>
+<thead><tr>
+  <th class="num">CH</th><th>TITLE</th><th>ACT</th><th class="num">WORDS</th><th class="num">Ω EFF</th><th class="num">DIA%</th><th>ISSUES CITED</th>
+</tr></thead>
+<tbody>
+
+<tr class="ch-row">
+  <td class="ch-num">17</td>
+  <td class="ch-title">Boundary Shift</td>
+  <td class="ch-act">I</td>
+  <td class="ch-words">5,633</td>
+  <td class="ch-omega omega-gray">103.91</td>
+  <td class="ch-dia dia-none">15.6%</td>
+  <td class="ch-issues">
+    <span class="tag tag-dia">LOW DIALOGUE 15.6%</span> Second-lowest dialogue in Act I. +0.6Ω available from lift.<br>
+    <span class="tag tag-sii">SII=75</span> Below floor — Spanish immersion deficit. One of only two chapters at SII=75.<br>
+    <span class="tag tag-spirit">SPIRITUAL VEC 0.28</span> Lowest in manuscript (tied with Ch.16). Ancestral presence nearly absent.<br>
+    <span class="tag tag-beh">BEH INTEGRITY 0.42</span> Character-voice consistency at deficit. Correlates with low dialogue.<br>
+    <span class="tag tag-struct">STRUCTURAL ECHO</span> Closing line mirrors Ch.16 exactly — "The dead spoke. This time, someone listened." Author must confirm intent or differentiate.
+  </td>
+</tr>
+
+<tr class="ch-row">
+  <td class="ch-num">36</td>
+  <td class="ch-title">Mission Execution</td>
+  <td class="ch-act">III</td>
+  <td class="ch-words">3,706</td>
+  <td class="ch-omega omega-gray">104.00</td>
+  <td class="ch-dia dia-low">23.6%</td>
+  <td class="ch-issues">
+    <span class="tag tag-high">UNDERWEIGHT</span> 3,706 words — 31% below mean of 5,493. Shortest chapter in manuscript. James Wilkins post-revision. Ghost Protocol seeding must occur here before Ch.45 reveal.<br>
+    <span class="tag tag-cls">CLS=82</span> Below floor. Short chapter length suppresses CLS naturally — expansion will lift this.<br>
+    <span class="tag tag-spirit">SPIRITUAL VEC 0.32</span> At floor. Ghost Protocol requires spiritual register.<br>
+    <span class="tag tag-high">SEEDING REQUIRED</span> Ch.45 reveal (4 men used Ramos identity) needs foreshadowing seeded here.
+  </td>
+</tr>
+
+<tr class="ch-row">
+  <td class="ch-num">16</td>
+  <td class="ch-title">My Lai Massacre</td>
+  <td class="ch-act">I</td>
+  <td class="ch-words">5,735</td>
+  <td class="ch-omega omega-gray">104.04</td>
+  <td class="ch-dia dia-none">14.4%</td>
+  <td class="ch-issues">
+    <span class="tag tag-dia">LOW DIALOGUE 14.4%</span> 3rd lowest in manuscript. The My Lai content may justify reduced dialogue — but current level suppresses BIS significantly.<br>
+    <span class="tag tag-sii">SII=75</span> Below floor. Tied with Ch.17 for lowest SII in manuscript.<br>
+    <span class="tag tag-spirit">SPIRITUAL VEC 0.28</span> Lowest in manuscript (tied Ch.17). Massacre sequence may architecturally justify — SE filing recommended.<br>
+    <span class="tag tag-beh">BEH INTEGRITY 0.42</span> At deficit level.
+  </td>
+</tr>
+
+<tr class="ch-row">
+  <td class="ch-num">43</td>
+  <td class="ch-title">RESURRECTION</td>
+  <td class="ch-act">III</td>
+  <td class="ch-words">5,186</td>
+  <td class="ch-omega omega-gray">104.26</td>
+  <td class="ch-dia dia-none">13.2%</td>
+  <td class="ch-issues">
+    <span class="tag tag-dia">LOW DIALOGUE 13.2%</span> 2nd lowest in manuscript. Resurrection register may justify — but current level is below architectural minimum.<br>
+    <span class="tag tag-beh">BEH INTEGRITY 0.39</span> Lowest in manuscript. George's voice consistency most at risk here.<br>
+    <span class="tag tag-bis">BIS=85</span> Below floor. Scene density and action sequencing thin.
+  </td>
+</tr>
+
+<tr class="ch-row">
+  <td class="ch-num">30</td>
+  <td class="ch-title">ORCHESTRATING NECESSARY EVIL</td>
+  <td class="ch-act">II</td>
+  <td class="ch-words">5,798</td>
+  <td class="ch-omega omega-gray">104.38</td>
+  <td class="ch-dia dia-none">15.6%</td>
+  <td class="ch-issues">
+    <span class="tag tag-dia">LOW DIALOGUE 15.6%</span> Institutional/briefing chapter — but low dialogue suppresses BIS.<br>
+    <span class="tag tag-cls">CLS=82</span> Below floor.<br>
+    <span class="tag tag-beh">BEH INTEGRITY 0.42</span> Character consistency below threshold.
+  </td>
+</tr>
+
+<tr class="ch-row">
+  <td class="ch-num">40</td>
+  <td class="ch-title">Ares Death of a God</td>
+  <td class="ch-act">III</td>
+  <td class="ch-words">5,612</td>
+  <td class="ch-omega omega-gray">104.47</td>
+  <td class="ch-dia dia-none">17.6%</td>
+  <td class="ch-issues">
+    <span class="tag tag-crit">TIMELINE CONFLICT</span> Character death date here conflicts with Ch.45 appearance. Continuity error — must resolve before submission.<br>
+    <span class="tag tag-dia">LOW DIALOGUE 17.6%</span> Death chapter — some reduction justified, but current level below minimum.<br>
+    <span class="tag tag-cls">CLS=82</span> Below floor.<br>
+    <span class="tag tag-beh">BEH INTEGRITY 0.43</span> At deficit.
+  </td>
+</tr>
+
+<tr class="ch-row">
+  <td class="ch-num">23</td>
+  <td class="ch-title">The Eagle and the Sparrow</td>
+  <td class="ch-act">II</td>
+  <td class="ch-words">5,756</td>
+  <td class="ch-omega omega-gray">104.48</td>
+  <td class="ch-dia dia-none">16.4%</td>
+  <td class="ch-issues">
+    <span class="tag tag-high">TRUNCATED TITLE</span> Header reads "Sparr1" — fix in data layer.<br>
+    <span class="tag tag-dia">LOW DIALOGUE 16.4%</span><br>
+    <span class="tag tag-cls">CLS=83</span> One point below floor.<br>
+    <span class="tag tag-beh">BEH INTEGRITY 0.42</span>
+  </td>
+</tr>
+
+<tr class="ch-row">
+  <td class="ch-num">18</td>
+  <td class="ch-title">Broken Wing</td>
+  <td class="ch-act">I</td>
+  <td class="ch-words">5,592</td>
+  <td class="ch-omega omega-gray">104.50</td>
+  <td class="ch-dia dia-none">15.2%</td>
+  <td class="ch-issues">
+    <span class="tag tag-dia">LOW DIALOGUE 15.2%</span> Immediately follows Ch.17 — both chapters at same dialogue deficit. DUP-001 adjacency (Ch.17/Ch.18 copper/jasmine-napalm repeat) also flags here.<br>
+    <span class="tag tag-beh">BEH INTEGRITY 0.42</span><br>
+    <span class="tag tag-cls">CLS=83</span><br>
+    <span class="tag tag-bis">BIS=86</span> One point below floor.<br>
+    <span class="tag tag-dup">DUP-001 ZONE</span> Ch.17↔Ch.18 copper/jasmine-napalm sensory beat repeated across adjacent chapters. P0 — highest manuscript risk, est. 2–4Ω penalty at submission.
+  </td>
+</tr>
+
+<tr class="ch-row">
+  <td class="ch-num">31</td>
+  <td class="ch-title">RETREAT, HELL</td>
+  <td class="ch-act">III</td>
+  <td class="ch-words">4,794</td>
+  <td class="ch-omega omega-gray">104.59</td>
+  <td class="ch-dia dia-low">20.8%</td>
+  <td class="ch-issues">
+    <span class="tag tag-high">UNDERWEIGHT</span> 4,794 words — 13% below mean. Not critical, but below structural comfort zone.
+  </td>
+</tr>
+
+<tr class="ch-row">
+  <td class="ch-num">37</td>
+  <td class="ch-title">The Mathematics of Revenge</td>
+  <td class="ch-act">III</td>
+  <td class="ch-words">5,795</td>
+  <td class="ch-omega omega-gray">104.62</td>
+  <td class="ch-dia dia-none">16.8%</td>
+  <td class="ch-issues">
+    <span class="tag tag-high">TRUNCATED TITLE</span> Header reads "Reveng6."<br>
+    <span class="tag tag-dia">LOW DIALOGUE 16.8%</span><br>
+    <span class="tag tag-cls">CLS=83</span><br>
+    <span class="tag tag-beh">BEH INTEGRITY 0.43</span><br>
+    <span class="tag tag-sii">SII=78</span> Below floor.
+  </td>
+</tr>
+
+<tr class="ch-row">
+  <td class="ch-num">41</td>
+  <td class="ch-title">Adios Muchachos</td>
+  <td class="ch-act">III</td>
+  <td class="ch-words">5,480</td>
+  <td class="ch-omega omega-gray">104.62</td>
+  <td class="ch-dia dia-none">16.4%</td>
+  <td class="ch-issues">
+    <span class="tag tag-dia">LOW DIALOGUE 16.4%</span><br>
+    <span class="tag tag-cls">CLS=83</span><br>
+    <span class="tag tag-beh">BEH INTEGRITY 0.44</span>
+  </td>
+</tr>
+
+<tr class="ch-row">
+  <td class="ch-num">25</td>
+  <td class="ch-title">Sacred Heart</td>
+  <td class="ch-act">II</td>
+  <td class="ch-words">5,812</td>
+  <td class="ch-omega omega-gray">104.65</td>
+  <td class="ch-dia dia-none">16.0%</td>
+  <td class="ch-issues">
+    <span class="tag tag-high">TRUNCATED TITLE</span> Header reads "Sacred Hear."<br>
+    <span class="tag tag-dia">LOW DIALOGUE 16.0%</span><br>
+    <span class="tag tag-sii">SII=79</span> One below floor.<br>
+    <span class="tag tag-beh">BEH INTEGRITY 0.43</span>
+  </td>
+</tr>
+
+<tr class="ch-row">
+  <td class="ch-num">42</td>
+  <td class="ch-title">Sacred Smoke</td>
+  <td class="ch-act">III</td>
+  <td class="ch-words">5,284</td>
+  <td class="ch-omega omega-gray">104.66</td>
+  <td class="ch-dia dia-none">16.0%</td>
+  <td class="ch-issues">
+    <span class="tag tag-high">PLACEHOLDER</span> Bathroom prayer scene unresolved. NERO O-stage narrative anchor — undercompletion hurts manuscript-wide SII.<br>
+    <span class="tag tag-dia">LOW DIALOGUE 16.0%</span><br>
+    <span class="tag tag-bis">BIS=86</span> One below floor.<br>
+    <span class="tag tag-beh">BEH INTEGRITY 0.43</span>
+  </td>
+</tr>
+
+<tr class="ch-row">
+  <td class="ch-num">2</td>
+  <td class="ch-title">DESCENT INTO BAPTISM</td>
+  <td class="ch-act">I</td>
+  <td class="ch-words">5,684</td>
+  <td class="ch-omega omega-gray">104.66</td>
+  <td class="ch-dia dia-none">18.0%</td>
+  <td class="ch-issues">
+    <span class="tag tag-dia">LOW DIALOGUE 18.0%</span><br>
+    <span class="tag tag-sii">SII=78</span> Below floor.<br>
+    <span class="tag tag-spirit">SPIRITUAL VEC 0.30</span> Near floor.<br>
+    <span class="tag tag-beh">BEH INTEGRITY 0.43</span>
+  </td>
+</tr>
+
+<tr class="ch-row">
+  <td class="ch-num">29</td>
+  <td class="ch-title">MATHEMATICS OF REVOLUTION</td>
+  <td class="ch-act">II</td>
+  <td class="ch-words">5,846</td>
+  <td class="ch-omega omega-gray">104.75</td>
+  <td class="ch-dia dia-none">18.4%</td>
+  <td class="ch-issues">
+    <span class="tag tag-dia">LOW DIALOGUE 18.4%</span><br>
+    <span class="tag tag-sii">SII=79</span><br>
+    <span class="tag tag-spirit">SPIRITUAL VEC 0.32</span> At floor.<br>
+    <span class="tag tag-beh">BEH INTEGRITY 0.44</span>
+  </td>
+</tr>
+
+<tr class="ch-row">
+  <td class="ch-num">33</td>
+  <td class="ch-title">Angels from Above</td>
+  <td class="ch-act">III</td>
+  <td class="ch-words">5,343</td>
+  <td class="ch-omega omega-gray">104.79</td>
+  <td class="ch-dia dia-none">16.0%</td>
+  <td class="ch-issues">
+    <span class="tag tag-dia">LOW DIALOGUE 16.0%</span><br>
+    <span class="tag tag-sii">SII=79</span><br>
+    <span class="tag tag-cls">CLS=83</span>
+  </td>
+</tr>
+
+<tr class="ch-row">
+  <td class="ch-num">10</td>
+  <td class="ch-title">The Pendejo Squad</td>
+  <td class="ch-act">I</td>
+  <td class="ch-words">5,812</td>
+  <td class="ch-omega omega-gray">104.81</td>
+  <td class="ch-dia dia-none">17.6%</td>
+  <td class="ch-issues">
+    <span class="tag tag-crit">NAME SWAP</span> Rodriguez/Ramirez swap ~60% through chapter. Character registry violation.<br>
+    <span class="tag tag-dup">DUP — Ch.9+10</span> 700+ line opening duplication with Ch.9. Both chapters penalized until resolved.<br>
+    <span class="tag tag-dia">LOW DIALOGUE 17.6%</span><br>
+    <span class="tag tag-cls">CLS=82</span>
+  </td>
+</tr>
+
+<tr class="ch-row">
+  <td class="ch-num">13</td>
+  <td class="ch-title">The Walls Speak in Red</td>
+  <td class="ch-act">I</td>
+  <td class="ch-words">5,580</td>
+  <td class="ch-omega omega-gray">104.82</td>
+  <td class="ch-dia dia-none">16.4%</td>
+  <td class="ch-issues">
+    <span class="tag tag-dia">LOW DIALOGUE 16.4%</span><br>
+    <span class="tag tag-cls">CLS=83</span>
+  </td>
+</tr>
+
+<tr class="ch-row">
+  <td class="ch-num">35</td>
+  <td class="ch-title">The Birthday Brief</td>
+  <td class="ch-act">III</td>
+  <td class="ch-words">5,645</td>
+  <td class="ch-omega omega-gray">104.89</td>
+  <td class="ch-dia dia-low">21.2%</td>
+  <td class="ch-issues">
+    <span class="tag tag-cls">CLS=83</span><br>
+    <span class="tag tag-spirit">SPIRITUAL VEC 0.32</span> At floor.<br>
+    <span class="tag tag-clean">CLEAN OTHERWISE</span>
+  </td>
+</tr>
+
+<tr class="ch-row">
+  <td class="ch-num">44</td>
+  <td class="ch-title">THE EXILE PATRIOTS</td>
+  <td class="ch-act">III</td>
+  <td class="ch-words">5,069</td>
+  <td class="ch-omega omega-gray">104.91</td>
+  <td class="ch-dia dia-none">14.8%</td>
+  <td class="ch-issues">
+    <span class="tag tag-dia">LOW DIALOGUE 14.8%</span> Exile Patriot register — structural case for low dialogue, but current level suppresses score.<br>
+    <span class="tag tag-cls">CLS=83</span><br>
+    <span class="tag tag-bis">BIS=84</span> Three below floor.
+  </td>
+</tr>
+
+<tr class="ch-row">
+  <td class="ch-num">5</td>
+  <td class="ch-title">The Ghost Protocol</td>
+  <td class="ch-act">I</td>
+  <td class="ch-words">5,769</td>
+  <td class="ch-omega omega-gray">104.97</td>
+  <td class="ch-dia dia-none">18.8%</td>
+  <td class="ch-issues">
+    <span class="tag tag-high">SEEDING REQUIRED</span> Ghost Protocol must seed Ch.45 reveal here (roster discrepancy, 1 line). Currently absent.<br>
+    <span class="tag tag-dia">LOW DIALOGUE 18.8%</span>
+  </td>
+</tr>
+
+<tr class="ch-row">
+  <td class="ch-num">3</td>
+  <td class="ch-title">THE GENOCIDE ALGORITHM</td>
+  <td class="ch-act">I</td>
+  <td class="ch-words">5,925</td>
+  <td class="ch-omega omega-gray">104.99</td>
+  <td class="ch-dia dia-none">11.2%</td>
+  <td class="ch-issues">
+    <span class="tag tag-dia">LOW DIALOGUE 11.2%</span> Lowest in manuscript. IBM 360 / algorithm chapter — machine register partially justifies this, but gap is large. +1.1Ω available.<br>
+    <span class="tag tag-bis">BIS=83</span> Lowest BIS in manuscript. Four below floor.<br>
+    <span class="tag tag-sii">SII=79</span><br>
+    <span class="tag tag-beh">BEH INTEGRITY 0.42</span>
+  </td>
+</tr>
+
+<tr class="ch-row">
+  <td class="ch-num">28</td>
+  <td class="ch-title">Cruzan, o nadie cruzan</td>
+  <td class="ch-act">II</td>
+  <td class="ch-words">5,795</td>
+  <td class="ch-omega omega-gray">105.05</td>
+  <td class="ch-dia dia-none">18.4%</td>
+  <td class="ch-issues">
+    <span class="tag tag-dia">LOW DIALOGUE 18.4%</span>
+  </td>
+</tr>
+
+<tr class="ch-row">
+  <td class="ch-num">7</td>
+  <td class="ch-title">The Boulevard Theorem</td>
+  <td class="ch-act">I</td>
+  <td class="ch-words">5,988</td>
+  <td class="ch-omega omega-gray">105.05</td>
+  <td class="ch-dia dia-none">18.8%</td>
+  <td class="ch-issues">
+    <span class="tag tag-dia">LOW DIALOGUE 18.8%</span><br>
+    <span class="tag tag-cls">CLS=83</span>
+  </td>
+</tr>
+
+<tr class="ch-row">
+  <td class="ch-num">32</td>
+  <td class="ch-title">CORRIDOR OF FIRE</td>
+  <td class="ch-act">III</td>
+  <td class="ch-words">5,451</td>
+  <td class="ch-omega omega-gray">105.18</td>
+  <td class="ch-dia dia-none">18.8%</td>
+  <td class="ch-issues">
+    <span class="tag tag-dia">LOW DIALOGUE 18.8%</span>
+  </td>
+</tr>
+
+<tr class="ch-row">
+  <td class="ch-num">26</td>
+  <td class="ch-title">Echoes of an Empire</td>
+  <td class="ch-act">II</td>
+  <td class="ch-words">4,971</td>
+  <td class="ch-omega omega-gray">105.19</td>
+  <td class="ch-dia dia-low">20.4%</td>
+  <td class="ch-issues">
+    <span class="tag tag-high">UNDERWEIGHT</span> 4,971 words — 10% below mean.<br>
+    <span class="tag tag-dup">DUP-003 ZONE</span> Ch.26↔Ch.27 structural overlap ~67%. P0 medium priority.
+  </td>
+</tr>
+
+<tr class="ch-row">
+  <td class="ch-num">12</td>
+  <td class="ch-title">Red Truth Revolution</td>
+  <td class="ch-act">I</td>
+  <td class="ch-words">5,735</td>
+  <td class="ch-omega omega-gray">105.23</td>
+  <td class="ch-dia dia-low">20.0%</td>
+  <td class="ch-issues">
+    <span class="tag tag-clean">CLEAN — NO ACTIVE FLAGS</span>
+  </td>
+</tr>
+
+<tr class="ch-row">
+  <td class="ch-num">14</td>
+  <td class="ch-title">Package Sacrament</td>
+  <td class="ch-act">I</td>
+  <td class="ch-words">5,571</td>
+  <td class="ch-omega omega-gray">105.39</td>
+  <td class="ch-dia dia-low">21.6%</td>
+  <td class="ch-issues">
+    <span class="tag tag-cls">CLS=83</span><br>
+    <span class="tag tag-dup">DUP-002 ZONE</span> Ch.14↔Ch.22 structural overlap ~86%. P0 high priority. Both chapters penalized until resolved.
+  </td>
+</tr>
+
+<tr class="ch-row">
+  <td class="ch-num">22</td>
+  <td class="ch-title">Don't Fuck with Familia</td>
+  <td class="ch-act">II</td>
+  <td class="ch-words">4,779</td>
+  <td class="ch-omega omega-gray">105.48</td>
+  <td class="ch-dia dia-ok">26.4%</td>
+  <td class="ch-issues">
+    <span class="tag tag-high">UNDERWEIGHT</span> 4,779 words — 13% below mean.<br>
+    <span class="tag tag-cls">CLS=83</span><br>
+    <span class="tag tag-dup">DUP-002 ZONE</span> Ch.14↔Ch.22 structural overlap ~86%.
+  </td>
+</tr>
+
+<tr class="ch-row">
+  <td class="ch-num">8</td>
+  <td class="ch-title">Los Records Mienten</td>
+  <td class="ch-act">I</td>
+  <td class="ch-words">5,800</td>
+  <td class="ch-omega omega-gray">105.61</td>
+  <td class="ch-dia dia-low">20.4%</td>
+  <td class="ch-issues">
+    <span class="tag tag-clean">CLEAN — NO ACTIVE FLAGS</span>
+  </td>
+</tr>
+
+<tr class="ch-row">
+  <td class="ch-num">6</td>
+  <td class="ch-title">Crucible Theorem</td>
+  <td class="ch-act">I</td>
+  <td class="ch-words">5,646</td>
+  <td class="ch-omega omega-gray">105.62</td>
+  <td class="ch-dia dia-low">20.0%</td>
+  <td class="ch-issues">
+    <span class="tag tag-clean">CLEAN — NO ACTIVE FLAGS</span>
+  </td>
+</tr>
+
+<tr class="ch-row">
+  <td class="ch-num">4</td>
+  <td class="ch-title">Pentagon, December 1969</td>
+  <td class="ch-act">I</td>
+  <td class="ch-words">6,200</td>
+  <td class="ch-omega omega-gray">105.78</td>
+  <td class="ch-dia dia-none">13.2%</td>
+  <td class="ch-issues">
+    <span class="tag tag-dia">LOW DIALOGUE 13.2%</span> Crawford/IBM institutional chapter — systemic-reckoning register justifies reduced exchange, but 13.2% is below architectural minimum. CLS=96 (peak) compensates partially.<br>
+    <span class="tag tag-sii">SII=72</span> Lowest in manuscript. Pentagon context — partially justified by register. Structural Exemption candidate.<br>
+    <span class="tag tag-spirit">SPIRITUAL VEC 0.30</span> Pentagon setting — justified absence of Yaqui presence. SE filing recommended.<br>
+    <span class="tag tag-beh">BEH INTEGRITY 0.44</span> Crawford POV — near floor.
+  </td>
+</tr>
+
+<tr class="ch-row">
+  <td class="ch-num">20</td>
+  <td class="ch-title">THE GENESIS EQUATION</td>
+  <td class="ch-act">II</td>
+  <td class="ch-words">5,256</td>
+  <td class="ch-omega omega-gray">105.91</td>
+  <td class="ch-dia dia-ok">26.0%</td>
+  <td class="ch-issues">
+    <span class="tag tag-sii">SII=77</span> Below floor.<br>
+    <span class="tag tag-spirit">SPIRITUAL VEC 0.32</span> At floor.
+  </td>
+</tr>
+
+</tbody>
+</table>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ══════════════ BAND: OMEGA ══════════════ -->
+<div class="band-header band-omega">
+  <span class="band-icon">🟢</span>
+  <span class="band-name band-name-omega">OMEGA</span>
+  <span class="band-range">Ω 106.00 – 110.99</span>
+  <span class="band-count">8 chapters — strongest in manuscript</span>
+</div>
+<div class="chapters-wrap">
+<table>
+<colgroup><col class="c-ch"><col class="c-title"><col class="c-act"><col class="c-words"><col class="c-omega"><col class="c-dia"><col class="c-issues"></colgroup>
+<thead><tr>
+  <th class="num">CH</th><th>TITLE</th><th>ACT</th><th class="num">WORDS</th><th class="num">Ω EFF</th><th class="num">DIA%</th><th>ISSUES CITED</th>
+</tr></thead>
+<tbody>
+
+<tr class="ch-row">
+  <td class="ch-num">21</td>
+  <td class="ch-title">El Cazador y El Guardián</td>
+  <td class="ch-act">II</td>
+  <td class="ch-words">6,161</td>
+  <td class="ch-omega omega-omega">106.02</td>
+  <td class="ch-dia dia-low">22.4%</td>
+  <td class="ch-issues">
+    <span class="tag tag-clean">CLEAN — PROTECT</span> Longest chapter in manuscript. Structural model for Act II.
+  </td>
+</tr>
+
+<tr class="ch-row">
+  <td class="ch-num">11</td>
+  <td class="ch-title">Contact Contact</td>
+  <td class="ch-act">I</td>
+  <td class="ch-words">5,909</td>
+  <td class="ch-omega omega-omega">106.18</td>
+  <td class="ch-dia dia-ok">26.4%</td>
+  <td class="ch-issues">
+    <span class="tag tag-clean">CLEAN — PROTECT</span>
+  </td>
+</tr>
+
+<tr class="ch-row">
+  <td class="ch-num">45</td>
+  <td class="ch-title">Unidos para Siempre</td>
+  <td class="ch-act">III</td>
+  <td class="ch-words">5,375</td>
+  <td class="ch-omega omega-omega">106.25</td>
+  <td class="ch-dia dia-none">15.6%</td>
+  <td class="ch-issues">
+    <span class="tag tag-crit">TIMELINE CONFLICT</span> Character appearance here conflicts with death date in Ch.40. Must resolve.<br>
+    <span class="tag tag-high">SEEDING MISSING</span> Ramos identity reveal (4 men) has no foreshadowing in Ch.5, Ch.36, Ch.42.<br>
+    <span class="tag tag-dia">LOW DIALOGUE 15.6%</span> Final chapter — some reduction justifiable, but current level suppresses BIS.<br>
+    <span class="tag tag-bis">BIS=85</span> Two below floor.
+  </td>
+</tr>
+
+<tr class="ch-row">
+  <td class="ch-num">9</td>
+  <td class="ch-title">FIRST BLOOD</td>
+  <td class="ch-act">I</td>
+  <td class="ch-words">5,097</td>
+  <td class="ch-omega omega-omega">106.35</td>
+  <td class="ch-dia dia-low">22.0%</td>
+  <td class="ch-issues">
+    <span class="tag tag-dup">DUP — Ch.9+10</span> 700+ line opening shared with Ch.10. Ch.9 must become kinetic/present-tense version. P0 critical.<br>
+    <span class="tag tag-sii">SII=79</span> One below floor.
+  </td>
+</tr>
+
+<tr class="ch-row">
+  <td class="ch-num">27</td>
+  <td class="ch-title">Hunter's Geometry</td>
+  <td class="ch-act">II</td>
+  <td class="ch-words">4,899</td>
+  <td class="ch-omega omega-omega">106.47</td>
+  <td class="ch-dia dia-low">20.4%</td>
+  <td class="ch-issues">
+    <span class="tag tag-dup">DUP-003 ZONE</span> Ch.26↔Ch.27 structural overlap ~67%. Medium priority P0.<br>
+    <span class="tag tag-high">UNDERWEIGHT</span> 4,899 words — 11% below mean.
+  </td>
+</tr>
+
+<tr class="ch-row">
+  <td class="ch-num">15</td>
+  <td class="ch-title">Move Like Water</td>
+  <td class="ch-act">I</td>
+  <td class="ch-words">5,433</td>
+  <td class="ch-omega omega-omega">107.04</td>
+  <td class="ch-dia dia-ok">26.8%</td>
+  <td class="ch-issues">
+    <span class="tag tag-clean">CLEAN — PROTECT</span> Highest-scoring non-artifact chapter in Act I. Dialogue above 25% floor. Model chapter.
+  </td>
+</tr>
+
+<tr class="ch-row">
+  <td class="ch-num">39</td>
+  <td class="ch-title">When Compadres Fall</td>
+  <td class="ch-act">III</td>
+  <td class="ch-words">5,097</td>
+  <td class="ch-omega omega-omega">107.06</td>
+  <td class="ch-dia dia-ok">25.2%</td>
+  <td class="ch-issues">
+    <span class="tag tag-clean">CLEAN — PROTECT</span> Strong Act III anchor. CL-MoE peak (0.89).<br>
+    <span class="tag" style="background:#1a3a1a;color:#86efac;border:1px solid #86efac44;">⭐ FASTEST PATH TO 111</span> Gap = 3.94 pts. SII=90 is only weakness. One targeted sensory anchor insert (copal smoke, Sonoran terrain, or somatic beat ~200w) projects to Ω=111.0+. First candidate for manuscript's first certified Elite chapter.
+  </td>
+</tr>
+
+<tr class="ch-row">
+  <td class="ch-num">19</td>
+  <td class="ch-title">Los Obligados</td>
+  <td class="ch-act">II</td>
+  <td class="ch-words">5,380</td>
+  <td class="ch-omega omega-omega">107.12</td>
+  <td class="ch-dia dia-ok">29.6%</td>
+  <td class="ch-issues">
+    <span class="tag tag-clean">CLEAN — PROTECT</span> Highest effective score in manuscript. Dialogue nearest to 30% target. CL-MoE peak (0.892 — highest in manuscript).
+  </td>
+</tr>
+
+</tbody>
+</table>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ══════════════ BAND: OMEGA ELITE ══════════════ -->
+<div class="band-header band-elite">
+  <span class="band-icon">⭐</span>
+  <span class="band-name band-name-elite">OMEGA ELITE</span>
+  <span class="band-range">Ω ≥ 111.00</span>
+  <span class="band-count">0 chapters — target: all 45</span>
+</div>
+<div class="chapters-wrap" style="padding:20px 40px;">
+  <p style="font-family:'JetBrains Mono',monospace; font-size:12px; color:#555540; letter-spacing:1px;">
+    NO CHAPTERS CERTIFIED AT 111+ AS OF v12.<br><br>
+    LITCENTRAL rates Ch.15, Ch.19, Ch.39 at individual tier OMEGA ELITE (≥105 individual threshold) but none reach the 111 composite Elite target.<br><br>
+    FASTEST PATH TO FIRST ELITE CHAPTER: Ch.39 "When Compadres Fall" (Ω=107.06, gap=3.94). Only weakness: SII=90. One ~200-word sensory anchor insert projects to Ω≥111.0. Ch.19 "Los Obligados" (Ω=107.12, gap=3.88) is equally strong with highest CL-MoE (0.892) in manuscript.<br><br>
+    SECOND TIER: Ch.34 and Ch.38 each have ~3.0Ω artifact penalty. Artifact delete alone (single-line edit) would push both to ~105+ raw — still need +5 pts more. Address Ch.39 and Ch.19 first.<br><br>
+    The manuscript has never had a chapter at 111+. First certified Elite chapter will be the benchmark for all revision work.
+  </p>
+</div>
+
+<!-- TIER SCALE + TOOLS -->
+<div class="flags-section" style="border-left: 3px solid #2a2a8a; margin-top:24px; display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+
+  <!-- TIER SCALE -->
+  <div>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;color:#c9a84c;text-transform:uppercase;padding:0 0 8px;border-bottom:1px solid #3a3a2a;margin-bottom:12px;">
+      Ω TIER SCALE — Correct Bands
+    </div>
+    <table style="width:100%;border-collapse:collapse;font-family:'JetBrains Mono',monospace;font-size:11px;">
+      <tr style="background:#07070f;border-bottom:1px solid #2a2a8a;">
+        <td style="padding:8px 10px;color:#c9a84c;font-size:13px;">⭐ 111.00+</td>
+        <td style="padding:8px 10px;color:#c9a84c;font-weight:bold;">OMEGA 111 ELITE</td>
+        <td style="padding:8px 10px;color:#555540;">Manuscript-level certification target · 0 chapters</td>
+      </tr>
+      <tr style="background:#0a1a0a;border-bottom:1px solid #1a3a1a;">
+        <td style="padding:8px 10px;color:#86efac;">108.00–110.99</td>
+        <td style="padding:8px 10px;color:#86efac;">OMEGA ELITE HIGH</td>
+        <td style="padding:8px 10px;color:#555540;">Platform badge · 5 chapters (v12)</td>
+      </tr>
+      <tr style="background:#0d1a0d;border-bottom:1px solid #1a3a1a;">
+        <td style="padding:8px 10px;color:#4ade80;">105.00–107.99</td>
+        <td style="padding:8px 10px;color:#4ade80;">OMEGA ELITE</td>
+        <td style="padding:8px 10px;color:#555540;">Platform badge · 37 chapters (v12)</td>
+      </tr>
+      <tr style="background:#0a0a0a;border-bottom:1px solid #3a3a2a;">
+        <td style="padding:8px 10px;color:#c9a84c;">103.00–104.99</td>
+        <td style="padding:8px 10px;color:#c9a84c;">OMEGA</td>
+        <td style="padding:8px 10px;color:#555540;">Base certification · 3 chapters</td>
+      </tr>
+      <tr style="background:#0a0a0a;border-bottom:1px solid #3a3a2a;">
+        <td style="padding:8px 10px;color:#9e9e8a;">100.00–102.99</td>
+        <td style="padding:8px 10px;color:#9e9e8a;">GRAY AREA</td>
+        <td style="padding:8px 10px;color:#555540;">Below certification · all artifact-penalized</td>
+      </tr>
+      <tr style="background:#0a0a0a;">
+        <td style="padding:8px 10px;color:#ef4444;">&lt;100.00</td>
+        <td style="padding:8px 10px;color:#ef4444;">BELOW</td>
+        <td style="padding:8px 10px;color:#555540;">Critical intervention required</td>
+      </tr>
+    </table>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#555540;margin-top:8px;font-style:italic;">
+      LitCentral platform badge "Omega Elite" = ≥105 · Manuscript target "Omega 111 Elite" = ≥111 · Gap from 107→111 = 4 real points of substantive work
+    </div>
+  </div>
+
+  <!-- TOOLS & WORKBOOK -->
+  <div>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;color:#c9a84c;text-transform:uppercase;padding:0 0 8px;border-bottom:1px solid #3a3a2a;margin-bottom:12px;">
+      Tools · Workbook · Prompt Architecture
+    </div>
+
+    <div style="margin-bottom:14px;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9e9e8a;margin-bottom:4px;">LITCENTRAL FORMULA</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#c9a84c;background:#0a0a0a;border:1px solid #3a3a2a;padding:8px;border-radius:3px;">
+        Ω = 71.443 + 0.124·CLS + 0.118·BIS + 0.089·SII + 0.067·MRF<br>
+        <span style="color:#555540;">R²=0.947 · α=0.938 · N=45 · seed=42</span>
+      </div>
+    </div>
+
+    <div style="margin-bottom:14px;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9e9e8a;margin-bottom:4px;">LEVER WEIGHTS (highest → lowest)</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#c9a84c;background:#0a0a0a;border:1px solid #3a3a2a;padding:8px;border-radius:3px;line-height:1.8;">
+        0.124 · CLS (Code-Switch Language) — highest lever<br>
+        0.118 · BIS (Behavioral Integrity Score)<br>
+        0.089 · SII (Sensory Immersion Index)<br>
+        0.067 · MRF (Motif Reference Field)<br>
+        <span style="color:#555540;">Each +1pt CLS ≈ +0.124Ω · Each +1pt SII ≈ +0.089Ω</span>
+      </div>
+    </div>
+
+    <div style="margin-bottom:14px;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9e9e8a;margin-bottom:4px;">TE360 FORMULA (editorial layer)</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9e9e8a;background:#0a0a0a;border:1px solid #3a3a2a;padding:8px;border-radius:3px;">
+        OMEGA = BR+CS+AS+TB+(EE×0.67)+(MP×0.67) · Max=160 · Elite=135–150
+      </div>
+    </div>
+
+    <div style="margin-bottom:14px;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9e9e8a;margin-bottom:4px;">AUDIT PROTOCOL</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9e9e8a;background:#0a0a0a;border:1px solid #3a3a2a;padding:8px;border-radius:3px;line-height:1.8;">
+        CR-1.0-DELTA — full pipeline stress test (6 JSON datasets)<br>
+        CR-2.0 — composite scoring with vector analysis<br>
+        SPSS v12 — authoritative component scores<br>
+        <span style="color:#555540;">Evidence weight: user_instruction > chapter_text > knowledge_base</span>
+      </div>
+    </div>
+
+    <div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9e9e8a;margin-bottom:4px;">SIX SENSORY CONSTANTS (all must be present)</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9e9e8a;background:#0a0a0a;border:1px solid #3a3a2a;padding:8px;border-radius:3px;line-height:1.8;">
+        <span style="color:#00ff41;">✓</span> Terminal Green #00AA00 (IBM 360 screen)<br>
+        <span style="color:#00ff41;">✓</span> 60Hz institutional hum<br>
+        <span style="color:#00ff41;">✓</span> 37°C life/death threshold<br>
+        <span style="color:#00ff41;">✓</span> 440Hz Musical A<br>
+        <span style="color:#c9a84c;">⚠ Jasmine+Napalm</span> — Ch.01 ABSENT, author decision<br>
+        <span style="color:#00ff41;">✓</span> Copper+Diesel / copper of old blood
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="section-divider"></div>
+
+<!-- FORMULA BAR -->
+<div class="formula-bar">
+  Ω = 71.443 + 0.124·CLS + 0.118·BIS + 0.089·SII + 0.067·MRF
+  <span>|</span>
+  R²=0.947  α=0.938
+  <span>|</span>
+  v12 · 45 chapters · 247,181 words
+  <span>|</span>
+  AUMER Foundation · EIN 99-0495658
+  <span>|</span>
+  Generated 2026-06-18
+</div>
+
+</body>
+</html>

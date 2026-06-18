@@ -12,15 +12,15 @@ import TruthEngine360Intel from "../components/jam/TruthEngine360Intel";
 import FieldOperations from "../components/jam/FieldOperations";
 
 const TABS = [
-  { id: "command", label: "Command Dashboard",       icon: Zap,       color: "gold"   },
-  { id: "border",  label: "Border Hub Map",          icon: Map,       color: "orange" },
-  { id: "crm",     label: "Stakeholder CRM",         icon: Users,     color: "teal"   },
-  { id: "social",  label: "Social Listening Grid",   icon: Radio,     color: "purple" },
-  { id: "spss",    label: "SPSS Behavioral Vectors", icon: BarChart2, color: "blue"   },
-  { id: "network", label: "Cross-Border Network",    icon: Network,   color: "gold"   },
-  { id: "media",   label: "Media + Podcast Pipeline",icon: Tv,        color: "orange" },
-  { id: "te360",   label: "TruthEngine360 Intel",    icon: Brain,     color: "teal"   },
-  { id: "field",   label: "Field Operations",        icon: Shield,    color: "red"    },
+  { id:"command",   label:"Command Dashboard",      icon: Zap,      color:"gold"   },
+  { id:"border",    label:"Border Hub Map",          icon: Map,      color:"orange" },
+  { id:"crm",       label:"Stakeholder CRM",         icon: Users,    color:"teal"   },
+  { id:"social",    label:"Social Listening Grid",   icon: Radio,    color:"purple" },
+  { id:"spss",      label:"SPSS Behavioral Vectors", icon: BarChart2,color:"blue"   },
+  { id:"network",   label:"Cross-Border Network",    icon: Network,  color:"gold"   },
+  { id:"media",     label:"Media + Podcast Pipeline",icon: Tv,       color:"orange" },
+  { id:"te360",     label:"TruthEngine360 Intel",    icon: Brain,    color:"teal"   },
+  { id:"field",     label:"Field Operations",        icon: Shield,   color:"red"    },
 ];
 
 export default function JAMSPage() {
@@ -28,9 +28,11 @@ export default function JAMSPage() {
   const [activeTab, setActiveTab] = useState("command");
 
   return (
-    <div className="jam-app min-h-screen bg-background font-mono">
+    <div className="min-h-screen bg-background font-mono">
+      {/* Brand stripe */}
       <div className="h-1 w-full bg-gradient-to-r from-gold via-teal to-purple" />
 
+      {/* Header */}
       <div className="border-b border-border bg-card/90 backdrop-blur-sm sticky top-0 z-30">
         <div className="max-w-[1440px] mx-auto px-4 md:px-6 h-14 flex items-center gap-4">
           <button onClick={() => navigate("/")} className="flex items-center gap-1.5 text-muted-foreground hover:text-foreground text-xs font-mono">
@@ -55,6 +57,7 @@ export default function JAMSPage() {
         </div>
       </div>
 
+      {/* Alert banner */}
       <div className="bg-gold/10 border-b border-gold/20 px-4 md:px-6 py-2">
         <div className="max-w-[1440px] mx-auto text-[9px] font-mono text-gold flex items-center gap-3">
           <span className="font-black">⚡ REVERSE-STRATEGY ALERT:</span>
@@ -62,22 +65,18 @@ export default function JAMSPage() {
         </div>
       </div>
 
+      {/* Tab nav */}
       <div className="border-b border-border bg-card/50">
         <div className="max-w-[1440px] mx-auto px-4 md:px-6">
           <div className="flex gap-1 overflow-x-auto py-2">
-            {TABS.map((t) => {
+            {TABS.map(t => {
               const Icon = t.icon;
-              const active = activeTab === t.id;
               return (
-                <button
-                  key={t.id}
-                  onClick={() => setActiveTab(t.id)}
+                <button key={t.id} onClick={() => setActiveTab(t.id)}
                   className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[10px] font-bold font-mono whitespace-nowrap transition-all ${
-                    active ? `bg-${t.color}/20 text-${t.color} border border-${t.color}/40` : "text-muted-foreground hover:text-foreground hover:bg-secondary/40"
-                  }`}
-                >
-                  <Icon className="w-3 h-3" />
-                  {t.label}
+                    activeTab === t.id ? `bg-${t.color}/20 text-${t.color} border border-${t.color}/40` : "text-muted-foreground hover:text-foreground hover:bg-secondary/40"
+                  }`}>
+                  <Icon className="w-3 h-3" />{t.label}
                 </button>
               );
             })}
@@ -85,6 +84,7 @@ export default function JAMSPage() {
         </div>
       </div>
 
+      {/* Content */}
       <main className="max-w-[1440px] mx-auto px-4 md:px-6 py-6">
         {activeTab === "command" && <CommandDashboard />}
         {activeTab === "border"  && <BorderHubMap />}

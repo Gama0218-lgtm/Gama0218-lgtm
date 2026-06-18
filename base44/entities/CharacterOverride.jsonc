@@ -1,0 +1,48 @@
+{
+  "name": "CharacterOverride",
+  "type": "object",
+  "properties": {
+    "character_id": {
+      "type": "string",
+      "description": "Matches the id field in CHARACTER_BIBLE (e.g. 'ramos', 'crawford')"
+    },
+    "name": {
+      "type": "string"
+    },
+    "arc": {
+      "type": "string",
+      "enum": [
+        "COMPLETE",
+        "INCOMPLETE",
+        "UPDATED"
+      ]
+    },
+    "note": {
+      "type": "string",
+      "description": "Key attributes / status note"
+    },
+    "voice_signature": {
+      "type": "string",
+      "description": "How this character speaks and thinks"
+    },
+    "agency_pattern": {
+      "type": "string",
+      "description": "How this character takes action"
+    },
+    "flag": {
+      "type": "boolean",
+      "description": "Whether this character has an active warning flag"
+    },
+    "clmoe": {
+      "type": "number",
+      "description": "CL-MoE drift score"
+    },
+    "color": {
+      "type": "string",
+      "description": "Display color (gold, red, purple, etc.)"
+    }
+  },
+  "required": [
+    "character_id"
+  ]
+}

@@ -1,52 +1,31 @@
-# Dependencies
-node_modules/
-package-lock.json
-yarn.lock
-
-# Build outputs
-dist/
-build/
-.next/
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-.DS_Store
-
-# Environment
+#env
 .env
-.env.local
-.env.*.local
+.env.*
 
 # Logs
+/logs
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
-# Temporary files
-*.tmp
-.cache/
+node_modules
+dist
+dist-ssr
+*.local
 
-# OS
-Thumbs.db
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
 .DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
 
-# Python
-__pycache__/
-*.py[cod]
-*.egg-info/
-.pytest_cache/
-.mypy_cache/
-.venv/
-venv/
-
-# Forensic pipeline artifacts (manuscript source and generated corpora are
-# kept out of git — the engine is committed; the manuscript is not).
-elasticsearch/config/config.yaml
-elasticsearch/data/
-*.docx
-manuscript_structured.json
-manuscript_with_embeddings.json
+.env
+.vite

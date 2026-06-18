@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Crucible Theorem · Generative Study</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+  <style>
+    :root {
+      --paper: #f7f4ee;
+      --paper-2: #efeae0;
+      --ink: #2b2620;
+      --ink-2: #5a544a;
+      --rule: #d8d1c2;
+      --ember: #c74634;
+      --indigo: #2f3e7a;
+      --gold: #c89b3c;
+      --highlight: #fff7e6;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0; padding: 0; height: 100%;
+      background:
+        radial-gradient(circle at 12% 0%, rgba(199,70,52,0.06), transparent 35%),
+        radial-gradient(circle at 88% 100%, rgba(47,62,122,0.07), transparent 38%),
+        linear-gradient(180deg, #f8f5ee 0%, #efeadf 100%);
+      color: var(--ink);
+      font-family: 'Poppins', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    .frame {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      min-height: 100vh;
+    }
+    aside.sidebar {
+      background: rgba(255, 252, 246, 0.86);
+      border-right: 1px solid var(--rule);
+      padding: 22px 22px 28px;
+      backdrop-filter: blur(8px);
+      position: sticky; top: 0; height: 100vh; overflow-y: auto;
+    }
+    .brand {
+      font-family: 'Lora', serif;
+      font-weight: 500;
+      font-style: italic;
+      font-size: 14px;
+      letter-spacing: 0.02em;
+      color: var(--ink-2);
+    }
+    .brand strong { font-family: 'Poppins', sans-serif; font-style: normal; font-weight: 700; color: var(--ink); letter-spacing: 0.02em; }
+    h1.title {
+      font-family: 'Lora', serif;
+      font-weight: 500;
+      font-size: 28px;
+      letter-spacing: -0.01em;
+      margin: 10px 0 6px;
+    }
+    p.kicker {
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ember);
+      font-weight: 600;
+      margin: 0;
+    }
+    p.lede {
+      font-family: 'Lora', serif;
+      color: var(--ink-2);
+      font-size: 13px;
+      line-height: 1.55;
+      margin: 8px 0 18px;
+      font-style: italic;
+    }
+    section.group { margin-top: 18px; }
+    section.group > .group-label {
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      color: var(--ink-2);
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    section.group > .group-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--rule);
+    }
+    .seed-row {
+      display: grid;
+      grid-template-columns: 1fr auto auto auto;
+      gap: 6px;
+      align-items: center;
+    }
+    .seed-display {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 18px;
+      color: var(--ink);
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      padding: 8px 10px;
+      letter-spacing: 0.02em;
+    }
+    .seed-display .label {
+      font-family: 'Poppins', sans-serif;
+      font-style: normal;
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      color: var(--ink-2);
+      display: block;
+    }
+    button.icon, button.btn, button.action {
+      font-family: 'Poppins', sans-serif;
+      border: 1px solid var(--rule);
+      background: var(--paper);
+      color: var(--ink);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.18s ease;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+    button.icon { padding: 8px 10px; }
+    button.icon:hover { background: var(--ember); color: var(--paper); border-color: var(--ember); }
+    .jump-row { display: grid; grid-template-columns: 1fr auto; gap: 6px; margin-top: 8px; }
+    .jump-row input {
+      font-family: 'Poppins', sans-serif;
+      border: 1px solid var(--rule);
+      background: var(--paper);
+      color: var(--ink);
+      padding: 8px 10px;
+      border-radius: 8px;
+      font-size: 12px;
+    }
+    .jump-row button { padding: 8px 12px; }
+    .control-group { margin-bottom: 14px; }
+    .control-group label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--ink-2);
+      margin-bottom: 4px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+    }
+    .control-group label .value-display {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      color: var(--ember);
+      font-size: 12px;
+    }
+    input[type="range"] {
+      width: 100%;
+      appearance: none;
+      height: 2px;
+      background: linear-gradient(90deg, var(--ember), var(--gold), var(--indigo));
+      border-radius: 999px;
+      outline: none;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      appearance: none;
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--paper);
+      border: 2px solid var(--ink);
+      cursor: pointer;
+      box-shadow: 0 1px 3px rgba(0,0,0,.15);
+    }
+    .color-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .color-pick { display: flex; flex-direction: column; gap: 4px; align-items: center; }
+    .color-pick label { font-size: 10px; color: var(--ink-2); letter-spacing: 0.1em; text-transform: uppercase; }
+    .color-pick input[type="color"] {
+      width: 100%;
+      height: 32px;
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      padding: 0;
+      cursor: pointer;
+      background: transparent;
+    }
+    .actions { display: grid; gap: 8px; grid-template-columns: 1fr 1fr; }
+    .actions .full { grid-column: span 2; }
+    button.action {
+      padding: 10px 12px;
+      font-weight: 600;
+    }
+    button.action.primary { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+    button.action.primary:hover { background: var(--ember); border-color: var(--ember); }
+    button.action:hover { background: var(--paper-2); }
+    main.stage {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 28px 24px;
+    }
+    .canvas-shell {
+      position: relative;
+      border: 1px solid var(--rule);
+      border-radius: 14px;
+      background: var(--paper);
+      box-shadow:
+        0 22px 60px rgba(43, 38, 32, 0.13),
+        inset 0 0 0 1px rgba(255,255,255,0.4);
+      padding: 18px;
+      max-width: 100%;
+    }
+    .stage-caption {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 12px;
+      font-family: 'Lora', serif;
+      font-style: italic;
+      color: var(--ink-2);
+      font-size: 12px;
+    }
+    .stage-caption .equation {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      color: var(--ink);
+    }
+    .stage-caption .equation .v { color: var(--ember); font-style: normal; }
+    canvas { display: block; border-radius: 8px; }
+    footer.meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 14px;
+      font-size: 11px;
+      color: var(--ink-2);
+      letter-spacing: 0.1em;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    .pill .dot { width: 7px; height: 7px; border-radius: 50%; }
+    @media (max-width: 900px) {
+      .frame { grid-template-columns: 1fr; }
+      aside.sidebar { position: static; height: auto; max-height: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <!-- ============================ SIDEBAR ============================ -->
+    <aside class="sidebar">
+      <div class="brand"><strong>Anthropic</strong> · generative study</div>
+      <p class="kicker">Crucible Theorem</p>
+      <h1 class="title">Order remembered through fire.</h1>
+      <p class="lede">
+        Forty-five points negotiate a coupled regression field until a hard-won
+        structure crystallizes from the heat. Every seed is a different proof.
+      </p>
+
+      <!-- SEED (FIXED) -->
+      <section class="group">
+        <div class="group-label">Seed</div>
+        <div class="seed-row">
+          <div class="seed-display"><span class="label">Current</span><span id="seed-display">42</span></div>
+          <button class="icon" id="prev-seed" title="Previous">‹</button>
+          <button class="icon" id="next-seed" title="Next">›</button>
+          <button class="icon" id="rand-seed" title="Random">⤳</button>
+        </div>
+        <div class="jump-row">
+          <input type="number" id="seed-input" placeholder="jump to seed…" min="1" />
+          <button class="icon" id="seed-go">Go</button>
+        </div>
+      </section>
+
+      <!-- PARAMETERS (VARIABLE) -->
+      <section class="group">
+        <div class="group-label">Parameters</div>
+
+        <div class="control-group">
+          <label>Particles (chapters)<span class="value-display" id="particles-value">45</span></label>
+          <input type="range" id="particles" min="9" max="180" step="1" value="45" />
+        </div>
+
+        <div class="control-group">
+          <label>α · intercept<span class="value-display" id="alpha-value">71.443</span></label>
+          <input type="range" id="alpha" min="40" max="100" step="0.001" value="71.443" />
+        </div>
+
+        <div class="control-group">
+          <label>β · CLS weight (coherence)<span class="value-display" id="beta-value">0.124</span></label>
+          <input type="range" id="beta" min="0" max="0.8" step="0.001" value="0.124" />
+        </div>
+
+        <div class="control-group">
+          <label>γ · BIS weight (intensity)<span class="value-display" id="gamma-value">0.118</span></label>
+          <input type="range" id="gamma" min="0" max="0.8" step="0.001" value="0.118" />
+        </div>
+
+        <div class="control-group">
+          <label>Field scale<span class="value-display" id="noise-value">0.0040</span></label>
+          <input type="range" id="noise" min="0.0005" max="0.0150" step="0.0001" value="0.0040" />
+        </div>
+
+        <div class="control-group">
+          <label>Trail decay<span class="value-display" id="decay-value">0.04</span></label>
+          <input type="range" id="decay" min="0.005" max="0.20" step="0.005" value="0.04" />
+        </div>
+
+        <div class="control-group">
+          <label>Step size<span class="value-display" id="step-value">1.4</span></label>
+          <input type="range" id="step" min="0.4" max="3.5" step="0.05" value="1.4" />
+        </div>
+
+        <div class="control-group">
+          <label>Sacred mountains<span class="value-display" id="mounts-value">3</span></label>
+          <input type="range" id="mounts" min="0" max="7" step="1" value="3" />
+        </div>
+
+        <div class="control-group">
+          <label>Boundary glow<span class="value-display" id="glow-value">0.55</span></label>
+          <input type="range" id="glow" min="0" max="1" step="0.01" value="0.55" />
+        </div>
+      </section>
+
+      <!-- COLORS (VARIABLE) -->
+      <section class="group">
+        <div class="group-label">Palette</div>
+        <div class="color-row">
+          <div class="color-pick">
+            <label>Ember</label>
+            <input type="color" id="color-ember" value="#c74634" />
+          </div>
+          <div class="color-pick">
+            <label>Indigo</label>
+            <input type="color" id="color-indigo" value="#2f3e7a" />
+          </div>
+          <div class="color-pick">
+            <label>Gold</label>
+            <input type="color" id="color-gold" value="#c89b3c" />
+          </div>
+        </div>
+      </section>
+
+      <!-- ACTIONS (FIXED) -->
+      <section class="group">
+        <div class="group-label">Actions</div>
+        <div class="actions">
+          <button class="action primary" id="regen">Regenerate</button>
+          <button class="action" id="reset">Reset</button>
+          <button class="action full" id="download">Download PNG</button>
+        </div>
+      </section>
+    </aside>
+
+    <!-- ============================ STAGE ============================== -->
+    <main class="stage">
+      <div class="canvas-shell">
+        <div class="stage-caption">
+          <span>Plate <span id="plate-num">042</span> · forty-five proofs</span>
+          <span class="equation">Ω = <span class="v" id="cap-alpha">71.443</span> + <span class="v" id="cap-beta">0.124</span>·CLS + <span class="v" id="cap-gamma">0.118</span>·BIS</span>
+        </div>
+        <div id="canvas-container"></div>
+        <footer class="meta">
+          <span class="pill"><span class="dot" style="background:var(--ember)"></span>I · Revelation</span>
+          <span class="pill"><span class="dot" style="background:var(--gold)"></span>II · Ordeal</span>
+          <span class="pill"><span class="dot" style="background:var(--indigo)"></span>III · Return</span>
+        </footer>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // ====================== Crucible Theorem ==========================
+    // Forty-five charged points negotiating a coupled regression field.
+    // Two Perlin textures stand in for CLS (coherence) and BIS (intensity);
+    // their weighted sum + intercept becomes the scalar potential Ω whose
+    // gradient drives every particle. The act bands re-tint the trails as
+    // particles cross from I (Revelation) → II (Ordeal) → III (Return).
+
+    const DEFAULTS = {
+      seed: 42,
+      particles: 45,
+      alpha: 71.443,
+      beta:  0.124,
+      gamma: 0.118,
+      noise: 0.0040,
+      decay: 0.04,
+      step:  1.4,
+      mounts: 3,
+      glow:  0.55,
+      colorEmber:  "#c74634",
+      colorIndigo: "#2f3e7a",
+      colorGold:   "#c89b3c",
+    };
+
+    let params = { ...DEFAULTS };
+
+    let particles = [];
+    let mountains = [];   // sacred-mountain attractors
+    let canvasSize = 900;
+    let lastSettleAt = 0;
+
+    function setup() {
+      const shell = document.querySelector('.canvas-shell');
+      const maxW = Math.min(shell.clientWidth - 36, 920);
+      canvasSize = Math.max(540, Math.floor(maxW));
+      const c = createCanvas(canvasSize, canvasSize);
+      c.parent('canvas-container');
+      pixelDensity(window.devicePixelRatio || 1);
+      initSystem();
+    }
+
+    function windowResized() {
+      const shell = document.querySelector('.canvas-shell');
+      const maxW = Math.min(shell.clientWidth - 36, 920);
+      const next = Math.max(540, Math.floor(maxW));
+      if (Math.abs(next - canvasSize) > 8) {
+        canvasSize = next;
+        resizeCanvas(canvasSize, canvasSize);
+        initSystem();
+      }
+    }
+
+    function initSystem() {
+      randomSeed(params.seed);
+      noiseSeed(params.seed);
+      lastSettleAt = millis();
+
+      // Lay the page — paper underwash, soft vignette
+      background(247, 244, 238);
+      drawVignette();
+      drawActBands();
+      drawScaffold();
+
+      // Sacred mountains — focal attractors (drawn faintly, function as
+      // gentle pull-points on the field)
+      mountains = [];
+      for (let i = 0; i < params.mounts; i++) {
+        const t = (i + 0.5) / Math.max(1, params.mounts);
+        mountains.push({
+          x: canvasSize * (0.18 + 0.64 * t),
+          y: canvasSize * (0.30 + 0.40 * sin(t * TWO_PI + params.seed * 0.31)),
+          r: canvasSize * (0.07 + 0.05 * noise(i * 0.7, params.seed * 0.13)),
+          phase: random(TWO_PI),
+        });
+      }
+      drawMountains();
+
+      // Particles — initialized on a faint canonical ring so the system
+      // feels deliberate, then released into the crucible
+      particles = [];
+      const cx = canvasSize / 2;
+      const cy = canvasSize / 2;
+      const r0 = canvasSize * 0.32;
+      for (let i = 0; i < params.particles; i++) {
+        const a = (i / params.particles) * TWO_PI + (params.seed % 360) * 0.001;
+        particles.push({
+          x: cx + r0 * cos(a),
+          y: cy + r0 * sin(a),
+          px: cx + r0 * cos(a),
+          py: cy + r0 * sin(a),
+          phase: i,
+          life: 1.0,
+        });
+      }
+    }
+
+    function draw() {
+      // Subtle trail decay — paper "breathes"
+      noStroke();
+      fill(247, 244, 238, 255 * params.decay);
+      rect(0, 0, canvasSize, canvasSize);
+
+      // Re-paint mountain glow softly so they remain a presence
+      drawMountains(0.06);
+
+      const ember  = color(params.colorEmber);
+      const indigo = color(params.colorIndigo);
+      const gold   = color(params.colorGold);
+
+      for (let p of particles) {
+        const force = sampleField(p.x, p.y);
+        p.px = p.x; p.py = p.y;
+        p.x += force.fx * params.step;
+        p.y += force.fy * params.step;
+
+        // Edge wrap with a slight inward pull so particles stay in the vessel
+        if (p.x < 12 || p.x > canvasSize - 12 || p.y < 12 || p.y > canvasSize - 12) {
+          const cx = canvasSize / 2, cy = canvasSize / 2;
+          p.x = cx + (p.x - cx) * 0.94;
+          p.y = cy + (p.y - cy) * 0.94;
+          p.px = p.x; p.py = p.y;
+        }
+
+        // Trail color from the field: blend ember/gold/indigo by potential
+        const pot = force.pot; // ~0..1 normalized
+        let c;
+        if (pot < 0.45) {
+          c = lerpColor(ember, gold, map(pot, 0, 0.45, 0, 1));
+        } else {
+          c = lerpColor(gold, indigo, map(pot, 0.45, 1.0, 0, 1));
+        }
+        const speed = dist(p.x, p.y, p.px, p.py);
+        const a = constrain(map(speed, 0, params.step * 1.6, 60, 220), 60, 220);
+        stroke(red(c), green(c), blue(c), a);
+        strokeWeight(map(pot, 0, 1, 0.6, 1.6));
+        line(p.px, p.py, p.x, p.y);
+
+        // Boundary-crossing flash — when a particle moves between act bands
+        const actPrev = actAt(p.px);
+        const actNow  = actAt(p.x);
+        if (actPrev !== actNow && params.glow > 0.001) {
+          noStroke();
+          const flash = color(255, 247, 230, 220 * params.glow);
+          fill(flash);
+          circle(p.x, p.y, 4 + 3 * params.glow);
+          // Faint mark on the boundary itself
+          stroke(255, 247, 230, 90 * params.glow);
+          strokeWeight(0.7);
+          const bx = canvasSize * (actNow > actPrev ? actBoundaryRight(actPrev) : actBoundaryRight(actNow));
+          line(bx, p.y - 5, bx, p.y + 5);
+        }
+      }
+
+      // Once a generation, lightly re-emphasize the scaffold lines so the
+      // sacred geometry never fully disappears under the trails
+      if ((frameCount % 240) === 0) drawScaffold(0.04);
+    }
+
+    // The crucible: Ω(x,y) = α + β·CLS(x,y) + γ·BIS(x,y), gradient → force
+    function sampleField(x, y) {
+      const ns = params.noise;
+      const cls = noise(x * ns,        y * ns,        0.000);  // coherence layer
+      const bis = noise(x * ns * 1.7,  y * ns * 1.7,  17.31);  // intensity layer
+      // Normalized potential ~0..1 from the regression
+      const raw = params.alpha * 0.01 + params.beta * cls + params.gamma * bis;
+      // Normalize against the *maximum possible* raw so colors are stable
+      const rawMax = params.alpha * 0.01 + params.beta + params.gamma + 1e-6;
+      const pot = constrain(raw / rawMax, 0, 1);
+
+      // Gradient — finite difference of the SAME blended field
+      const eps = 1.0;
+      const f = (xx, yy) => {
+        const a = noise(xx * ns,       yy * ns,       0.000);
+        const b = noise(xx * ns * 1.7, yy * ns * 1.7, 17.31);
+        return params.beta * a + params.gamma * b;
+      };
+      const dfdx = f(x + eps, y) - f(x - eps, y);
+      const dfdy = f(x, y + eps) - f(x, y - eps);
+
+      // Rotate the gradient 90° → vector field that follows isolines
+      // (this is what produces the looping, "field-walking" arcs)
+      let fx = -dfdy;
+      let fy =  dfdx;
+
+      // Mountain pull — slight inward attractors so particles re-center
+      for (const m of mountains) {
+        const dx = m.x - x, dy = m.y - y;
+        const d2 = dx*dx + dy*dy + 600;
+        const k = (m.r * m.r) / d2 * 0.45;
+        fx += dx * k * 0.00007;
+        fy += dy * k * 0.00007;
+      }
+
+      // Normalize → unit force * field magnitude
+      const mag = sqrt(fx*fx + fy*fy) + 1e-6;
+      const speed = map(pot, 0, 1, 0.6, 1.4);
+      return { fx: (fx / mag) * speed, fy: (fy / mag) * speed, pot };
+    }
+
+    // ----- Acts: three vertical bands across the canvas -----
+    // I (Revelation): 0   – 0.2
+    // II (Ordeal):    0.2 – 0.86
+    // III (Return):   0.86– 1.0
+    function actAt(x) {
+      const t = x / canvasSize;
+      if (t < 0.20) return 1;
+      if (t < 0.86) return 2;
+      return 3;
+    }
+    function actBoundaryRight(act) {
+      if (act === 1) return 0.20;
+      if (act === 2) return 0.86;
+      return 1.0;
+    }
+
+    // ----- Underwash drawing -----
+    function drawVignette() {
+      const cx = canvasSize / 2, cy = canvasSize / 2;
+      for (let i = 0; i < 30; i++) {
+        const r = (canvasSize * 0.7) * (1 - i / 30);
+        const a = 4;
+        noStroke();
+        fill(43, 38, 32, a);
+        circle(cx, cy, r * 2);
+      }
+    }
+    function drawActBands() {
+      noStroke();
+      fill(199, 70, 52, 8); rect(0, 0, canvasSize * 0.20, canvasSize);                       // Act I — ember
+      fill(200, 155, 60, 6); rect(canvasSize * 0.20, 0, canvasSize * 0.66, canvasSize);       // Act II — gold
+      fill(47, 62, 122, 8); rect(canvasSize * 0.86, 0, canvasSize * 0.14, canvasSize);        // Act III — indigo
+      // The two boundary lines — drawn once into the underwash
+      stroke(43, 38, 32, 60);
+      strokeWeight(0.6);
+      line(canvasSize * 0.20, 0, canvasSize * 0.20, canvasSize);
+      line(canvasSize * 0.86, 0, canvasSize * 0.86, canvasSize);
+    }
+    function drawScaffold(opacity = 0.10) {
+      // Faint sacred ring + 45 chapter ticks around it
+      push();
+      translate(canvasSize / 2, canvasSize / 2);
+      noFill();
+      stroke(43, 38, 32, 255 * opacity);
+      strokeWeight(0.5);
+      circle(0, 0, canvasSize * 0.64);
+      circle(0, 0, canvasSize * 0.40);
+      for (let i = 0; i < 45; i++) {
+        const a = (i / 45) * TWO_PI;
+        const r1 = canvasSize * 0.32;
+        const r2 = r1 + (i % 5 === 0 ? canvasSize * 0.012 : canvasSize * 0.006);
+        line(r1 * cos(a), r1 * sin(a), r2 * cos(a), r2 * sin(a));
+      }
+      pop();
+    }
+    function drawMountains(opacity = 0.18) {
+      noFill();
+      for (const m of mountains) {
+        for (let k = 0; k < 4; k++) {
+          stroke(200, 155, 60, 255 * opacity * (1 - k * 0.22));
+          strokeWeight(0.6);
+          circle(m.x, m.y, m.r * (1 + k * 0.5));
+        }
+      }
+    }
+
+    // ====================== UI WIRING =================================
+    function $(id) { return document.getElementById(id); }
+
+    function syncDisplays() {
+      $('seed-display').textContent = params.seed;
+      $('plate-num').textContent = String(params.seed).padStart(3, '0');
+      $('particles-value').textContent = params.particles;
+      $('alpha-value').textContent = params.alpha.toFixed(3);
+      $('beta-value').textContent  = params.beta.toFixed(3);
+      $('gamma-value').textContent = params.gamma.toFixed(3);
+      $('noise-value').textContent = params.noise.toFixed(4);
+      $('decay-value').textContent = params.decay.toFixed(2);
+      $('step-value').textContent  = params.step.toFixed(2);
+      $('mounts-value').textContent= params.mounts;
+      $('glow-value').textContent  = params.glow.toFixed(2);
+      $('cap-alpha').textContent = params.alpha.toFixed(3);
+      $('cap-beta').textContent  = params.beta.toFixed(3);
+      $('cap-gamma').textContent = params.gamma.toFixed(3);
+    }
+
+    function bindSlider(id, key, parse = parseFloat) {
+      const el = $(id);
+      el.value = params[key];
+      el.addEventListener('input', () => {
+        params[key] = parse(el.value);
+        syncDisplays();
+      });
+      el.addEventListener('change', () => initSystem());
+    }
+    function bindColor(id, key) {
+      const el = $(id);
+      el.value = params[key];
+      el.addEventListener('input', () => { params[key] = el.value; });
+    }
+
+    function regenerate() { initSystem(); }
+    function setSeed(s)   { params.seed = Math.max(1, Math.floor(s)); syncDisplays(); initSystem(); }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      // Sliders
+      bindSlider('particles', 'particles', (v) => parseInt(v, 10));
+      bindSlider('alpha', 'alpha');
+      bindSlider('beta',  'beta');
+      bindSlider('gamma', 'gamma');
+      bindSlider('noise', 'noise');
+      bindSlider('decay', 'decay');
+      bindSlider('step',  'step');
+      bindSlider('mounts','mounts', (v) => parseInt(v, 10));
+      bindSlider('glow',  'glow');
+
+      // Colors
+      bindColor('color-ember',  'colorEmber');
+      bindColor('color-indigo', 'colorIndigo');
+      bindColor('color-gold',   'colorGold');
+
+      // Seed
+      $('prev-seed').addEventListener('click', () => setSeed(params.seed - 1));
+      $('next-seed').addEventListener('click', () => setSeed(params.seed + 1));
+      $('rand-seed').addEventListener('click', () => setSeed(Math.floor(Math.random() * 9999) + 1));
+      $('seed-go').addEventListener('click', () => {
+        const v = parseInt($('seed-input').value, 10);
+        if (!isNaN(v)) setSeed(v);
+      });
+      $('seed-input').addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') $('seed-go').click();
+      });
+
+      // Actions
+      $('regen').addEventListener('click', regenerate);
+      $('reset').addEventListener('click', () => {
+        params = { ...DEFAULTS };
+        // Reset slider DOM values
+        $('particles').value = params.particles;
+        $('alpha').value     = params.alpha;
+        $('beta').value      = params.beta;
+        $('gamma').value     = params.gamma;
+        $('noise').value     = params.noise;
+        $('decay').value     = params.decay;
+        $('step').value      = params.step;
+        $('mounts').value    = params.mounts;
+        $('glow').value      = params.glow;
+        $('color-ember').value  = params.colorEmber;
+        $('color-indigo').value = params.colorIndigo;
+        $('color-gold').value   = params.colorGold;
+        syncDisplays();
+        initSystem();
+      });
+      $('download').addEventListener('click', () => {
+        const name = `crucible-theorem-plate-${String(params.seed).padStart(3,'0')}.png`;
+        saveCanvas(name, 'png');
+      });
+
+      syncDisplays();
+    });
+  </script>
+</body>
+</html>

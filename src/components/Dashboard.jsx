@@ -10,6 +10,7 @@ import GateZeroTab from "./GateZeroTab";
 import ExternalSourcesTab from "./ExternalSourcesTab";
 import RemediationTasksTab from "./RemediationTasksTab";
 import BugFixRoadmapTab from "./BugFixRoadmapTab";
+import OmegaCLSTrendTab from "./OmegaCLSTrendTab";
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState("gates");
@@ -104,6 +105,7 @@ export default function Dashboard() {
         {activeTab === "sources" && <ExternalSourcesTab manuscript={manuscript} />}
         {activeTab === "tasks" && <RemediationTasksTab manuscript={manuscript} />}
         {activeTab === "roadmap" && <BugFixRoadmapTab manuscript={manuscript} />}
+        {activeTab === "omegacls" && <OmegaCLSTrendTab />}
       </div>
 
       <footer className="dashboard-footer">

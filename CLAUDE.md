@@ -163,21 +163,17 @@ Reverse-engineered from eight years of jury citations. Every winner maps to five
 
 ## CH.01 FINAL LINES — PERMANENTLY LOCKED
 
-> George did not find peace that night. He found orientation. He found the ability to hold what he had carried for fifty years without going under.
+> * * *
 >
-> He found north.
->
-> That was enough to stand on. That was the beginning of the next sentence. He stayed in the dark and breathed, and the dark did not ask him to be anything other than what he was: a man with a debt, still standing, still present, still accountable to the names.
->
-> Still here.
+> Cumplido.
 
-These are the canonical final lines of Chapter 1. They are not editable.
+This is the canonical final word of Chapter 1. It is not editable.
 
-**Register check:** orientation / north / accountable to the names / still here — all analytical register, all load-bearing. No generic mysticism. This is correct.
+**Register check:** *Cumplido* — Spanish, formal, ceremonial. "Accomplished." "Done." The last word of a dispatch. The transmission is complete, the debt acknowledged, the record set. This is the Mouth Portal's closing register — not survivor's grammar but archivist's grammar. The chapter ends not with the body ("still here") but with the act: the transmission delivered.
 
-**What this means:** Liberation as orientation, not resolution. George does not find peace. He finds the ability to hold the weight and remain standing. "Still here" = present, accountable, alive — not healed.
+**What this means:** The chapter is a transmission. *Cumplido* marks its completion — the witness has done what a witness does. The record exists. The names are in the ledger correctly. The erased have been restored. The debt is not paid but it is acknowledged, formally, in the only register that counts.
 
-**History:** Author-confirmed canonical. Do not change under any circumstances.
+**History:** Author-confirmed canonical June 18, 2026. Do not change under any circumstances.
 
 ---
 

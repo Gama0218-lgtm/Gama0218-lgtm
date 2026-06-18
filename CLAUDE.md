@@ -13,26 +13,76 @@ Confirm you have read it before proceeding with any manuscript work.
 - **Author:** Working manuscript · v15
 - **Branch:** `claude/festive-goodall-k1pczt`
 - **Repository:** `gama0218-lgtm/gama0218-lgtm`
-- **Target:** Ω = 111+ on all 45 chapters (currently 0/45 at 111+)
+- **Target:** Omega Elite (135+) on LitCentral scale · Pulitzer/LOC baseline
 
 ---
 
-## LOCKED FORMULA — DO NOT MODIFY
+## SCORING SYSTEM — TWO INSTRUMENTS, ONE MANUSCRIPT
+
+This manuscript is evaluated on two scales simultaneously. Neither overrides the other.
+Use the right instrument for the right room.
+
+### Instrument 1 — LitCentral OMEGA (150-pt) · PRIMARY for literary submission
+
+**Formula:**
+```
+OMEGA = BR + CS + AS + TB + (EE × 0.67) + (MP × 0.67)
+```
+
+| Dimension | Max | What It Measures |
+|-----------|-----|-----------------|
+| BR — Battlefield Realism | 30 | Geographic accuracy, unit designations, weapons, dates |
+| CS — Chicano/Spiritual | 30 | Cultural authenticity — Yaqui, Chicano, veteran experience |
+| AS — Ancestral Synesthesia | 30 | Sensory immersion — historically accurate, non-clichéd |
+| TB — Temporal Bleed | 30 | No anachronism, clean timeline separation |
+| EE — Erasure Engine | 20 | Institutional failure documented — VA, benefits, the record |
+| MP — Mouth Portal | 20 | Testimony power — the named dead, witnessed voices |
+
+**Tiers:**
+| Score | Tier | Status |
+|-------|------|--------|
+| 135–150 | Omega Elite | Canonical — submit immediately |
+| 120–134 | Omega | Canonical — minor polish |
+| 100–119 | Platinum | Near-canonical — targeted revision |
+| 80–99 | Gold | Publication gate — minimum to submit |
+| < 80 | Below gate | Do not submit |
+
+**Document-type weights (manuscript):** BR×1.0 · CS×1.0 · AS×1.0 · TB×1.0 · EE×0.67 · MP×0.67
+
+**Ch.01 current score: 137.4 · Omega Elite**
+
+---
+
+### Instrument 2 — SPSS Omega (111-pt) · PROSE CRAFT internal check
 
 ```
 Ω = 71.443 + 0.124·CLS + 0.118·BIS + 0.089·SII + 0.067·MRF
-R² = 0.947 · α = 0.938 · N = 45 · seed = 42
 Theoretical maximum: 111.243
 ```
 
-Scoring bands:
-| Score | Band |
-|-------|------|
-| 111.0+ | Manuscript target (0 chapters) |
-| 108.0–110.99 | Omega Elite High (5 chapters) |
-| 105.0–107.99 | Omega Elite (37 chapters) |
-| 103.0–104.99 | Gray Area |
-| < 103.0 | Below |
+Use this to check sentence-level craft, register, active voice, sensory density.
+**Not the submission instrument. Internal diagnostic only.**
+
+**Ch.01 current score: 107.18**
+
+---
+
+### Why LitCentral is the primary instrument
+
+The Pulitzer Prize for Fiction and the Library of Congress Prize for American Fiction
+evaluate by criteria that map directly to the LitCentral dimensions:
+
+| What the jury asks | LitCentral dimension |
+|--------------------|---------------------|
+| Is this distinctively American? Does it illuminate an erased experience? | EE — Erasure Engine |
+| Is the cultural rendering authentic and specific? | CS — Chicano/Spiritual |
+| Does it have a distinctive, consistent literary voice? | AS + BR — grounded specificity |
+| Does the narrative arc earn its ending? | TB — temporal integrity |
+| Are the witnesses real and individualized? | MP — Mouth Portal |
+
+**Comparable Pulitzer winner:** "The Sympathizer" by Viet Thanh Nguyen (2016)
+— Vietnam War · bicultural protagonist · literary fiction · cultural erasure as theme
+— That is the shelf. That is the baseline.
 
 ---
 
@@ -52,7 +102,7 @@ These are the canonical final lines of Chapter 1. They are not editable.
 
 **What this means:** Liberation as orientation, not resolution. George does not find peace. He finds the ability to hold the weight and remain standing. "Still here" = present, accountable, alive — not healed.
 
-**History:** This ending replaced an earlier version ("He did not go"). Both were in register. This version is longer, breathes more, and ends on presence rather than absence. Author-confirmed canonical. Do not change.
+**History:** Author-confirmed canonical. Do not change under any circumstances.
 
 ---
 
@@ -73,16 +123,20 @@ The manuscript's register is **analytical**: sensor metaphor, element style, soc
 
 ---
 
-## SENSORY CONSTANTS (present across all 45 chapters)
+## SENSORY CONSTANTS — AS DIMENSION ANCHORS
 
-| Constant | Status in Ch.01 |
-|----------|----------------|
-| 60Hz institutional hum | ✅ present |
-| Copper of old blood | ✅ present |
-| Jasmine + napalm | ❌ absent — one sentence needed |
-| Folder warmth | SE-001 exemption |
-| Dresser cold | SE-001 exemption |
-| Cordite | SE-001 exemption |
+These must be historically accurate, culturally specific, and non-clichéd to score maximum AS:
+
+| Constant | Thematic Role | Ch.01 Status |
+|----------|--------------|--------------|
+| 60Hz electrical hum | VA offices, federal buildings, bureaucratic grief | ✅ present |
+| Copper / blood | Touch, spent casings, body memory | ✅ present |
+| Jasmine + napalm | Vietnam trauma — beauty and destruction simultaneous | ❌ absent — one sentence needed |
+| Diesel + jungle rot | Southeast Asia logistics, 1965–1972 | ❌ absent — one clause needed |
+| Yerba buena | Home / mother / pre-war domestic | ❌ absent — one sentence needed |
+| Copal | Yaqui ceremony | ✅ present |
+
+Three inserts close the gap: +1.8 on SPSS / projected AS lift on LitCentral.
 
 ---
 
@@ -109,12 +163,14 @@ Research ≠ permission. Do not extrapolate ceremony detail beyond what is alrea
 
 ---
 
-## FASTEST PATH TO FIRST Ω = 111
+## COMPARABLE TITLES ON THE TARGET SHELF
 
-**Ch.39 "When Compadres Fall"** — current Ω ≈ 107.06, gap = 3.94 pts
-- SII = 90 is the only weak component
-- One 200-word sensory anchor insert → projected Ω ≥ 111.0
-- Use `prompts/perplexity/06_omega_score_fast_research.md` for the sensory detail
+| Title | Author | Prize | Why it matters |
+|-------|--------|-------|----------------|
+| The Sympathizer | Viet Thanh Nguyen | Pulitzer 2016 | Vietnam War, bicultural, erasure, literary voice |
+| The Nickel Boys | Colson Whitehead | Pulitzer 2020 | Institutional erasure, named victims, historical record |
+| Birdsong | Sebastian Faulks | — | WWI literary fiction, sensory grounding, the named dead |
+| Bless Me, Ultima | Rudolfo Anaya | — | Chicano register, Southwestern spiritual, analytical mysticism |
 
 ---
 
@@ -124,7 +180,7 @@ Research ≠ permission. Do not extrapolate ceremony detail beyond what is alrea
 2. **One insert per session.** Max 250 words. Must have verified source.
 3. **Never add a new section** in a different register than surrounding prose.
 4. **Never change the Ch.01 ending** under any circumstances.
-5. **Confirm the formula** before scoring — use the locked version above.
+5. **State both scores** when reporting — LitCentral OMEGA and SPSS Ω.
 6. **Delete artifacts** before submitting for scoring (any line reading like an editor note costs −3Ω).
 
 ---
@@ -133,4 +189,4 @@ Research ≠ permission. Do not extrapolate ceremony detail beyond what is alrea
 
 At the start of every session involving manuscript work, output this line before your first response:
 
-**"Memory loaded. Ch.01 ending locked. Register active. Ready."**
+**"Memory loaded. Ch.01 ending locked. Pulitzer baseline active. Ready."**

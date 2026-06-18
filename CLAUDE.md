@@ -173,20 +173,38 @@ The manuscript's register is **analytical**: sensor metaphor, element style, soc
 
 ---
 
-## SENSORY CONSTANTS — AS DIMENSION ANCHORS
+## SENSORY CONSTANTS — SANDBOX-VERIFIED STATUS (June 18, 2026)
 
-These must be historically accurate, culturally specific, and non-clichéd to score maximum AS:
+Direct text analysis of 245,574 words confirmed. The "gap" theory is revised.
 
-| Constant | Thematic Role | Ch.01 Status |
-|----------|--------------|--------------|
-| 60Hz electrical hum | VA offices, federal buildings, bureaucratic grief | ✅ present |
-| Copper / blood | Touch, spent casings, body memory | ✅ present |
-| Jasmine + napalm | Vietnam trauma — beauty and destruction simultaneous | ❌ absent — one sentence needed |
-| Diesel + jungle rot | Southeast Asia logistics, 1965–1972 | ❌ absent — one clause needed |
-| Yerba buena | Home / mother / pre-war domestic | ❌ absent — one sentence needed |
-| Copal | Yaqui ceremony | ✅ present |
+| Constant | Manuscript Count | Status | Insert Strategy |
+|----------|-----------------|--------|-----------------|
+| 60Hz electrical hum | 26 | ✅ confirmed — 12+ chapters | None needed |
+| Copper / blood | 117 | ✅ confirmed — 43/46 chapters | None needed |
+| Copal | 16 | ✅ confirmed — Ch01, Ch03, Ch12, Ch39... | None needed |
+| Jasmine + napalm | 57 / 40 | ⚠ PRESENT — not absent | Concentration insert (Ch.39, Ch.01) |
+| Diesel + jungle rot | 35 | ⚠ PRESENT — not absent | Concentration insert (Ch.01 convoy) |
+| Yerba buena | 1 | ❌ TRUE GAP — medical scene only | Priority insert (Ch.01 Phoenix/granddaughter) |
 
-Three inserts close the gap: +1.8 on SPSS / projected AS lift on LitCentral.
+**CRITICAL REFRAME:** Jasmine, napalm, and diesel are NOT absent from the manuscript. They appear 57, 40, and 35 times respectively. R=86 is not because constants are missing — it is because they are **diffused across 40+ chapters** rather than concentrated in the 6–8 chapters a jury reader weighs most heavily.
+
+**The three inserts are density anchors, not gap-fills.** This is a stronger editorial argument.
+
+**Yerba buena is the only genuine gap** (1 occurrence, in a medical scene). The Ch.01 Phoenix/granddaughter insert is the highest-value placement.
+
+---
+
+## REVISED EXECUTION SEQUENCE (Post-Sandbox)
+
+| Priority | Action | Rationale |
+|----------|--------|-----------|
+| **1 — URGENT** | DUP-001: Ch17↔Ch18 resolution | 55.9% 15-word chunk overlap confirmed (~3,365 duplicate words). Structural integrity issue. Jury reads Ch17 then Ch18 as same scene twice. Fix before any submission. |
+| 2 | Yerba buena — Ch.01 Phoenix/granddaughter | Only true gap constant (1 occurrence total) |
+| 3 | Jasmine-napalm concentration — Ch.39 fire sequence | Anchors existing constant into primary narrative moment |
+| 4 | Diesel-sweat — Ch.01 convoy arrival | Concentrates existing constant into opening frame |
+| 5 | Rhythm audit — Ch45, Ch36, Ch16 | Worst passive chapters (2.0%, 1.8%, 1.5%) → V → 92? |
+
+**Post-completion target:** ~91.2 PBI · ~111 Ω · ~141 LitCentral
 
 ---
 

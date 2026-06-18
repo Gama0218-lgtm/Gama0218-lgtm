@@ -15,6 +15,7 @@ research. Use **Writing** focus mode for literary/genre research.
 | 04 | `04_omega_score_publishing.md` | Publishing research — agents, presses, market comps, sensitivity readers |
 | 05 | `05_sensory_detail_verification.md` | Verifying specific sensory details — jasmine/napalm, cordite, copal, 60Hz, terrain |
 | 06 | `06_omega_score_fast_research.md` | **FASTEST** — 30-min pre-revision targeted lookup for any single chapter |
+| 07 | `07_insert_anchor_research.md` | **Paired with `/insert-anchor`** — verify one sensory detail before writing an insert |
 
 ---
 

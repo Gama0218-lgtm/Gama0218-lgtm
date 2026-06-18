@@ -1,11 +1,18 @@
-# Perplexity Prompt Library — SGT George Ramos: The Mathematics of Vietnam
+# Perplexity Prompt Library — TWO NOVELS
 
-Copy any prompt below into Perplexity. Use **Academic** focus mode for historical/cultural
-research. Use **Writing** focus mode for literary/genre research.
+## ⚠️ TWO SEPARATE MANUSCRIPTS — TWO SEPARATE PROTOCOLS
+
+| Novel | Subject | Scoring Framework | Prompt |
+|-------|---------|------------------|--------|
+| **SGT George Ramos: The Mathematics of Vietnam** | Chicano Vietnam War literary fiction | BR/CS/AS/TB/EE/MP | Prompts 01–07 |
+| **Alba Voice** | Alba Terminel de Arce (the author's mother) | MV/GS/AS/TS/AE/FP | **Prompt 08** |
+
+**DO NOT mix these frameworks.** If asked to audit Alba Voice, use Prompt 08 only.
+If asked to audit SGT Ramos, use Prompts 01–07. When in doubt, ask the user to confirm which novel.
 
 ---
 
-## PROMPT FILES
+## RAMOS PROMPTS (SGT George Ramos: The Mathematics of Vietnam)
 
 | # | File | Use When |
 |---|------|----------|
@@ -16,6 +23,14 @@ research. Use **Writing** focus mode for literary/genre research.
 | 05 | `05_sensory_detail_verification.md` | Verifying specific sensory details — jasmine/napalm, cordite, copal, 60Hz, terrain |
 | 06 | `06_omega_score_fast_research.md` | **FASTEST** — 30-min pre-revision targeted lookup for any single chapter |
 | 07 | `07_insert_anchor_research.md` | **Paired with `/insert-anchor`** — verify one sensory detail before writing an insert |
+
+---
+
+## ALBA VOICE PROMPTS (Alba Terminel de Arce novel)
+
+| # | File | Use When |
+|---|------|----------|
+| 08 | `08_alba_voice_audit.md` | **ANY Alba Voice chapter audit** — different scoring framework, different sensory constants, different governance rules. USE THIS FILE ONLY for Alba Voice. Do NOT use Prompts 01–07 for Alba Voice. |
 
 ---
 

@@ -247,13 +247,27 @@ He knew where north was.
 
 The earth under his knees was cold and dry and specific — this earth, this plaza, this altitude, the particular mineral compound of eight-thousand-foot desert ground that had been here before and would be here after. The fire breathed in the dark. A hand on his back rose and fell with his breath.
 
-That was enough. That was sufficient. That was what fifty years had been moving toward without his knowing it was a direction.
+The mathematics exact, unchanged. All thirteen in their positions. All thirteen weights correct.
 
-He did not go.
+He had spent fifty years believing that setting them down meant losing them. The Chieftain's palm on his spine told him what no chaplain had found language for: you do not set them down. You carry them differently. Upright instead of under. Forward instead of under. The difference between a man bent by weight and a man who has learned the weight is part of his architecture.
 
-For the first time in fifty years.
+George breathed in.
 
-He did not go.
+George breathed out.
+
+The Chieftain's hand rose with the first breath and descended with the second, steady as a compass needle finding true north.
+
+Then George opened his eyes. He put both palms flat against the cold desert earth — this specific ground, mineral and dry — and pressed himself to standing. His knees registered the altitude. The fire registered on his face. The obsidian mirrors held the Milky Way at the four corners of the world.
+
+He turned and walked back through the dark toward the guesthouse. Each step placed deliberately on the plaza stones. The convoy sat where they had left it. The mountains above held their positions.
+
+He was going home.
+
+For the first time in fifty years, he knew what he was going home to.
+
+He carried them with him — Rodriguez, O'Neil, Williams, Martinez, Johnson, Thompson, Herrera, Chen, Delgado, and the four who had come home and died anyway — and the carrying was not the same thing it had been at sunrise. Not lighter. Not resolved. Oriented.
+
+He walked.
 
 ---
 
@@ -300,6 +314,6 @@ He did not go.
   - Chieftain's hand placed between shoulder blades, breathing with George's spine — physical fact, not metaphor
   - Holds all thirteen dead in exact positions, exact mathematics — unchanged
   - Ends on: earth, fire, hand, breath — four concrete images
-  - Final beat: liberation without resolution — "He did not go. For the first time in fifty years. He did not go." — the original liberation line restored, now earned by everything preceding it
+  - Final beat: liberation as motion — "He walked." George departs San Javier. He has to. The liberation is not in staying; it is in being able to go. Fifty years of weight that kept him from returning to his life — the ceremony doesn't anchor him, it frees him to move. "He was going home. For the first time in fifty years, he knew what he was going home to." He carries all thirteen names with him, but the carrying is oriented now, not crushing.
 
 **Word Count:** ~5,720 (target: 5,600–5,800 ✓)

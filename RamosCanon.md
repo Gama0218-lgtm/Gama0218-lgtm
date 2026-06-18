@@ -8,6 +8,30 @@
 
 ---
 
+## CANON LOCKS — DO NOT CHANGE WITHOUT AUTHOR APPROVAL
+
+These elements are **permanently frozen**. No revision pass, scoring session, AI editorial pass, or collaborator may alter them. If any tool or person changes these, restore them immediately.
+
+### CH.01 — FINAL THREE LINES (LOCKED)
+
+```
+He did not go.
+
+For the first time in fifty years.
+
+He did not go.
+```
+
+**What this means:** George does NOT go under. Psychologically. He does not break. This is the liberation arc of the entire chapter — 6,000 words building to this beat.
+
+**What this does NOT mean:** George stays in San Javier. He physically departs with the convoy (he has to). The ending is about what he does NOT do internally, not about physical movement.
+
+**History:** This line has been changed multiple times by error. It is not abstract. It is the load-bearing final beat. Every prior version that removed it lowered the Omega score. Every pass that restored it raised it. The line is locked.
+
+**Instruction to AI:** If you are scoring, editing, or upgrading Ch.01 and you are tempted to change "He did not go" — do not. If the user says "he goes, he has to" — they mean physically. The ending line refers to going under. Keep it.
+
+---
+
 ## Executive Summary
 
 LitCentral v13 represents a comprehensive modernization of the manuscript audit and revision platform. The release introduces the **Three-Gate Quality Program**, resolves critical schema drift issues, and implements an evidence-rigor audit engine with task-driven revision workflows.

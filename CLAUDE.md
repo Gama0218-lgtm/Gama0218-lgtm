@@ -83,15 +83,31 @@ OMEGA = BR + CS + AS + TB + (EE × 0.67) + (MP × 0.67)
 
 ### Instrument 2 — SPSS Omega (111-pt) · PROSE CRAFT internal check
 
+Two formulas in use:
+
+**Standard SPSS:**
 ```
 Ω = 71.443 + 0.124·CLS + 0.118·BIS + 0.089·SII + 0.067·MRF
 Theoretical maximum: 111.243
 ```
 
-Use this to check sentence-level craft, register, active voice, sensory density.
+**Hybrid Omega RF 1.5** (ceremony chapters — MRF coefficient raised):
+```
+Ω = 71.443 + 0.124·CLS + 0.118·BIS + 0.089·SII + 0.1005·MRF
+Formula ceiling (all-100): 114.593 · Transcendent target: Ω ≥ 115
+```
+
+**When to use RF 1.5:** Ceremony-chapter-as-plot chapters where standard formula penalizes genre conventions. Justified on four grounds: genre convention (Chicano healing fiction), POV management (analytical frame maintained throughout), field-effect validation (Yaqui cosmological record), Shorter's epistemology ("He did not go" = constitution, not resolution).
+
+**Full document:** `data/omega115_rf1.5_ch01_analysis.md`
+
+Use SPSS to check sentence-level craft, register, active voice, sensory density.
 **Not the submission instrument. Internal diagnostic only.**
 
-**Ch.01 current score: 107.18**
+**Ch.01 scores:**
+- Standard SPSS Ω: 107.18
+- RF 1.5 pre-injection: 106.59 (CLS=82, BIS=87, SII=84, MRF=72)
+- RF 1.5 post-injection target: 111.71 (CLS=89, BIS=95, SII=93, MRF=97)
 
 ---
 
@@ -208,6 +224,27 @@ Direct text analysis of 245,574 words confirmed. The "gap" theory is revised.
 
 ---
 
+## FIVE YAQUI INJECTIONS — Ch.01 (RF 1.5 TARGET)
+
+**Governance gate applies to all five.** Tribal consultation required before any injection enters the published manuscript. Research ≠ permission. Contact: culture@pascuayaqui-nsn.gov.
+
+| # | Injection | Insertion Point | MRF Gain | RF 1.5 Ω Gain | Priority |
+|---|-----------|----------------|----------|---------------|----------|
+| A | Sea Ania / Flower World (fallen brothers) | After deer dancers emerge, before fire | +10 | +1.005+SII | 1 |
+| B | Saila Maaso Heartbeat / Water Drum | At drum entrainment — replaces/follows "social physics" | +8 | +0.804+BIS | 2 |
+| C | Huya Ania / Wilderness World (Chieftain's observation) | After face painting, before headband | +7 | +0.703+BIS | 3 |
+| D | Surem / Ancestors in the Hills | Palms on plaza earth → fire vision | +6 | +0.603+SII | 4 |
+| E | Seegua Yoleme / Flower-Deer-Man | Lead dancer at fire — eyes | +5 | +0.503+BIS | 5 |
+
+**Pre-injection RF 1.5 Ω:** 106.59  
+**Post-injection RF 1.5 Ω:** 111.71  
+**Formula ceiling:** 114.593 (all-100). Ω 115 = transcendent target by design.
+
+**Full prose for all five injections:** `data/omega115_rf1.5_ch01_analysis.md` §Part Four  
+**Research library + cosmological sourcing:** `data/research_library_ch01.md`
+
+---
+
 ## GOVERNANCE GATE — P0
 
 Yaqui Nation consultation required before any Yaqui ceremony content is published.
@@ -228,6 +265,8 @@ Research ≠ permission. Do not extrapolate ceremony detail beyond what is alrea
 | `prompts/CHAPTER_REVISION_PROTOCOL.md` | 7-step revision protocol |
 | `prompts/perplexity/` | Perplexity research prompt library (6 prompts) |
 | `data/research_chicano_yaqui_magicalrealism.md` | Research library |
+| `data/omega115_rf1.5_ch01_analysis.md` | RF 1.5 scoring + five injection prose (full text) |
+| `data/research_library_ch01.md` | Ch.01 research synthesis — Yaqui cosmology, genre, governance, injections |
 
 ---
 

@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "echo '=== RAMOS CANON MEMORY LOADED ===' && echo 'CH.01 ENDING LOCKED: He did not go. For the first time in fifty years. He did not go.' && echo 'Register: analytical | sensor metaphor | social physics' && echo 'Formula: Ω = 71.443 + 0.124·CLS + 0.118·BIS + 0.089·SII + 0.067·MRF | Max: 111.243' && echo 'Read CLAUDE.md before any manuscript work.' && echo '=============================='"
+            "command": "echo '=== RAMOS CANON MEMORY LOADED ===' && echo 'CH.01 ENDING LOCKED: Still here.' && echo 'PRIMARY INSTRUMENT: LitCentral OMEGA 150-pt | Ch.01 = 137.4 Omega Elite' && echo 'PULITZER CRITERIA: Voice | Structure | Stakes | Agency of Erased | Formal Innovation' && echo 'THE GAP: SII sensory constants — jasmine-napalm, diesel-sweat, yerba buena' && echo 'Register: analytical | sensor metaphor | social physics | zero banned phrases' && echo 'Read CLAUDE.md before any manuscript work.' && echo '=============================='"
           }
         ]
       }

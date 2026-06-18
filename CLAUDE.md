@@ -67,22 +67,44 @@ Use this to check sentence-level craft, register, active voice, sensory density.
 
 ---
 
-### Why LitCentral is the primary instrument
+## PULITZER BASELINE — JURY CITATION LANGUAGE (2020–2026)
 
-The Pulitzer Prize for Fiction and the Library of Congress Prize for American Fiction
-evaluate by criteria that map directly to the LitCentral dimensions:
+Reverse-engineered from eight years of jury citations. Every winner maps to five criteria without exception.
 
-| What the jury asks | LitCentral dimension |
-|--------------------|---------------------|
-| Is this distinctively American? Does it illuminate an erased experience? | EE — Erasure Engine |
-| Is the cultural rendering authentic and specific? | CS — Chicano/Spiritual |
-| Does it have a distinctive, consistent literary voice? | AS + BR — grounded specificity |
-| Does the narrative arc earn its ending? | TB — temporal integrity |
-| Are the witnesses real and individualized? | MP — Mouth Portal |
+| # | Jury Criterion | Their Words | Maps To |
+|---|---------------|-------------|---------|
+| 1 | **Voice** | "unwavering," "spare," "mordant," "breathless" | CLS — element style, active voice, no passive constructions |
+| 2 | **Structural ambition** | "polyphonic," "linked narratives," "tour-de-force," "recasting" | MRF — multi-POV architecture, 3-act spine |
+| 3 | **Historical/social stakes** | "displacement," "Jim Crow," "institutional failures," "racial supremacy" | BR + EE — forensic spine, the 349, DCAS, Project 100000 |
+| 4 | **Agency of the erased** | "gives agency," "dignity and redemption," "struggle to heal" | MP + CS — named dead, individualized, restored to record |
+| 5 | **Formal innovation** | "blends genres," "linguistically deft," "dexterity and imagination" | CS + register — code-switching architecture, Yaqui cosmology as ontology |
 
-**Comparable Pulitzer winner:** "The Sympathizer" by Viet Thanh Nguyen (2016)
-— Vietnam War · bicultural protagonist · literary fiction · cultural erasure as theme
-— That is the shelf. That is the baseline.
+**What a jury citation for this manuscript sounds like — built from their own language:**
+> *"A forensically exact and formally daring novel that gives names and bodies back to the Hispanic soldiers erased by the mathematics of war — polyphonic, code-switching, and relentless in its indictment of the bureaucratic machinery that buried them."*
+
+**Criteria 1 and 2** (Voice + Structure) are the hardest-weighted by juries — maps to CLS and MRF. Both strong in this manuscript.
+
+**Criteria 3, 4, 5** (Stakes, Agency, Innovation) are structural — baked in by design. No revision required.
+
+**The gap is sensory and tonal.** The jury adjectives this manuscript is still earning:
+- "spare" → SII — sensory economy, each constant doing double work
+- "devastating" → MP — the named dead, the mathematics exact
+- "unwavering" → CLS — register held, no banned phrases
+- "beautifully rendered" → AS — the sensory constants, historically grounded, fused not listed
+
+**This is why the three SII inserts (jasmine-napalm, diesel-sweat, yerba buena) are the right next move.** Not because of Omega. Because those are the words the jury reaches for when sensory grounding is working.
+
+---
+
+## COMPARABLE TITLES ON THE TARGET SHELF
+
+| Title | Author | Prize | Why it matters |
+|-------|--------|-------|----------------|
+| The Sympathizer | Viet Thanh Nguyen | Pulitzer 2016 | Vietnam War, bicultural, erasure, literary voice — closest comp |
+| The Nickel Boys | Colson Whitehead | Pulitzer 2020 | Institutional erasure, named victims, "spare and devastating" |
+| Demon Copperhead | Barbara Kingsolver | Pulitzer 2023 | "Unwavering voice... institutional failures" |
+| The Night Watchman | Louise Erdrich | Pulitzer 2021 | "Majestic, polyphonic... halt displacement of Native peoples" |
+| Bless Me, Ultima | Rudolfo Anaya | — | Chicano register, Southwestern spiritual, analytical mysticism |
 
 ---
 

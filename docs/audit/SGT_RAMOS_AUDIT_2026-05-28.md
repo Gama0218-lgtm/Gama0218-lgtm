@@ -400,3 +400,23 @@ Ch.01 jumps from the floor band (105-106) to **the highest point on the
 chart at 113.35**, well above the 107.34 manuscript mean and approaching
 the 115.5 submission-ready target line. Y-axis ceiling raised to 116 so
 the certified point and the target line both render.
+
+---
+
+## 11 · Opening-run projection (Ch.1-6) — pre-S2
+
+Modeled forecast for the first-impression cluster (Ch.1-6 at the
+CR-1.0 ≥ 112 floor). See [`SGT_RAMOS_CR1_OPENING_MOCK_Ch02-06.md`](./SGT_RAMOS_CR1_OPENING_MOCK_Ch02-06.md)
+for the per-chapter sprint scope, lift methodology, and confidence bands.
+
+| | Ω | Notes |
+| --- | ---: | --- |
+| Opening-run baseline (mean Ch.1-6) | 107.00 | v13 audit |
+| **Projected post-CR-1.0 mean** | **113.49** | All six chapters above 112 floor |
+| Highest projected | 114.50 | Ch.05 *Ghost Protocol* |
+| Lowest projected  | 112.40 | Ch.02 *Descent Into Baptism* (highest-yield, highest-cost) |
+| Sprint effort     | ~2 weeks | 2 LOW + 3 MED chapters, parallel-trackable |
+
+Only Ch.01 (113.35) is actually certified. Ch.2-6 values in the linked
+brief are projections; live data (`src/lib/chapterScores.js`) holds them
+at v13 baseline until real CR delta workbooks land.

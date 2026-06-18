@@ -1,48 +1,73 @@
-/**
- * src/App.jsx
- * LitCentral v13 + JAMNet — Routed App Entry
- */
+import { Toaster } from "@/components/ui/toaster"
+import { QueryClientProvider } from '@tanstack/react-query'
+import { queryClientInstance } from '@/lib/query-client'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import PageNotFound from './lib/PageNotFound';
+import { AuthProvider, useAuth } from '@/lib/AuthContext';
+import UserNotRegisteredError from '@/components/UserNotRegisteredError';
+import Dashboard from './pages/Dashboard';
+import WriterPage from './pages/WriterPage';
+import MarketIntelligencePage from './pages/MarketIntelligencePage';
+import LitIntelReportPage from './pages/LitIntelReportPage';
+import StakeholderDirectoryPage from './pages/StakeholderDirectoryPage';
+import StakeholderProfilerPage from './pages/StakeholderProfilerPage';
+import JAMSPage from './pages/JAMSPage';
+import SprintTrackerPage from './pages/SprintTrackerPage';
+import PromptMasterPage from './pages/PromptMasterPage';
 
-import React from "react";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import Dashboard from "./components/Dashboard";
-import JAMSPage from "./pages/JAMSPage";
-import "./App.css";
+const AuthenticatedApp = () => {
+  const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
 
-function Home() {
-  return (
-    <div className="app">
-      <Dashboard />
-      <div style={{ textAlign: "center", padding: "24px" }}>
-        <Link
-          to="/jams"
-          style={{
-            display: "inline-block",
-            padding: "12px 22px",
-            background: "linear-gradient(90deg,#d4a72c,#19c0a8,#9a5cd6)",
-            color: "#0b0d12",
-            fontWeight: 800,
-            borderRadius: 8,
-            textDecoration: "none",
-            fontFamily: "monospace",
-            letterSpacing: "0.15em",
-            fontSize: 12,
-          }}
-        >
-          → OPEN JAMNet · STAKEHOLDER INTELLIGENCE
-        </Link>
+  // Show loading spinner while checking app public settings or auth
+  if (isLoadingPublicSettings || isLoadingAuth) {
+    return (
+      <div className="fixed inset-0 flex items-center justify-center">
+        <div className="w-8 h-8 border-4 border-slate-200 border-t-slate-800 rounded-full animate-spin"></div>
       </div>
-    </div>
+    );
+  }
+
+  // Handle authentication errors
+  if (authError) {
+    if (authError.type === 'user_not_registered') {
+      return <UserNotRegisteredError />;
+    } else if (authError.type === 'auth_required') {
+      // Redirect to login automatically
+      navigateToLogin();
+      return null;
+    }
+  }
+
+  // Render the main app
+  return (
+    <Routes>
+      <Route path="/" element={<Dashboard />} />
+      <Route path="/writer" element={<WriterPage />} />
+      <Route path="/market-intelligence" element={<MarketIntelligencePage />} />
+      <Route path="/lit-intel-report" element={<LitIntelReportPage />} />
+      <Route path="/stakeholders" element={<StakeholderDirectoryPage />} />
+      <Route path="/profiler" element={<StakeholderProfilerPage />} />
+      <Route path="/jams" element={<JAMSPage />} />
+      <Route path="/sprints" element={<SprintTrackerPage />} />
+      <Route path="/prompt-master" element={<PromptMasterPage />} />
+      <Route path="*" element={<PageNotFound />} />
+    </Routes>
   );
+};
+
+
+function App() {
+
+  return (
+    <AuthProvider>
+      <QueryClientProvider client={queryClientInstance}>
+        <Router>
+          <AuthenticatedApp />
+        </Router>
+        <Toaster />
+      </QueryClientProvider>
+    </AuthProvider>
+  )
 }
 
-export default function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/jams" element={<JAMSPage />} />
-      </Routes>
-    </BrowserRouter>
-  );
-}
+export default App

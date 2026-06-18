@@ -69,11 +69,11 @@ Count occurrences in this chapter of:
 Report present/absent and count.
 
 ### D. ENDING LOCK CHECK (Ch.01 only)
-If this is Chapter 1, verify the final lines match exactly:
+If this is Chapter 1, verify the final word is exactly:
 
-> He stayed in the dark and breathed, and the dark did not ask him to be anything other than what he was: a man with a debt, still standing, still present, still accountable to the names.
->
-> Still here.
+> Cumplido.
+
+Author-confirmed canonical June 18, 2026. Register: archivist's grammar, transmission complete — not survivor's grammar.
 
 If missing or different: flag as CRITICAL — do not alter the ending, flag it for the author.
 
@@ -105,10 +105,11 @@ Assess each dimension 0–30 (EE and MP 0–20):
 State each dimension score with one sentence of evidence.
 
 ### SPSS Ω
-```
-Ω = 71.443 + 0.124·CLS + 0.118·BIS + 0.089·SII + 0.067·MRF
-Max: 111.243
-```
+**Select formula by chapter type:**
+- Standard: `Ω = 71.443 + 0.124·CLS + 0.118·BIS + 0.089·SII + 0.067·MRF` (max 111.243)
+- RF 1.5 (ceremony-as-plot): `Ω = 71.443 + 0.124·CLS + 0.118·BIS + 0.089·SII + 0.1005·MRF` (ceiling 114.593)
+
+Use RF 1.5 when: ceremony IS the plot (not backdrop) + analytical POV maintained throughout + code-switching active. Current candidates: Ch.01, Ch.19.
 
 Score each component 0–100:
 - **CLS** — Sentence variety, active voice, subordinate clause density, register hold

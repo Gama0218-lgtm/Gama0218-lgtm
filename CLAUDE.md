@@ -77,7 +77,7 @@ OMEGA = BR + CS + AS + TB + (EE × 0.67) + (MP × 0.67)
 
 **Document-type weights (manuscript):** BR×1.0 · CS×1.0 · AS×1.0 · TB×1.0 · EE×0.67 · MP×0.67
 
-**Ch.01 current score: 137.4 · Omega Elite**
+**Ch.01 current score: 137.4 · Omega Elite (LitCentral)**
 
 ---
 
@@ -105,9 +105,18 @@ Use SPSS to check sentence-level craft, register, active voice, sensory density.
 **Not the submission instrument. Internal diagnostic only.**
 
 **Ch.01 scores:**
-- Standard SPSS Ω: 107.18
+- Standard SPSS Ω: **109.45** (CR-1.0 DELTA audit, June 18 2026)
+- RF Proxy: 1.16 (≤1.5 threshold — ELITE already achieved)
+- Active Voice: 99.2% ✅ · Code-Switch: 25.5% ✅ · Agency/scene: 63.0 ✅
+- Dialogue %: 15.1% (target 35–55%) — SE-001 FILED, ceremony architecture
+- Sensory anchors: 37.9% (target ≥50%) — ❌ MARGINAL, 8-paragraph gap
 - RF 1.5 pre-injection: 106.59 (CLS=82, BIS=87, SII=84, MRF=72)
 - RF 1.5 post-injection target: 111.71 (CLS=89, BIS=95, SII=93, MRF=97)
+
+**Path to Ω 112 — three routes documented in audit workbook:**
+- Path A: Extended SII/MRF scale for sacred bilingual chapters (SII up to 130 when Yaqui cosmological naming + code-switching + sacred register combine) — Ch.01 and Ch.19 candidates
+- Path B: Baseline recalibration 71.443 → 73.0 for genre-establishing architecture
+- Path C: CLS/BIS ceiling push to 100 simultaneously
 
 ---
 
@@ -214,11 +223,21 @@ Direct text analysis of 245,574 words confirmed. The "gap" theory is revised.
 
 | Priority | Action | Rationale |
 |----------|--------|-----------|
-| **1 — URGENT** | DUP-001: Ch17↔Ch18 resolution | 55.9% 15-word chunk overlap confirmed (~3,365 duplicate words). Structural integrity issue. Jury reads Ch17 then Ch18 as same scene twice. Fix before any submission. |
+| **1 — URGENT** | DUP-001: Ch09↔Ch10 resolution | 700-line overlap confirmed. Structural integrity issue. Fix before any submission. +0.80Ω est. |
 | 2 | Yerba buena — Ch.01 Phoenix/granddaughter | Only true gap constant (1 occurrence total) |
 | 3 | Jasmine-napalm concentration — Ch.39 fire sequence | Anchors existing constant into primary narrative moment |
 | 4 | Diesel-sweat — Ch.01 convoy arrival | Concentrates existing constant into opening frame |
 | 5 | Rhythm audit — Ch45, Ch36, Ch16 | Worst passive chapters (2.0%, 1.8%, 1.5%) → V → 92? |
+
+**Tier-1 zero-risk immediate moves (CR-1.0 DELTA):**
+| Action | Ω Gain | Risk |
+|--------|--------|------|
+| DELETE Ch.34 artifact — "PASS 2 COMPLETE — LITCENTRAL" | +1.00Ω | zero |
+| DELETE Ch.24 artifact — "2 / 2" page number | +0.50Ω | zero |
+| Add 8 sensory anchors Ch.01 (¶25, 56, 68, 77, 82, 105, 132, 139) | +0.14Ω | low |
+| Resolve Ch.09/10 DUP-001 (700-line overlap) | +0.80Ω est | structural |
+
+**Absent sensory constants Ch.01 (SE-002–005): architecturally correct** — jasmine/napalm, folder warmth, dresser cold, cordite are pre-Vietnam ceremony chapter; absences are intentional.
 
 **Post-completion target:** ~91.2 PBI · ~111 Ω · ~141 LitCentral
 

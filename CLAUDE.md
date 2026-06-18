@@ -38,17 +38,21 @@ Scoring bands:
 
 ## CH.01 FINAL LINES — PERMANENTLY LOCKED
 
-> **He did not go.**
+> George did not find peace that night. He found orientation. He found the ability to hold what he had carried for fifty years without going under.
 >
-> **For the first time in fifty years.**
+> He found north.
 >
-> **He did not go.**
+> That was enough to stand on. That was the beginning of the next sentence. He stayed in the dark and breathed, and the dark did not ask him to be anything other than what he was: a man with a debt, still standing, still present, still accountable to the names.
+>
+> Still here.
 
-These three lines are the load-bearing liberation arc of Chapter 1. They are not editable.
+These are the canonical final lines of Chapter 1. They are not editable.
 
-**Disambiguation:** "He did not go" = he did not go under, psychologically. George physically departs San Javier (he has to — he goes). The ending is internal, not geographic. If the author says "he goes, he has to" — she means physically. The ending line does not change.
+**Register check:** orientation / north / accountable to the names / still here — all analytical register, all load-bearing. No generic mysticism. This is correct.
 
-**History:** This line has been changed multiple times in error. Every change lowered the score. It is locked here permanently.
+**What this means:** Liberation as orientation, not resolution. George does not find peace. He finds the ability to hold the weight and remain standing. "Still here" = present, accountable, alive — not healed.
+
+**History:** This ending replaced an earlier version ("He did not go"). Both were in register. This version is longer, breathes more, and ends on presence rather than absence. Author-confirmed canonical. Do not change.
 
 ---
 

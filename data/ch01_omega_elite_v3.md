@@ -257,11 +257,13 @@ The fire burned. The obsidian mirrors held the Milky Way at the four corners of 
 
 He held the thirteen dead. He had always held them. The question — the one he had never had language for — was whether the holding was a wall or a spine.
 
-He did not go.
+George did not find peace that night. He found orientation. He found the ability to hold what he had carried for fifty years without going under.
 
-For the first time in fifty years.
+He found north.
 
-He did not go.
+That was enough to stand on. That was the beginning of the next sentence. He stayed in the dark and breathed, and the dark did not ask him to be anything other than what he was: a man with a debt, still standing, still present, still accountable to the names.
+
+Still here.
 
 ---
 

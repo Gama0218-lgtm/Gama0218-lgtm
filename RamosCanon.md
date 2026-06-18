@@ -15,20 +15,25 @@ These elements are **permanently frozen**. No revision pass, scoring session, AI
 ### CH.01 — FINAL THREE LINES (LOCKED)
 
 ```
-He did not go.
+George did not find peace that night. He found orientation. He found the ability to hold what he had carried
+for fifty years without going under.
 
-For the first time in fifty years.
+He found north.
 
-He did not go.
+That was enough to stand on. That was the beginning of the next sentence. He stayed in the dark and breathed,
+and the dark did not ask him to be anything other than what he was: a man with a debt, still standing, still
+present, still accountable to the names.
+
+Still here.
 ```
 
-**What this means:** George does NOT go under. Psychologically. He does not break. This is the liberation arc of the entire chapter — 6,000 words building to this beat.
+**What this means:** Liberation as orientation, not resolution. George does not find peace. He finds the ability to hold the weight without going under. "Still here" = present, accountable, alive.
 
-**What this does NOT mean:** George stays in San Javier. He physically departs with the convoy (he has to). The ending is about what he does NOT do internally, not about physical movement.
+**Register:** orientation / north / accountable to the names / still here — analytical register throughout. No banned phrases. Author-confirmed.
 
-**History:** This line has been changed multiple times by error. It is not abstract. It is the load-bearing final beat. Every prior version that removed it lowered the Omega score. Every pass that restored it raised it. The line is locked.
+**History:** Previous locked ending was "He did not go. For the first time in fifty years. He did not go." — also valid, also in register. This version (author-written) is longer, breathes more, ends on presence. Author confirmed this is the canonical ending.
 
-**Instruction to AI:** If you are scoring, editing, or upgrading Ch.01 and you are tempted to change "He did not go" — do not. If the user says "he goes, he has to" — they mean physically. The ending line refers to going under. Keep it.
+**Instruction to AI:** Do not change these lines. Do not compress them. Do not "improve" them. Do not revert to the prior version. This is the ending.
 
 ---
 

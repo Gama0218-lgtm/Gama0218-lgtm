@@ -1,0 +1,268 @@
+================================================================================
+  LITCENTRAL HYBRID OMEGA + TE360 EDITORIAL — COMPLETE SEALED AUDIT
+  SGT George Ramos: The Mathematics of Vietnam — MANUSCRIPT v15
+================================================================================
+  Audit date     : 2026-06-18 05:52 UTC
+  SHA-256        : 9d4314b0d95ae37ddfa12149696e9d65d946e7d3866a603724c9ef05cbe6badb
+  Chapters       : 45 canonical | 252,237 words
+  Hybrid Omega   : Ω = 71.443 + 0.124·CLS + 0.118·BIS + 0.089·SII + 0.067·MRF
+  Seal status    : R²=0.947 | α=0.938 | N=45 | seed=42
+  TE360 formula  : BR+CS+AS+TB+(EE×0.67)+(MP×0.67) | max 160
+
+  ┌─ MANUSCRIPT SCORECARD ─────────────────────────────────────────────┐
+  │  Hybrid Ω mean   : 106.907  (σ 1.107)       │
+  │  Hybrid Ω range  : 104.19 – 109.69              │
+  │  TE360 mean      : 123.8  (OMEGA tier: 120–134)          │
+  │  Target Ω=111    : 0/45 chapters at target today            │
+  │  Gap to target   : +4.093 avg across all 45 chapters     │
+  │  RF mean         : 88.07 (formula: 0.55·RRP + 0.45·CLS)         │
+  │  Publication gate: TE360 HOLD — target Omega Elite (≥135)        │
+  └────────────────────────────────────────────────────────────────────┘
+
+  TE360 TIER DISTRIBUTION:
+    OMEGA           : 30 chapters
+    PLATINUM        : 15 chapters
+
+  STRUCTURAL ANOMALIES — BLOCK SUBMISSION UNTIL RESOLVED (10 items)
+  --------------------------------------------------------------------
+  Ch.15 [PHANTOM_CHAPTER]
+        FIX: Ch.15 immediately followed by stray 'Chapter 7: Red Clay: The Patrol' (P
+  Ch.16 [DUPLICATE_HEADING]
+        FIX: Ch.16 appears as both 'My Lai Massacre' (Para#3426) and 'My Lai' (Para#3
+  Ch.17 [FORMULA_BLEED]
+        FIX: Ch.17 heading bleeds the boundary-shift formula into the chapter title l
+        →    REMOVE formula bleed from heading. Clean title = 'Chapter 17: Boundary Shift'
+  Ch.23 [DUPLICATE_HEADING]
+        FIX: Ch.23 has two heading variants: 'The Eagle and the Sparr1' (truncated + 
+  Ch.24 [TITLE_ARTIFACT]
+        FIX: Ch.24 title: 'SACRED HEART BRIEFING3' — trailing numeral '3' is page/dra
+  Ch.32 [TITLE_TRUNCATED]
+        FIX: Ch.32 title: 'CORRIDOR OF FIRE: THE MASTERPIEC' — truncated, missing 'E'
+  Ch.34 [NUMBER_COLLISION]
+        FIX: Para#7026 says 'Chapter 34: Sixty-Eight' but Para#7027 says 'Chapter 33:
+  Ch.36 [TITLE_ARTIFACT]
+        FIX: Ch.36 title: 'Mission Execution & Brotherhood Under Fire34' — trailing '
+        →    Clean title: 'Chapter 36: Mission Execution & Brotherhood Under Fire' — remove trailing '34'
+  Ch.37 [TITLE_TRUNCATED]
+        FIX: Ch.37 title: 'The Mathematics of Reveng6' — truncated ('Revenge') + trai
+        →    Clean title: 'Chapter 37: The Mathematics of Revenge' — remove truncation artifact '6'
+  Ch.45 [TITLE_TYPO]
+        FIX: Ch.45 title: 'Unidos para SemprK' — should be 'Unidos para Siempre'; fin
+
+  COMPLETE 45-CHAPTER AUDIT TABLE
+  --------------------------------------------------------------------------------------------
+   Ch Title                                  Act  Words       Ω    Gap  TE360  CLS  Pri
+  --------------------------------------------------------------------------------------------
+   17 Boundary Shift                          II   6005  104.19  +6.81  110.8   76  MED ⚠
+   20 The Genesis Equation                    II   5588  104.50  +6.50  121.1   77  MED  
+    2 Descent Into Baptism                     I   6397  104.61  +6.39  122.1   78  MED  
+   29 Mathematics of Revolution               II   5614  105.30  +5.70  126.5   75 HIGH  
+   37 The Mathematics of Revenge             III   5965  105.52  +5.48  116.5   83  LOW ⚠
+   41 Adios Muchachos                        III   5645  105.52  +5.48  114.9   83  LOW  
+   26 Echoes of an Empire                     II   3990  105.68  +5.32  114.1   83  LOW  
+    4 Pentagon, December 1969                  I   6617  105.74  +5.26  116.2   82  LOW  
+   36 Mission Execution & Brotherhood Unde   III   4765  105.80  +5.20  119.3   84  LOW ⚠
+   19 Los Obligados (Act II)                  II   5719  105.85  +5.15  121.0   84  LOW  
+    1 The Sacred Mountain Revelation           I   5887  106.27  +4.73  119.4   85  LOW  
+    9 First Blood                              I   5239  106.54  +4.46  117.9   87  LOW  
+    6 Crucible Theorem                         I   5791  106.63  +4.37  119.6   87  LOW  
+   16 My Lai                                  II   5716  106.63  +4.37  123.6   87  LOW ⚠
+   30 Orchestrating Necessary Evil            II   5793  106.63  +4.37  131.9   87  LOW  
+   38 Last Dance                             III   5892  106.63  +4.37  119.8   87  LOW  
+   10 The Pendejo Squad                        I   5947  106.64  +4.36  117.1   88  LOW  
+   12 Red Truth Revolution                     I   6065  106.75  +4.25  128.8   87  LOW  
+   25 The Heart Mission                       II   5908  106.75  +4.25  116.0   87  LOW  
+   18 Broken Wing                             II   6105  106.76  +4.24  119.9   88  LOW  
+   28 Cruzan, o Nadie Cruzan                  II   6285  106.76  +4.24  119.9   88  LOW  
+   35 The Birthday Brief (Act III)           III   5722  106.76  +4.24  124.5   88  LOW  
+   32 Corridor of Fire: The Masterpiece      III   5592  106.82  +4.18  123.6   88  LOW ⚠
+    3 The Genocide Algorithm                   I   6021  106.94  +4.06  116.6   88  LOW  
+   21 El Cazador y El Guardián                II   4662  106.94  +4.06  120.7   88  LOW  
+   13 The Walls Speak in Red                   I   4618  107.53  +3.47  123.6   90  LOW  
+   27 Hunter's Geometry                       II   5154  107.53  +3.47  127.2   90  LOW  
+   34 Sixty-Eight                            III   6153  107.53  +3.47  121.1   90  LOW ⚠
+    5 The Ghost Protocol                       I   6092  107.65  +3.35  131.7   90  LOW  
+   11 Contact Contact                          I   6240  107.65  +3.35  133.0   90  LOW  
+   23 The Eagle and the Sparrow               II   6450  107.65  +3.35  127.6   90  LOW ⚠
+   31 Retreat, Hell                           II   3051  107.65  +3.35  123.1   90  LOW  
+   33 Angels from Above                      III   5298  107.65  +3.35  123.2   90  LOW  
+   40 Ares: Death of a God                   III   5950  107.65  +3.35  127.9   90  LOW  
+   42 Sacred Smoke                           III   5290  107.65  +3.35  124.5   90  LOW  
+   43 Resurrection                           III   5312  107.65  +3.35  134.4   90  LOW  
+   22 Don't Fuck with Familia                 II   5027  107.65  +3.35  131.6   91  LOW  
+    7 The Boulevard Theorem                    I   6278  107.72  +3.28  127.1   91  LOW  
+   24 Sacred Heart Briefing                   II   5351  107.72  +3.28  130.7   91  LOW ⚠
+   14 Package Sacrament                        I   4911  107.84  +3.16  131.1   91  LOW  
+   44 The Exile Patriots                     III   5215  108.24  +2.76  126.2   92  LOW  
+   45 Unidos para Siempre                    III   5557  108.24  +2.76  129.8   92  LOW ⚠
+   15 Move Like Water                          I   5806  108.36  +2.64  134.7   93  LOW ⚠
+    8 Los Records Mienten                      I   6152  108.43  +2.57  132.9   93  LOW  
+   39 When Compadres Fall                    III   5402  109.69  +1.31  127.6   99  LOW  
+
+  PRIORITY FIX QUEUE — RANKED BY Ω GAP TO TARGET 111
+  ====================================================================
+
+  ── TIER 1: CRITICAL (Gap > 6.0) — Fix First ────────────────────────
+
+  Ch.17 — Boundary Shift
+  Ω 104.19 | Gap +6.81 | CLS=76 BIS=84 SII=89 MRF=82
+  CLS→100 | BIS→100 | MRF→100
+  PRIMARY: CLS CRITICAL + TITLE FIX
+  TITLE:   REMOVE formula bleed from heading. Clean title = 'Chapter 17: Boundary Shift'
+  CLS Rx:  Ch.17 opens with exceptional sensory prose (flak, copper, WEE-OOO tone) but zero Spanish register. Insert Ramos interior monologue in Spanish during the ejection sequence: 'Dios mío — la máquina me es
+  MRF Rx:  MRF: Add single cross-chapter callback to the mathematics motif: 'The aircraft was a theorem that had just been disproved.'
+
+  Ch.20 — The Genesis Equation
+  Ω 104.50 | Gap +6.50 | CLS=77 BIS=85 SII=89 MRF=83
+  CLS→100 | BIS→100 | MRF→100
+  PRIMARY: CLS + TE360-AS (Sensory Constants)
+  CLS Rx:  Ch.20 features the IBM System/360 — the 'Terminal Green' sensory constant (#00AA00). The computer's phosphor glow needs a bilingual frame: Crawford's English bureaucracy vs. the data's Spanish silence
+  SII Rx:  The 60 Hz electrical hum is the canonical TE360 sensory constant for institutional settings — it's already in the text ('low, serrated hum that lived behind the teeth'). Strengthen it: add the body te
+  TE360:   TE360 AS dimension: deploy Terminal Green (#00AA00) IBM 360 phosphor explicitly. This is a canonical sensory constant.
+
+  Ch.02 — Descent Into Baptism
+  Ω 104.61 | Gap +6.39 | CLS=78 BIS=85 SII=88 MRF=84
+  CLS→100 | BIS→100 | MRF→100
+  PRIMARY: CLS + SII boost
+  CLS Rx:  Ch.2 has Joshua Sagasta (Yaqui/Chicano) going underground — maximum code-switch opportunity. His grandmother's photograph should invoke Spanish: '*Mi Lita* stared back at him from Five Points — *no te
+  SII Rx:  The iron-grit / red clay opening is strong. Add olfactory constant: diesel + jungle rot blending with copper (tunnel walls). The tunnel should taste like old blood and rust.
+  MRF Rx:  Yaqui ancestry callback: his grandfather's 'stealth' mentioned — expand with specific Yaqui resistance reference (Díaz era, 1900s deportations) to activate MRF cross-chapter historical depth.
+
+  ── TIER 2: HIGH PRIORITY (Gap 5.0–6.0) ─────────────────────────────
+
+  Ch.29 — Mathematics of Revolution
+  Ω 105.30 | Gap +5.70 | CLS=75 BIS=92 SII=90 MRF=85
+  PRIMARY: CLS CRITICAL — lowest CLS in manuscript (75)
+  CLS Rx:  Ch.29 is Vietnamese POV (Major Duc) — the chapter's bilingualism should run Vietnamese→English, not Spanish→English. But Ramos's presence in the chapter (or his shadow) needs a Spa
+  MRF Rx:  Cross-chapter mathematics callback: Duc's equation ('eighteen coordinated strikes') mirrors Ramos's own mathematics. Insert: 'He solved it the way his enemy solved it. The mathemat
+
+  Ch.37 — The Mathematics of Revenge
+  Ω 105.52 | Gap +5.48 | CLS=83 BIS=86 SII=90 MRF=84
+  PRIMARY: TITLE FIX + CLS
+  TITLE:   Clean title: 'Chapter 37: The Mathematics of Revenge' — remove truncation artifact '6'
+  CLS Rx:  Ch.37 Ω=105.52, CLS=83. 'Revenge' is a concept Spanish carries more viscerally: '*La venganza* is not the right word,' Ramos thinks. '*La justicia* is not right either. *El ajuste 
+
+  Ch.41 — Adios Muchachos
+  Ω 105.52 | Gap +5.48 | CLS=83 BIS=86 SII=90 MRF=84
+  PRIMARY: CLS + Dialogue
+  CLS Rx:  Ch.41 Adios Muchachos — the title is already bilingual. Extend the farewell into the body: the goodbye scene should cycle through Spanish registers. Ramos's adios to each squad mem
+
+  Ch.26 — Echoes of an Empire
+  Ω 105.68 | Gap +5.32 | CLS=83 BIS=86 SII=91 MRF=85
+  PRIMARY: CLS + word count short (3,990 words)
+  CLS Rx:  Ch.26 is the SHORTEST chapter (3,990 words — nearly 500 below minimum). Expand the empire-echoes meditation with a bilingual historical register: the Spanish colonial land grant sy
+
+  Ch.04 — Pentagon, December 1969
+  Ω 105.74 | Gap +5.26 | CLS=82 BIS=87 SII=91 MRF=86
+  PRIMARY: CLS — Pentagon bilingual contrast (already prescribed)
+  CLS Rx:  Pentagon scene: the empire's English vs. Ramos's interior Spanish. Already prescribed in earlier work — apply the abuela/Pentagon registration contrast. This chapter is in good sha
+
+  Ch.36 — Mission Execution & Brotherhood Under Fire
+  Ω 105.80 | Gap +5.20 | CLS=84 BIS=86 SII=91 MRF=85
+  PRIMARY: TITLE ARTIFACT FIX + CLS
+  TITLE:   Clean title: 'Chapter 36: Mission Execution & Brotherhood Under Fire' — remove trailing '34'
+  CLS Rx:  CLS=84. Brotherhood needs Spanish naming: *hermandad* carries more than brotherhood. 'There was no English word for what they had. *Hermandad* came closest — but even that word was
+
+  Ch.19 — Los Obligados (Act II)
+  Ω 105.85 | Gap +5.15 | CLS=84 BIS=86 SII=90 MRF=87
+  PRIMARY: CLS already strong via Spanish — needs SII + MRF
+  MRF Rx:  MRF: Los Obligados is a structural chapter title — it should echo forward (the obligation doesn't end here) and backward (when was the obligation incurred?). Add explicit cross-cha
+
+  ── TIER 3: STANDARD (Gap 3.0–5.0) — Work through in ch order ───────
+  30 chapters. All need CLS +28 pts avg (3–4 bilingual insertions each).
+  Ch.01 The Sacred Mountain Revelation         Ω=106.27 CLS=85→100 MRF=95→100
+  Ch.09 First Blood                            Ω=106.54 CLS=87→100 MRF=87→100
+  Ch.06 Crucible Theorem                       Ω=106.63 CLS=87→100 MRF=87→100
+  Ch.16 My Lai                                 Ω=106.63 CLS=87→100 MRF=87→100
+  Ch.30 Orchestrating Necessary Evil           Ω=106.63 CLS=87→100 MRF=87→100
+  Ch.38 Last Dance                             Ω=106.63 CLS=87→100 MRF=87→100
+  Ch.10 The Pendejo Squad                      Ω=106.64 CLS=88→100 MRF=87→100
+  Ch.12 Red Truth Revolution                   Ω=106.75 CLS=87→100 MRF=87→100
+  Ch.25 The Heart Mission                      Ω=106.75 CLS=87→100 MRF=87→100
+  Ch.18 Broken Wing                            Ω=106.76 CLS=88→100 MRF=87→100
+  Ch.28 Cruzan, o Nadie Cruzan                 Ω=106.76 CLS=88→100 MRF=87→100
+  Ch.35 The Birthday Brief (Act III)           Ω=106.76 CLS=88→100 MRF=87→100
+  Ch.32 Corridor of Fire: The Masterpiece      Ω=106.82 CLS=88→100 MRF=88→100
+  Ch.03 The Genocide Algorithm                 Ω=106.94 CLS=88→100 MRF=88→100
+  Ch.21 El Cazador y El Guardián               Ω=106.94 CLS=88→100 MRF=88→100
+  Ch.13 The Walls Speak in Red                 Ω=107.53 CLS=90→100 MRF=90→100
+  Ch.27 Hunter's Geometry                      Ω=107.53 CLS=90→100 MRF=90→100
+  Ch.34 Sixty-Eight                            Ω=107.53 CLS=90→100 MRF=90→100
+  Ch.05 The Ghost Protocol                     Ω=107.65 CLS=90→100 MRF=90→100
+  Ch.11 Contact Contact                        Ω=107.65 CLS=90→100 MRF=90→100
+  Ch.23 The Eagle and the Sparrow              Ω=107.65 CLS=90→100 MRF=90→100
+  Ch.31 Retreat, Hell                          Ω=107.65 CLS=90→100 MRF=90→100
+  Ch.33 Angels from Above                      Ω=107.65 CLS=90→100 MRF=90→100
+  Ch.40 Ares: Death of a God                   Ω=107.65 CLS=90→100 MRF=90→100
+  Ch.42 Sacred Smoke                           Ω=107.65 CLS=90→100 MRF=90→100
+  Ch.43 Resurrection                           Ω=107.65 CLS=90→100 MRF=90→100
+  Ch.22 Don't Fuck with Familia                Ω=107.65 CLS=91→100 MRF=90→100
+  Ch.07 The Boulevard Theorem                  Ω=107.72 CLS=91→100 MRF=91→100
+  Ch.24 Sacred Heart Briefing                  Ω=107.72 CLS=91→100 MRF=91→100
+  Ch.14 Package Sacrament                      Ω=107.84 CLS=91→100 MRF=91→100
+
+  ── TIER 4: POLISH (Gap < 3.0) — Last pass ──────────────────────────
+  5 chapters. Each needs 1–2 insertions to close final gap.
+  Ch.44 The Exile Patriots                     Ω=108.24 Gap=+2.76
+  Ch.45 Unidos para Siempre                    Ω=108.24 Gap=+2.76
+  Ch.15 Move Like Water                        Ω=108.36 Gap=+2.64
+  Ch.08 Los Records Mienten                    Ω=108.43 Gap=+2.57
+  Ch.39 When Compadres Fall                    Ω=109.69 Gap=+1.31
+
+  TE360 SENSORY CONSTANTS AUDIT
+  ------------------------------------------------------------
+  60Hz_hum            : ✓ DEPLOYED                     [Ch.4, Ch.20]
+  jasmine_napalm      : ✓ DEPLOYED                     [Ch.17, Ch.26, Ch.27]
+  copper              : ✓ DEPLOYED                     [Ch.17, Ch.9, Ch.32]
+  terminal_green      : ✓ DEPLOYED                     [Ch.20]
+  diesel_jungle       : ✓ DEPLOYED                     [Ch.2, Ch.9, Ch.17, Ch.28]
+  body_37c            : ✓ DEPLOYED                     [Ch.20, Ch.4]
+  440hz               : ⚡ OPPORTUNITY — NOT YET DEPLOYED [none]
+
+  440 Hz (Musical A) is UNDEPLOYED — highest available AS gain.
+  Deploy in Ch.1 (Sacred Mountain) or Ch.34 (Sixty-Eight) for maximum impact.
+
+  TE360 CERT RECORD CROSS-REFERENCE
+  ------------------------------------------------------------
+  Required stats in manuscript vs. canonical cert records:
+  TE-001 (NARA):  Total Vietnam KIA = 58,220       CHECK: verify all manuscript refs
+  TE-003:         Hispanic KIA = 349 (structural limitation applies)
+  TE-002 (BISG):  Estimate = 2,309–3,741 | ≥84.9% must carry AMBER caveat
+  TE-007:         Tracking gap = 91–98%+ | must carry 1996–2018 date bound
+  TE-009:         Veteran population = 94,000 | Feb 2024 date qualifier required
+  TE-010:         Noem contradiction | must cite BOTH documents by date
+
+  ACTION: Author must audit all statistics in chapters 1–5, 20, 34 against
+  cert records above before any external submission.
+
+  PATH TO Ω=111 — PROJECTION
+  ------------------------------------------------------------
+  Current mean Ω = 106.907
+  Target mean Ω  = 111.000
+  Required gain  = +4.093 across all 45 chapters
+
+  By lever (applying to all chapters):
+  CLS +15 pts avg  → Ω gain = +1.86  (most achievable — bilingual density)
+  BIS +12 pts avg  → Ω gain = +1.42  (character consistency passes)
+  SII +10 pts avg  → Ω gain = +0.89  (sensory constant deployment)
+  MRF +10 pts avg  → Ω gain = +0.67  (cross-chapter callbacks)
+  Combined:          → Ω gain = +4.84  → Mean Ω = 111.74
+
+  SPRINT PLAN (3 weeks to Ω=111):
+  Week 1: Fix 10 structural anomalies + Tier-1 chapters (17, 2, 20, 29)
+  Week 2: Tier-2 (37, 41, 26, 4, 36, 19) + CLS surgical pass all 45
+  Week 3: TE360 sensory constants + cert record audit + 440Hz deployment
+  Reseal after each week. Target Week 3 seal: Ω=111 on weakest chapter.
+
+  GATE DECISION
+  ------------------------------------------------------------
+  Hybrid OMEGA:  HOLD — mean 106.907, target 111.000
+  TE360:         HOLD — mean 123.8, target 135 (Omega Elite)
+  Structural:    HOLD — 10 anomalies unresolved (title artifacts, phantom chapter,
+                        duplicate headings, formula bleed in Ch.17 title)
+  Publication:   BLOCKED until all three gates clear
+
+  NEXT ACTION: Fix Ch.17 title formula bleed (1 minute edit) →
+               Apply Ch.2/17/20/29 Tier-1 insertions (Week 1) →
+               Reseal → Project Ω improvement
+================================================================================

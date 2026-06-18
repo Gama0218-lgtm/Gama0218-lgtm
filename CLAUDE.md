@@ -17,10 +17,38 @@ Confirm you have read it before proceeding with any manuscript work.
 
 ---
 
-## SCORING SYSTEM — TWO INSTRUMENTS, ONE MANUSCRIPT
+## SCORING SYSTEM — THREE INSTRUMENTS, ONE MANUSCRIPT
 
-This manuscript is evaluated on two scales simultaneously. Neither overrides the other.
-Use the right instrument for the right room.
+This manuscript is evaluated on three scales. Use the right instrument for the right room.
+
+### Instrument 3 — PBI (Pulitzer Baseline Index) · EXTERNAL award/submission positioning
+
+**Formula:**
+```
+PBI = 0.28·V + 0.28·S + 0.18·A + 0.15·R + 0.11·F
+```
+
+| Dimension | Weight | Maps To | SGT Ramos |
+|-----------|--------|---------|-----------|
+| V — Voice | 0.28 | CLS · active register · zero banned phrases | 91 |
+| S — Stakes/Erasure | 0.28 | BR + EE · the 349 · DCAS · Project 100,000 | 89 |
+| A — Agency of Erased | 0.18 | MP + CS · 9 named dead · George narrates own liberation | 97 |
+| R — Rendering/Sensory | 0.15 | SII · sensory constants · **current gap** | 86 → 91 target |
+| F — Formal Innovation | 0.11 | CS · code-switching · Yaqui cosmology as ontology | 88 |
+
+**Derived from:** 11 Pulitzer Fiction winners, 2016–2026. Methodology: reverse-engineering jury citation language.
+
+**Current score: 90.4** — above The Sympathizer (88.7), above winner average (88.5).
+**Post-inserts target: 91.2** — second only to Nickel Boys (92.2).
+
+**Full document:** `data/PBI_v1_validated_instrument.md`
+
+**When to use PBI:** Pitching to agents · submission cover letters · award positioning. NOT for chapter revision (use SPSS Ω for that).
+
+---
+
+**Governance — when instruments disagree:**
+A chapter can score high on PBI but low on LitCentral = literature-ready, not yet evidence-ready. Both states are valid. Investigate which dimension is failing on which instrument before revising.
 
 ### Instrument 1 — LitCentral OMEGA (150-pt) · PRIMARY for literary submission
 

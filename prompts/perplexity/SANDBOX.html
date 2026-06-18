@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Perplexity Prompt Sandbox — SGT George Ramos</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Georgia', serif;
+    background: #0d0d0d;
+    color: #e0d8c8;
+    min-height: 100vh;
+  }
+
+  header {
+    background: #1a1a1a;
+    border-bottom: 2px solid #8b3a3a;
+    padding: 20px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  header h1 {
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+    color: #c8a882;
+    text-transform: uppercase;
+  }
+
+  header .scores {
+    font-size: 0.8rem;
+    color: #888;
+    text-align: right;
+    line-height: 1.6;
+  }
+
+  header .scores span {
+    color: #c8a882;
+    font-weight: bold;
+  }
+
+  .status-bar {
+    background: #111;
+    padding: 8px 32px;
+    font-size: 0.75rem;
+    color: #666;
+    border-bottom: 1px solid #222;
+    display: flex;
+    gap: 24px;
+  }
+
+  .status-bar .lock { color: #8b3a3a; }
+  .status-bar .gap { color: #a07040; }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 24px;
+  }
+
+  .section-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #555;
+    margin-bottom: 16px;
+    margin-top: 36px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #222;
+  }
+
+  .prompt-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 16px;
+  }
+
+  .prompt-card {
+    background: #161616;
+    border: 1px solid #2a2a2a;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: border-color 0.15s;
+  }
+
+  .prompt-card:hover {
+    border-color: #8b3a3a;
+  }
+
+  .card-header {
+    padding: 14px 18px 10px;
+    background: #1a1a1a;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .card-number {
+    font-size: 0.65rem;
+    color: #8b3a3a;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .card-title {
+    font-size: 0.95rem;
+    color: #c8a882;
+    margin-top: 3px;
+    line-height: 1.3;
+  }
+
+  .card-mode {
+    font-size: 0.68rem;
+    background: #222;
+    color: #888;
+    padding: 2px 8px;
+    border-radius: 2px;
+    white-space: nowrap;
+    margin-left: 8px;
+  }
+
+  .card-desc {
+    padding: 10px 18px;
+    font-size: 0.8rem;
+    color: #888;
+    line-height: 1.5;
+    border-bottom: 1px solid #222;
+  }
+
+  .prompt-text {
+    padding: 14px 18px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.72rem;
+    color: #aaa;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    max-height: 200px;
+    overflow-y: auto;
+    background: #111;
+    border-bottom: 1px solid #222;
+  }
+
+  .prompt-text::-webkit-scrollbar { width: 4px; }
+  .prompt-text::-webkit-scrollbar-track { background: #111; }
+  .prompt-text::-webkit-scrollbar-thumb { background: #333; }
+
+  .card-footer {
+    padding: 10px 18px;
+    display: flex;
+    gap: 8px;
+  }
+
+  .btn {
+    font-family: 'Georgia', serif;
+    font-size: 0.75rem;
+    padding: 6px 14px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  .btn-copy {
+    background: #8b3a3a;
+    color: #f0e8d8;
+  }
+  .btn-copy:hover { background: #a04545; }
+  .btn-copy.copied { background: #2a5a2a; color: #8fcc8f; }
+
+  .btn-perplexity {
+    background: #1e2a3a;
+    color: #7aadcc;
+    border: 1px solid #2a3a4a;
+  }
+  .btn-perplexity:hover { background: #243040; }
+
+  /* Fast track card */
+  .prompt-card.fast-track {
+    border-color: #a07040;
+    grid-column: 1 / -1;
+  }
+
+  .prompt-card.fast-track .card-header {
+    background: #1c1810;
+  }
+
+  .prompt-card.fast-track .card-title {
+    color: #d4a060;
+  }
+
+  .fast-track-fields {
+    padding: 14px 18px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    background: #131210;
+    border-bottom: 1px solid #222;
+  }
+
+  .field-group label {
+    display: block;
+    font-size: 0.68rem;
+    color: #666;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .field-group input,
+  .field-group select,
+  .field-group textarea {
+    width: 100%;
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    color: #c8a882;
+    padding: 6px 10px;
+    font-size: 0.78rem;
+    font-family: 'Georgia', serif;
+    border-radius: 3px;
+    outline: none;
+  }
+
+  .field-group input:focus,
+  .field-group select:focus,
+  .field-group textarea:focus {
+    border-color: #8b3a3a;
+  }
+
+  .field-group textarea {
+    resize: vertical;
+    min-height: 72px;
+  }
+
+  .field-group select option {
+    background: #1a1a1a;
+  }
+
+  .generated-prompt {
+    padding: 14px 18px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.72rem;
+    color: #b0c8a0;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    background: #0e120e;
+    border-bottom: 1px solid #222;
+    min-height: 80px;
+    display: none;
+  }
+
+  .governance-note {
+    background: #1c1010;
+    border: 1px solid #5a2020;
+    border-radius: 4px;
+    padding: 14px 18px;
+    font-size: 0.78rem;
+    color: #cc8888;
+    line-height: 1.5;
+  }
+
+  .governance-note strong {
+    color: #ee9999;
+    display: block;
+    margin-bottom: 4px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+  }
+
+  .quick-ref {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 8px;
+  }
+
+  .ref-box {
+    background: #161616;
+    border: 1px solid #2a2a2a;
+    border-radius: 3px;
+    padding: 12px 16px;
+    font-size: 0.78rem;
+  }
+
+  .ref-box h4 {
+    font-size: 0.68rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+  }
+
+  .ref-box ul {
+    list-style: none;
+    line-height: 1.8;
+  }
+
+  .ref-box ul li::before {
+    content: "— ";
+    color: #8b3a3a;
+  }
+
+  .ref-box .banned { color: #cc7777; }
+  .ref-box .present { color: #7aaa7a; }
+  .ref-box .absent { color: #cc9955; }
+
+  @media (max-width: 600px) {
+    .prompt-grid { grid-template-columns: 1fr; }
+    .fast-track-fields { grid-template-columns: 1fr; }
+    .quick-ref { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div style="font-size:0.7rem;color:#555;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:4px;">Perplexity Prompt Sandbox</div>
+    <h1>SGT George Ramos: The Mathematics of Vietnam</h1>
+  </div>
+  <div class="scores">
+    LitCentral OMEGA: <span>137.4</span> · Omega Elite<br>
+    SPSS Ω: <span>107.18</span> · Ch.01<br>
+    PBI: <span>90.4</span> · Above winner avg
+  </div>
+</header>
+
+<div class="status-bar">
+  <span class="lock">⚑ Ch.01 ending locked — "Still here."</span>
+  <span class="gap">Gap: jasmine-napalm · diesel-sweat · yerba buena (3 inserts pending)</span>
+  <span>Ch.39 → fastest Ω=111 · one SII insert</span>
+</div>
+
+<div class="container">
+
+  <!-- FAST TRACK -->
+  <div class="section-label">Fast Track — Chapter Targeted Research</div>
+
+  <div class="prompt-grid">
+    <div class="prompt-card fast-track" id="card-fast">
+      <div class="card-header">
+        <div>
+          <div class="card-number">Prompt 06 · Fast Research</div>
+          <div class="card-title">Single Chapter Score-Targeted Lookup</div>
+        </div>
+        <span class="card-mode">Academic</span>
+      </div>
+      <div class="card-desc">
+        Fill the fields — the prompt builds automatically. Use before any revision session. 30–60 min turnaround.
+      </div>
+
+      <div class="fast-track-fields">
+        <div class="field-group">
+          <label>Chapter Title</label>
+          <input type="text" id="ft-chapter" placeholder="e.g. Chapter 39: When Compadres Fall"
+                 value="Chapter 39: When Compadres Fall" oninput="buildFastPrompt()">
+        </div>
+        <div class="field-group">
+          <label>Target Improvement</label>
+          <select id="ft-target" onchange="buildFastPrompt()">
+            <option value="sensory grounding (SII)">Sensory grounding (SII)</option>
+            <option value="historical authenticity (BR)">Historical authenticity (BR)</option>
+            <option value="character specificity (BIS)">Character specificity (BIS)</option>
+            <option value="cultural accuracy (CS)">Cultural accuracy (CS)</option>
+          </select>
+        </div>
+        <div class="field-group" style="grid-column:1/-1">
+          <label>Chapter Summary (1–2 sentences)</label>
+          <textarea id="ft-summary" oninput="buildFastPrompt()"
+                    placeholder="What does this chapter do?">Two Chicano soldiers, one wounded, the other refusing to leave him, in the Central Highlands, 1968.</textarea>
+        </div>
+        <div class="field-group">
+          <label>Detail 1 — what you need verified</label>
+          <input type="text" id="ft-d1" oninput="buildFastPrompt()"
+                 value="Central Highlands terrain smell in the rainy season (May–Sep)">
+        </div>
+        <div class="field-group">
+          <label>Detail 2</label>
+          <input type="text" id="ft-d2" oninput="buildFastPrompt()"
+                 value="Army medevac radio procedure and codes, 1968">
+        </div>
+        <div class="field-group">
+          <label>Detail 3</label>
+          <input type="text" id="ft-d3" oninput="buildFastPrompt()"
+                 value="Is copal smoke plausible for a Chicano/Yaqui soldier in this terrain?">
+        </div>
+      </div>
+
+      <div class="generated-prompt" id="ft-output"></div>
+
+      <div class="card-footer">
+        <button class="btn btn-copy" onclick="copyGenerated()">Copy Prompt</button>
+        <a class="btn btn-perplexity" href="https://www.perplexity.ai" target="_blank" rel="noopener">Open Perplexity ↗</a>
+        <span style="font-size:0.72rem;color:#555;margin-left:auto;align-self:center;">Focus: Academic</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATIC PROMPTS -->
+  <div class="section-label">Research Prompts — Full Library</div>
+
+  <div class="prompt-grid">
+
+    <div class="prompt-card" id="card-01">
+      <div class="card-header">
+        <div>
+          <div class="card-number">Prompt 01</div>
+          <div class="card-title">Yaqui Ceremony &amp; Cosmology</div>
+        </div>
+        <span class="card-mode">Academic</span>
+      </div>
+      <div class="card-desc">Huya ania · yoania · Pahko ceremony · Surem · Vietnam-era Yaqui veterans. Flag restricted content.</div>
+      <div class="prompt-text" id="pt-01">I am researching Yaqui (Yoeme) Nation ceremonial traditions and cosmology for a historical fiction novel set during the Vietnam War. The protagonist is a Yaqui soldier navigating between two worlds. I need academically grounded, culturally respectful information.
+
+Please search for and summarize:
+
+1. Huya ania and yoania — the "wilderness world" and "flower world" in Yaqui cosmology. What do these realms mean? How do initiates enter them? What are the sensory markers (sound, smell, physical sensation) associated with crossing between them?
+
+2. Pahko ceremony structure — the Deer Dance and its relationship to the flower world. What happens physically and spiritually during the ceremony? Who officiates? What role does the Maso (Deer Dancer) play?
+
+3. Surem — the "little people" or ancient Yaqui ancestors. What is their relationship to the Yaqui people today? Do they appear in ceremony?
+
+4. Vietnam-era Yaqui veterans — are there documented accounts of Yaqui men who served in Vietnam? Any oral histories or academic work on how Indigenous veterans reconciled military service with ceremonial obligation?
+
+5. Academic sources — prioritize University of Arizona, NAU, UTEP, and Yaqui Nation tribal college publications. Note any sources that are restricted from non-tribal publication.
+
+Format: numbered findings with source URLs. Flag any content that Yaqui cultural governance considers restricted from outsider publication.</div>
+      <div class="card-footer">
+        <button class="btn btn-copy" onclick="copyCard('pt-01', this)">Copy</button>
+        <a class="btn btn-perplexity" href="https://www.perplexity.ai" target="_blank" rel="noopener">Perplexity ↗</a>
+      </div>
+    </div>
+
+    <div class="prompt-card" id="card-02">
+      <div class="card-header">
+        <div>
+          <div class="card-number">Prompt 02</div>
+          <div class="card-title">Chicano Vietnam Historical</div>
+        </div>
+        <span class="card-mode">Academic</span>
+      </div>
+      <div class="card-desc">Casualty rates · weapons (M60 not M249) · ID cards · Khe Sanh · Chicano Moratorium · code-switching.</div>
+      <div class="prompt-text" id="pt-02">I am fact-checking a historical fiction novel about a Mexican-American (Chicano) soldier in Vietnam, 1965–1972. I need verified historical details to avoid anachronisms and ensure authentic representation.
+
+Please research and confirm:
+
+1. Chicano casualty rates in Vietnam — what percentage of Vietnam casualties were Mexican-American? Was there documented disproportionate front-line deployment? Cite specific studies (Chicano Moratorium, NARA data, or academic sources).
+
+2. Standard infantry weapons 1965–1968 — what rifle/machine gun combinations were standard for Army infantry units in the Central Highlands during this period? Specifically: was the M60 the standard squad automatic weapon in 1966–1967? (I need to verify against M249 SAW, which was not fielded until 1984.)
+
+3. Military ID cards 1960s — what did standard Army ID cards (DD Form 2) look like in 1966–1967? Were they magnetic stripe, punched card, or plain laminate? (Magnetic stripe was not standard military issue until the 1980s.)
+
+4. Khe Sanh timeline — the Siege of Khe Sanh ran January 21 – July 9, 1968. What units were involved? Was the 101st Airborne present, or primarily Marines? What was the terrain and weather during the siege?
+
+5. Chicano Moratorium 1970 — what was the stated position of the Chicano Moratorium movement on Vietnam? Who were the key figures? What happened at the August 29, 1970 Los Angeles demonstration?
+
+6. Spanglish / code-switching in 1960s–70s — what does linguistic research say about how Chicano soldiers code-switched between Spanish and English during this era? Were there documented patterns of borrowing vs. full switching?
+
+Format: numbered findings, source URL per finding, confidence level (confirmed / probable / uncertain).</div>
+      <div class="card-footer">
+        <button class="btn btn-copy" onclick="copyCard('pt-02', this)">Copy</button>
+        <a class="btn btn-perplexity" href="https://www.perplexity.ai" target="_blank" rel="noopener">Perplexity ↗</a>
+      </div>
+    </div>
+
+    <div class="prompt-card" id="card-03">
+      <div class="card-header">
+        <div>
+          <div class="card-number">Prompt 03</div>
+          <div class="card-title">Chicano Literature &amp; Genre</div>
+        </div>
+        <span class="card-mode">Writing</span>
+      </div>
+      <div class="card-desc">Anaya technique · Rivera fragmented memory · Chicano vs. Latin American magical realism · battle mysticism without register collapse.</div>
+      <div class="prompt-text" id="pt-03">I am writing a Chicano Vietnam War historical fiction novel and need to understand the literary tradition I am working within. Please research:
+
+1. Foundational Chicano novels featuring Vietnam or military service — are there published Chicano novels that deal with Vietnam combat experience? Who are the authors? How do they handle the intersection of barrio identity, Catholicism, and war trauma?
+
+2. Rudolfo Anaya's technique in Bless Me, Ultima — how does Anaya blend curandera mysticism with realist narrative without breaking the narrative voice? What specific techniques keep the supernatural grounded?
+
+3. Tomás Rivera's "...y no se lo tragó la tierra" — how does Rivera handle fragmented memory and collective Chicano identity? What is the relationship between individual chapters and the whole?
+
+4. Magical realism in Chicano vs. Latin American tradition — how does the Chicano magical realism tradition differ from García Márquez or Isabel Allende? Specifically: how do Chicano authors handle Indigenous spiritual elements vs. Catholic folk elements?
+
+5. Battle mysticism in literary fiction — are there examples of literary fiction (any tradition) where combat is rendered as spiritual transformation without losing realist grounding? Specifically: how do authors avoid generic "warrior mysticism" shorthand while still conveying transcendence?
+
+6. Academic Chicano literary criticism — what journals or critics are the primary voices for Chicano literary studies? (I need to verify my novel's register against scholarly frameworks, not just popular reception.)
+
+Format: numbered findings, source URL, 2-3 sentence summary per finding.</div>
+      <div class="card-footer">
+        <button class="btn btn-copy" onclick="copyCard('pt-03', this)">Copy</button>
+        <a class="btn btn-perplexity" href="https://www.perplexity.ai" target="_blank" rel="noopener">Perplexity ↗</a>
+      </div>
+    </div>
+
+    <div class="prompt-card" id="card-04">
+      <div class="card-header">
+        <div>
+          <div class="card-number">Prompt 04</div>
+          <div class="card-title">Publishing &amp; Market Positioning</div>
+        </div>
+        <span class="card-mode">Writing</span>
+      </div>
+      <div class="card-desc">Agents · presses · market comps · sensitivity readers · LOC submission · Pulitzer eligibility.</div>
+      <div class="prompt-text" id="pt-04">I have completed a Chicano Vietnam War literary fiction novel (45 chapters, ~90,000 words). I need to understand the current publishing landscape for this work.
+
+Please research:
+
+1. Literary agents currently representing Chicano/Latinx literary fiction — who are the active agents? Which agencies have sold comparable titles in the last 5 years?
+
+2. Independent and university presses for Chicano/Latinx literary fiction — Arte Público Press, Bilingual Press, University of New Mexico Press, University of Arizona Press, and others. What are their submission windows and manuscript requirements?
+
+3. Comparable titles published 2015–2025 — what Chicano or Latinx Vietnam War novels have been published? How were they received? What were their sales trajectories?
+
+4. Sensitivity readers for Yaqui Nation content — are there professional sensitivity readers with verified Yaqui Nation cultural competency? (This is a specific requirement — Yaqui, not general Indigenous or Mexican-American.)
+
+5. Pulitzer Prize eligibility — what are the submission requirements for the Pulitzer Prize for Fiction? Who submits (publishers, not authors directly)? What is the timeline?
+
+6. Library of Congress / American Memory Project — does the LOC accept literary manuscripts for the American Memory collection? What is the submission process for works documenting Chicano Vietnam War experience?
+
+Format: numbered findings, source URL, actionable next step per finding.</div>
+      <div class="card-footer">
+        <button class="btn btn-copy" onclick="copyCard('pt-04', this)">Copy</button>
+        <a class="btn btn-perplexity" href="https://www.perplexity.ai" target="_blank" rel="noopener">Perplexity ↗</a>
+      </div>
+    </div>
+
+    <div class="prompt-card" id="card-05">
+      <div class="card-header">
+        <div>
+          <div class="card-number">Prompt 05</div>
+          <div class="card-title">Sensory Detail Verification</div>
+        </div>
+        <span class="card-mode">Academic</span>
+      </div>
+      <div class="card-desc">Jasmine + napalm · cordite accuracy · copal in Yaqui ceremony · Sonoran Desert dusk · 60Hz institutional hum.</div>
+      <div class="prompt-text" id="pt-05">I am writing a Vietnam War novel and need to verify specific sensory details for authenticity. Please research each of the following:
+
+1. Jasmine in Vietnam — does jasmine grow in the Mekong Delta and Central Highlands regions? What does it smell like in proximity to burning? Are there veteran accounts that specifically mention jasmine smell during combat operations? What is the scientific name of the dominant jasmine species in South Vietnam?
+
+2. Napalm smell — what do veteran accounts say about the specific smell of napalm (MK-77 incendiary)? Is "jasmine and napalm" a documented sensory combination in Vietnam War veteran memoirs or oral histories?
+
+3. Cordite smell — is "cordite" the accurate term for the smell of discharged firearms in 1966–1968 Vietnam? (Cordite was largely replaced by other propellants by WWII — what is the technically accurate term for the propellant smell in M16/M60 ammunition of this era?)
+
+4. Copal incense — is copal used in Yaqui ceremony specifically, or is it primarily Aztec/Mexica? What does copal smell like vs. other incenses? Are there documented accounts of Yaqui ceremonial use of copal?
+
+5. Sonoran Desert terrain specifics — what are the dominant sensory features of the Sonoran Desert in southern Arizona/northern Sonora in summer? Specific plants, smells, sounds at dusk. What does the ground feel like underfoot?
+
+6. 60Hz electrical hum — is 60Hz the correct frequency for US institutional electrical hum (fluorescent lighting, transformers)? Would a 1966 US military base in Vietnam use US-standard 60Hz or local Vietnamese 50Hz electrical systems?
+
+Format: numbered findings, source URL, verdict (confirmed accurate / needs adjustment / uncertain).</div>
+      <div class="card-footer">
+        <button class="btn btn-copy" onclick="copyCard('pt-05', this)">Copy</button>
+        <a class="btn btn-perplexity" href="https://www.perplexity.ai" target="_blank" rel="noopener">Perplexity ↗</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- GOVERNANCE -->
+  <div class="section-label">Governance</div>
+
+  <div class="governance-note">
+    <strong>P0 — Non-Negotiable</strong>
+    Yaqui Nation consultation required before any Yaqui ceremony content is published. Research ≠ permission.
+    Do not extrapolate ceremony detail beyond what is already in the chapter.
+    Any content flagged as culturally restricted by Perplexity results must be cleared through
+    tribal consultation before it enters the manuscript.
+  </div>
+
+  <!-- QUICK REFERENCE -->
+  <div class="section-label">Quick Reference</div>
+
+  <div class="quick-ref">
+    <div class="ref-box">
+      <h4>Register — Banned Phrases</h4>
+      <ul>
+        <li class="banned">"a language older than words"</li>
+        <li class="banned">"cosmic rhythm"</li>
+        <li class="banned">"burned in the soul / eyes / heart"</li>
+        <li class="banned">"he felt a presence"</li>
+        <li class="banned">"something he could not name"</li>
+        <li class="banned">"time seemed to stop"</li>
+        <li class="banned">"suddenly" · "very" · "really"</li>
+        <li class="banned">"began to" / "started to"</li>
+        <li class="banned">"seemed" / "appeared" / "felt" (filter)</li>
+      </ul>
+    </div>
+    <div class="ref-box">
+      <h4>Sensory Constants — Ch.01 Status</h4>
+      <ul>
+        <li class="present">60Hz institutional hum ✓</li>
+        <li class="present">Copper / blood ✓</li>
+        <li class="present">Copal ✓</li>
+        <li class="absent">Jasmine + napalm — INSERT NEEDED</li>
+        <li class="absent">Diesel + jungle rot — INSERT NEEDED</li>
+        <li class="absent">Yerba buena — INSERT NEEDED</li>
+      </ul>
+    </div>
+    <div class="ref-box">
+      <h4>Scoring — Three Instruments</h4>
+      <ul>
+        <li><strong style="color:#c8a882">LitCentral OMEGA</strong> — PRIMARY (150-pt, submission)</li>
+        <li><strong style="color:#c8a882">SPSS Ω</strong> — internal craft diagnostic (111-pt)</li>
+        <li><strong style="color:#c8a882">PBI</strong> — Pulitzer positioning (100-pt)</li>
+        <li>Ch.01: 137.4 · 107.18 · 90.4</li>
+      </ul>
+    </div>
+    <div class="ref-box">
+      <h4>Fastest Path to Ω = 111</h4>
+      <ul>
+        <li>Ch.39 — SII only weak component</li>
+        <li>Use Prompt 06 → Central Highlands sensory</li>
+        <li>One 200-word insert → Ω ≥ 111.0</li>
+        <li>Ch.01 three inserts: +1.8Ω projected</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function buildFastPrompt() {
+  const chapter = document.getElementById('ft-chapter').value || '[CHAPTER TITLE]';
+  const summary = document.getElementById('ft-summary').value || '[chapter summary]';
+  const target = document.getElementById('ft-target').value;
+  const d1 = document.getElementById('ft-d1').value || '[detail 1]';
+  const d2 = document.getElementById('ft-d2').value || '[detail 2]';
+  const d3 = document.getElementById('ft-d3').value || '[detail 3]';
+
+  const prompt = `I am revising "${chapter}" of a Vietnam War literary fiction novel.
+This chapter covers: ${summary}
+
+I need 3–5 verified facts or sensory details I can insert to strengthen ${target}.
+
+Specifically I need:
+
+- ${d1}
+- ${d2}
+- ${d3}
+
+For each, give me:
+1. The verified fact
+2. A single source URL
+3. One example sentence showing how the detail could appear in literary prose
+   (third-person limited, present-to-past reflection, analytical register —
+   sensor metaphor, not generic mystical language)
+
+Keep responses tight — one paragraph per finding, source, example sentence. No summaries.`;
+
+  const out = document.getElementById('ft-output');
+  out.style.display = 'block';
+  out.textContent = prompt;
+}
+
+function copyGenerated() {
+  const out = document.getElementById('ft-output');
+  const text = out.textContent;
+  if (!text) return;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = event.target;
+    btn.textContent = 'Copied ✓';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'Copy Prompt';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+
+function copyCard(id, btn) {
+  const text = document.getElementById(id).textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = 'Copied ✓';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'Copy';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+
+// Build on load
+buildFastPrompt();
+</script>
+</body>
+</html>

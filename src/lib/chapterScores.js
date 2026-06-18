@@ -35,8 +35,10 @@ export const ACT_BANDS = [
 
 // [Ch#, Ω, CLS, BIS, SII, MRF, RRP, "Title", "Act", FixPriority]
 // Source: SGTRamos_SPSS_Chapter_Scoring_Workbook.xlsx
+// Ch.01 updated to CR-1.0-DELTA CERTIFIED values (2026-06-18). All other
+// chapters remain at v13 audit baseline pending their own CR cycles.
 const RAW = [
-  [1, 106.0, 85.0, 84.0, 90.0, 95.0, 87.0, "The Sacred Mountain Revelation", "I", "LOW"],
+  [1, 113.35, 86.0, 87.0, 82.0, 82.0, 95.0, "The Sacred Mountain Revelation", "I", "CERT"],
   [2, 105.0, 79.0, 90.0, 93.0, 78.0, 83.0, "Descent Into Baptism", "I", "MED"],
   [3, 108.0, 99.0, 90.0, 92.0, 88.0, 93.0, "The Genocide Algorithm", "I", "LOW"],
   [4, 106.0, 84.0, 91.0, 93.0, 81.0, 86.0, "Pentagon December 1969", "I", "LOW"],

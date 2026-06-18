@@ -20,9 +20,11 @@ const PAD = { top: 24, right: 28, bottom: 56, left: 52 };
 const PLOT_W = W - PAD.left - PAD.right;
 const PLOT_H = H - PAD.top - PAD.bottom;
 
-// Real workbook range — Ω lives 105-110, CLS lives 75-99
+// Real workbook range — Ω baseline lives 105-110; CR-1.0 certified chapters
+// reach 113+ (Ch.01 = 113.35). CLS lives 75-99. Y ceiling at 116 so the
+// Ω ≥ 115.5 manuscript target line is visible and certified points don't clip.
 const Y_MIN = 70;
-const Y_MAX = 112;
+const Y_MAX = 116;
 
 const ACT_TINT = {
   teal:   "rgba(46, 196, 182, 0.10)",

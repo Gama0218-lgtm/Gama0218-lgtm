@@ -365,3 +365,38 @@ Synthesizing Ω + PV + SSI + MPE against the framework's own ranges:
 indices in this report are internal diagnostic outputs and must be
 labelled as such in any agent, academic, or award-facing context until
 the Three-Gate validation programme completes.*
+
+---
+
+## 10 · CR-1.0 DELTA addendum (2026-06-18)
+
+**Ch.01 *The Sacred Mountain Revelation* — CERTIFIED ★.** Ω = **113.35**
+(up from 106 baseline), all 8 CR-1.0 benchmarks pass at the strict ≥ 112
+cutoff. First chapter through the Certified Revision pipeline. See
+[`SGT_RAMOS_CR1_DELTA_Ch01.md`](./SGT_RAMOS_CR1_DELTA_Ch01.md) for the full
+brief and [`SGT_RAMOS_CR1_DELTA_Omega_Ch01_CERTIFIED.xlsx`](./SGT_RAMOS_CR1_DELTA_Omega_Ch01_CERTIFIED.xlsx)
+for the source workbook.
+
+### Manuscript-level impact
+- **Manuscript Ω̄ target raised:** ≥ 115.5 (was implicit "≥ 105 across all").
+- **Current gap to target:** 7.51 pts (was 10.56 at v12 baseline).
+- **6-sprint plan** booked to drive the rest of the chapters through CR
+  cycles (S1 done; S2-S6 queued).
+
+### New audit flags (folded into §6)
+- **DUP-001 · Ch.17 ↔ Ch.18** — 90% overlap, 4,729 words at risk, CLS + BIS hit · UNRESOLVED 🔴
+- **DUP-002 · Ch.14 ↔ Ch.22** — 86% overlap · UNRESOLVED 🔴
+- **DUP-003 · Ch.26 ↔ Ch.27** — 67% overlap · UNRESOLVED 🟡
+- Ch.34 artifact (`LITCENTRAL_PASS2` trailing line) · OPEN 🔴
+- Ch.24 artifact (`2/2` page number) · OPEN 🔴
+- Ch.36 underweight (3,706 w → ~4,500 w target) · OPEN 🟠
+
+The Ch.9/10 700-line duplication remains the headline CRITICAL flag, but it
+is no longer alone — DUP-001 (Ch.17/18 at 90%) is the next-highest-risk
+structural finding and should be paired with it in S3.
+
+### What the Ω/CLS Trend tab now shows
+Ch.01 jumps from the floor band (105-106) to **the highest point on the
+chart at 113.35**, well above the 107.34 manuscript mean and approaching
+the 115.5 submission-ready target line. Y-axis ceiling raised to 116 so
+the certified point and the target line both render.

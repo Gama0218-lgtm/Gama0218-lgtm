@@ -8,6 +8,35 @@
 
 ---
 
+## CANON LOCKS — DO NOT CHANGE WITHOUT AUTHOR APPROVAL
+
+These elements are **permanently frozen**. No revision pass, scoring session, AI editorial pass, or collaborator may alter them. If any tool or person changes these, restore them immediately.
+
+### CH.01 — FINAL THREE LINES (LOCKED)
+
+```
+George did not find peace that night. He found orientation. He found the ability to hold what he had carried
+for fifty years without going under.
+
+He found north.
+
+That was enough to stand on. That was the beginning of the next sentence. He stayed in the dark and breathed,
+and the dark did not ask him to be anything other than what he was: a man with a debt, still standing, still
+present, still accountable to the names.
+
+Still here.
+```
+
+**What this means:** Liberation as orientation, not resolution. George does not find peace. He finds the ability to hold the weight without going under. "Still here" = present, accountable, alive.
+
+**Register:** orientation / north / accountable to the names / still here — analytical register throughout. No banned phrases. Author-confirmed.
+
+**History:** Previous locked ending was "He did not go. For the first time in fifty years. He did not go." — also valid, also in register. This version (author-written) is longer, breathes more, ends on presence. Author confirmed this is the canonical ending.
+
+**Instruction to AI:** Do not change these lines. Do not compress them. Do not "improve" them. Do not revert to the prior version. This is the ending.
+
+---
+
 ## Executive Summary
 
 LitCentral v13 represents a comprehensive modernization of the manuscript audit and revision platform. The release introduces the **Three-Gate Quality Program**, resolves critical schema drift issues, and implements an evidence-rigor audit engine with task-driven revision workflows.

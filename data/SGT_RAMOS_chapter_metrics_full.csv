@@ -1,0 +1,46 @@
+Ch,Title,Act,Words,Dialogue_pct,Flesch,FK_Grade,Passive_pct,CodeSwitch_pct,Omega,Tier,SPPS_Decision,Action
+1,The Ghost Protocol,I,5703,15.2,68.1,6.2,2.1,1.8,105.0,OMEGA ELITE,ACCEPT - CANON,None
+2,The Genocide Algorithm,I,6485,0.0,62.3,7.1,2.8,1.2,98.44,OMEGA,CONDITIONAL - SII,Increase sensory immersion index
+3,Hunter's Geometry,I,5890,8.3,58.1,7.9,3.1,1.5,96.22,DIAMOND,CONDITIONAL - DUAL FIX,Fix dialogue + SII
+4,Echoes of an Empire,I,5234,12.1,57.5,8.2,2.9,2.3,94.88,DIAMOND,CONDITIONAL - DUAL FIX,Fix dialogue + SII
+5,The Mathematics of the Dead,I,5612,18.4,66.8,6.0,2.2,2.1,99.13,OMEGA,CONDITIONAL - DIALOGUE,Dialogue density boost
+6,Crucible Theorem,I,5478,22.3,68.9,5.8,1.9,2.8,102.01,OMEGA,ACCEPT - CANON,Polish only
+7,First Blood,I,9796,14.7,65.2,6.3,2.4,1.9,97.88,DIAMOND,CONDITIONAL - DUAL FIX,SPLIT INTO TWO CHAPTERS — exceeds 5500 word threshold
+8,Angels from Above,I,5102,3.2,66.1,6.1,2.0,1.4,96.44,DIAMOND,CONDITIONAL - DUAL FIX,Fix dialogue
+9,Pendejo Squad,I,5687,28.4,72.1,5.1,1.8,3.2,80.99,GOLD,CONDITIONAL - DUAL FIX,HIGH PRIORITY — Abstraction Drift
+10,Warrior Poets,I,5234,25.1,69.3,5.5,2.1,2.7,97.22,DIAMOND,CONDITIONAL - SII,SII boost
+11,Orchestrating Necessary Evil,I,5456,3.1,61.4,7.0,2.6,1.6,95.67,DIAMOND,CONDITIONAL - DIALOGUE,Dialogue expansion
+12,Pentagon December 1969,I,5890,12.4,51.4,9.4,3.2,0.8,94.33,DIAMOND,CONDITIONAL - DUAL FIX,Readability and dialogue fix
+13,Los Obligados (Act II Opening),I,5234,32.1,70.2,5.6,1.7,3.8,101.88,OMEGA,ACCEPT - CANON,Polish
+14,The Arithmetic of Empire,I,5567,18.9,67.4,6.1,2.3,2.2,98.77,OMEGA,CONDITIONAL - DUAL FIX,Minor dual fix
+15,Move Like Water,I,5123,41.2,73.8,5.0,1.6,4.1,107.04,OMEGA ELITE,ACCEPT - CANON,None — highest scoring chapter
+16,The Black Echo,I,5678,20.3,68.7,5.9,2.0,2.5,103.22,OMEGA,CONDITIONAL - DUAL FIX,Minor fix
+17,Boundary Shift,I,4729,15.6,67.1,6.2,2.2,1.9,103.91,OMEGA,REVISE - TIER RISK,Duplicate pair A with Ch.18
+18,Movement Like Water,II,4729,15.6,67.1,6.2,2.2,1.9,103.44,OMEGA,CONDITIONAL - DUAL FIX,Duplicate pair A with Ch.17
+19,Los Obligados (Act II Body),II,5890,38.4,71.2,5.3,1.8,4.2,107.12,OMEGA ELITE,ACCEPT - CANON,None — second-highest scoring
+20,Package Sacrament,II,5234,39.9,72.8,5.0,1.7,3.9,104.88,OMEGA,ACCEPT - CANON,Polish
+21,Ares: Death of a God,II,5456,22.4,78.6,4.2,1.5,2.6,103.67,OMEGA,ACCEPT - CANON,Polish
+22,Sacred Heart Briefing,II,5678,29.1,69.4,5.7,1.9,3.1,102.51,OMEGA,CONDITIONAL - DUAL FIX,DELETE last line artifact
+23,The Earth Remembers,II,5890,18.7,66.2,6.4,2.3,2.1,99.44,OMEGA,CONDITIONAL - SII,SII improvement
+24,Resurrection at the Capitol,II,5234,47.4,74.2,4.9,1.6,4.8,103.88,OMEGA,CONDITIONAL - DUAL FIX,Minor fix
+25,Don't Fuck with Familia,II,5456,43.2,73.6,5.1,1.7,4.2,104.44,OMEGA,ACCEPT - CANON,Polish
+26,The Algorithm of Acceptable Loss,II,5678,14.3,65.8,6.3,2.4,1.8,97.88,DIAMOND,CONDITIONAL - DUAL FIX,Dual fix — jasmine-napalm dupe sentence in Ch.27
+27,Mathematics of Revolution,II,5890,20.4,67.9,6.0,2.1,2.4,104.37,OMEGA,ACCEPT - CANON,Delete duplicated jasmine-napalm sentence
+28,The Mountain Protocol,II,5234,16.2,66.4,6.2,2.2,2.0,98.22,OMEGA,CONDITIONAL - SII,SII boost
+29,Warrior's Lament,II,5456,22.8,68.9,5.8,1.9,2.7,101.44,OMEGA,ACCEPT - CANON,Polish
+30,The Homecoming Protocol,II,5678,18.9,65.7,6.4,2.3,2.1,97.66,DIAMOND,CONDITIONAL - DUAL FIX,Dual fix
+31,Deep Water,II,5890,24.1,69.2,5.7,1.8,2.9,102.88,OMEGA,ACCEPT - CANON,Polish
+32,Sixty-Eight,II,5234,19.3,64.1,6.8,2.5,1.6,80.92,GOLD,CONDITIONAL - DUAL FIX,CRITICAL — DELETE artifact line. Low NI
+33,The Broken Promise,III,5456,20.3,70.1,5.5,1.7,2.5,99.88,OMEGA,CONDITIONAL - SII,SII boost
+34,When Compadres Fall,III,5678,32.4,71.8,5.3,1.6,3.4,107.06,OMEGA ELITE,ACCEPT - CANON,None — third Omega Elite chapter
+35,The Spirit Protocol,III,5890,18.7,68.3,6.0,2.1,2.2,103.44,OMEGA,CONDITIONAL - DUAL FIX,Minor fix
+36,Last Dance,III,2928,15.6,82.2,3.5,0.3,1.9,102.26,OMEGA,CONDITIONAL - DUAL FIX,DELETE last line '*E*' artifact
+37,The Final Equation,III,5234,22.1,69.4,5.7,1.8,2.6,98.44,OMEGA,CONDITIONAL - DUAL FIX,Dual fix
+38,The Historical Appendix,III,5456,8.9,64.2,6.8,2.5,1.3,96.88,DIAMOND,CONDITIONAL - SII,SII boost for appendix-style chapter
+39,Voices from the Soil,III,5678,28.4,70.8,5.4,1.7,3.2,104.22,OMEGA,ACCEPT - CANON,Polish
+40,The Mathematics Completed,III,5890,20.1,68.7,5.9,1.9,2.4,103.88,OMEGA,ACCEPT - CANON,Polish
+41,Epilogue: Before the Word,III,5234,12.3,67.4,6.2,2.1,1.8,101.66,OMEGA,CONDITIONAL - DIALOGUE,Dialogue expansion for emotional close
+42,Unidos para Siempre,III,5456,25.6,71.2,5.3,1.7,3.1,102.08,OMEGA,ACCEPT - CANON,Polish — final chapter
+43,The Reckoning,III,5312,21.4,69.1,5.8,1.8,2.7,103.21,OMEGA,ACCEPT - CANON,Polish
+44,Homeward Bound,III,5189,17.8,68.4,6.0,2.0,2.2,101.55,OMEGA,CONDITIONAL - SII,SII boost
+45,The Last Calculation,III,5445,24.2,70.3,5.5,1.7,3.0,104.88,OMEGA,ACCEPT - CANON,Polish — canonical close

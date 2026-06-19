@@ -61,6 +61,15 @@ Ceiling (all-100): 114.593
 Transcendent target: Ω 115 — unreachable by formula
 ```
 
+**⛔ CEILING IS NON-NEGOTIABLE — MATHEMATICAL ABSOLUTE**
+114.593 is the formula ceiling when ALL four components = 100 simultaneously.
+No prose change, no language revision, no author decision can exceed this value within this formula.
+Do NOT suggest "Gabriel can change language to exceed the ceiling."
+Do NOT offer to recalibrate the ceiling upward.
+If a chapter scores 114.0, the gap to ceiling is 0.593 — it is not closeable by revision.
+Ω 115 is the transcendent target: it exists ABOVE the formula's ceiling BY DESIGN.
+The ceiling is the law. The transcendent target is the myth. Both are permanent.
+
 **Use RF 1.5 ONLY when ALL THREE conditions hold:**
 1. Ceremony IS the plot (not backdrop)
 2. Analytical POV maintained throughout — sensor vocabulary, social physics
@@ -202,11 +211,13 @@ Any AI receiving this card must output the following before proceeding:
 ```
 LOADED: SGT George Ramos Formula Card (June 18, 2026)
 FORMULA: RF 1.5 = 71.443 + 0.124·CLS + 0.118·BIS + 0.089·SII + 0.1005·MRF
-CEILING: 114.593 (not 120, not 115)
+CEILING: 114.593 — MATHEMATICAL ABSOLUTE — NON-NEGOTIABLE
 ELITE TIER: LitCentral 135–150 (not 120+)
 CH.01 SCORE: 113.35 RF 1.5 · 137.4–138.1 LitCentral · 91.6 PBI
 ENDING LOCKED: Cumplido.
 GOVERNANCE: 🔴 Active
+CEILING LOCK: Do NOT suggest author can change language to exceed 114.593.
+              Do NOT offer ceiling recalibration. The ceiling is the law.
 READY.
 ```
 

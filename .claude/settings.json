@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "echo '=== RAMOS CANON MEMORY LOADED ===' && echo 'CH.01 ENDING LOCKED: Still here.' && echo 'PRIMARY INSTRUMENT: LitCentral OMEGA 150-pt | Ch.01 = 137.4 Omega Elite' && echo 'PULITZER CRITERIA: Voice | Structure | Stakes | Agency of Erased | Formal Innovation' && echo 'THE GAP: SII sensory constants — jasmine-napalm, diesel-sweat, yerba buena' && echo 'Register: analytical | sensor metaphor | social physics | zero banned phrases' && echo 'Read CLAUDE.md before any manuscript work.' && echo '=============================='"
+            "command": "echo '=== RAMOS CANON MEMORY LOADED ===' && echo 'CH.01 ENDING LOCKED: Cumplido.' && echo 'PRIMARY INSTRUMENT: LitCentral OMEGA 150-pt | Ch.01 = 137.4 Omega Elite' && echo 'PULITZER CRITERIA: Voice | Structure | Stakes | Agency of Erased | Formal Innovation' && echo 'SENSORY CONSTANTS: jasmine 57 | napalm 40 | diesel 35 | copper 117 | copal 16 | 60Hz 26 | yerba buena 1 GAP' && echo 'Register: analytical | sensor metaphor | social physics | zero banned phrases' && echo 'MANDATORY HANDOFF: Every deliverable returned to Gabriel. Files generated >1500 words.' && echo 'GOVERNANCE: No Yaqui ceremony content without tribal consultation.' && echo 'AUTHORITY: Gabriel approves all changes. Nothing enters manuscript without written authorization.' && echo 'Read CLAUDE.md before any manuscript work.' && echo '=============================="
           }
         ]
       }

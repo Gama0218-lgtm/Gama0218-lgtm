@@ -6,6 +6,7 @@
 
 import React, { useState, useEffect } from "react";
 import TabNav from "./TabNav";
+import SkillsDropdown from "./SkillsDropdown";
 import GateZeroTab from "./GateZeroTab";
 import ExternalSourcesTab from "./ExternalSourcesTab";
 import RemediationTasksTab from "./RemediationTasksTab";
@@ -57,9 +58,14 @@ export default function Dashboard() {
   return (
     <div className="dashboard">
       <header className="dashboard-header">
-        <h1>📚 LitCentral v13</h1>
-        <p className="subtitle">Manuscript Audit & Revision Platform</p>
-        <p className="version-note">Gate Zero Normalization | Evidence-Rigor Audit | Task-Driven Revision</p>
+        <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", flexWrap: "wrap", gap: 12 }}>
+          <div>
+            <h1>📚 LitCentral v13</h1>
+            <p className="subtitle">Manuscript Audit & Revision Platform</p>
+            <p className="version-note">Gate Zero Normalization | Evidence-Rigor Audit | Task-Driven Revision</p>
+          </div>
+          <SkillsDropdown />
+        </div>
       </header>
 
       {manuscript && auditData && (
